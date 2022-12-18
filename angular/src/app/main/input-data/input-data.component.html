@@ -1,0 +1,144 @@
+<div class="container" >
+    <div class="row">
+        <div class="col-md-4">
+                <form  #inputDataForm="ngForm" novalidate (ngSubmit)="saveAttributes()">
+                    <div class="btgreen">EXTRACTED ATTRIBUTES</div>
+
+                <div class="card card-custom gutter-b" (onRowSelect)="checkUncheckAll()">
+                    <div class="card-body">  
+                          <div class="">
+                            <!-- <label for="Select All / Unselect All" class="form-control">
+                              <input type="checkbox" name="list_name" value="" (change)="bulk($event)">  <span> Select All / Unselect All</span>
+                          
+                            <input type="checkbox" name="list_name" value="{{x.id}}" (change)="onChangeb(x.attributes,$event)">  <span> Select All / Unselect All</span>
+                          </label> -->
+                            <!-- <label for="Select All / Unselect All" class="form-control">  $event.target.value bulk($event)
+                              <input type="checkbox" value="{{x.id}}" (change)="onChange(x.attributes,$event)">  
+                                {{x.attributes}}<br>   
+                            </label> -->
+                     
+
+
+
+
+
+
+
+
+
+
+                            
+                           <!-- <label class="form-control" *ngFor="let x of data">  
+                              <input type="checkbox" value="{{x.id}}" [checked]="checks" (change)="onChange(x.attributes,$event)">  
+                                {{x.attributes}}
+                            </label>   -->
+
+                           <label class="form-control" *ngFor="let x of insertedHeadersList">  
+                              <input type="checkbox" value="{{x.id}}" [checked]="checks" (change)="onChange(x.attributes,$event)">  
+                                {{x.attributes}}
+                            </label>  
+                           <!-- <label class="form-control" *ngFor="let x of columnHeaders">  
+                              <input type="checkbox" value="{{x}}" [checked]="checks" (change)="onChange(x.attributes,$event)">  
+                                {{x}}
+                            </label>   -->
+                            <label style="color:blue;">{{values}}</label>    
+                            <label style="font-size:12px; color:blue;">({{count}}) selected</label>    
+                            <p style="font-size:12px;" class="text-danger">{{errorMsg}}</p><br>       
+                          </div> 
+                          <button style="float: right;" type="submit" class="btn btn-primary" [buttonBusy]="saving" [busyText]="l('SavingWithThreeDot')"><i class="fal fa-battery-bolt"></i> <span>{{l("Save")}}</span></button>
+  
+                      </div>
+                    
+                </div>
+    
+                
+             </form> 
+        
+
+        </div>
+
+        
+        <div class="col-md-8" [@routerTransition]>
+            <div class="kt-subheader kt-grid__item">
+                <div [class]="containerClass">
+                    <!-- <div class="kt-subheader__main">
+                        <span class="kt-subheader__desc">
+                            <button (click)="reload()" class="btn btn-outline-danger" style="font-size: 12px;"><i class="fas fa-sync-alt"></i>{{l("Refresh")}}</button>
+                        </span>
+                    </div> -->
+                   
+                </div>
+                
+            </div>
+        
+            <div [class]="containerClass + ' kt-grid_item kt-grid_item--fluid'">
+                <div class="kt-portlet kt-portlet--mobile">
+                    <div class="kt-portlet__body">
+                                <div class="row align-items-center">
+        
+                            <div class="primeng-datatable-container col-12"  [busyIf]="primengTableHelper.isLoading">
+                                <p-table  #dataTable (onLazyLoad)="getSelectedAttributes($event)"
+                                    [value]="primengTableHelper.records"
+                                    rows="{{primengTableHelper.defaultRecordsCountPerPage}}" [paginator]="false" [lazy]="true"
+                                    [scrollable]="true" ScrollWidth="100%" [responsive]="primengTableHelper.isResponsive"
+                                    [resizableColumns]="primengTableHelper.resizableColumns">
+                                    <ng-template ng-template pTemplate="header" style="background-color: #e90c0c">
+                                        <tr >
+                                            <th style="width: 150px; background-color: #e90c0c; color: white;">
+                                                {{l('ACTIONS')}}</th>
+        
+                                            <th style="width: 150px; background-color: #e90c0c; color: white;" pSortableColumn="selectedValues">
+                                                {{l('SELECTED ATTRIBUTES TO BE USED')}}
+                                                <p-sortIcon field="selectedValues"></p-sortIcon>
+                                            </th>
+                                           
+                                            </tr>
+                                    </ng-template>
+                                    <ng-template pTemplate="body" let-record="$implicit">
+                                        <tr>
+                                            <td style="width: 130px">
+                                                <div class="btn-group dropdown" dropdown container="body">
+                                                    <button class="dropdown-toggle btn btn-sm btn-primary" dropdownToggle>
+                                                        <i class="fa fa-cog"></i><span class="caret"></span> {{l("Actions")}}
+                                                    </button>
+                                                    <ul class="dropdown-menu" *dropdownMenu>
+                                                       
+                                                        <li>
+                                                            <a href="javascript:;" (click)="deleteSelectedAttributes(record)" class="dropdown-item">{{l('Remove')}}</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </td>
+        
+                                            <td style="width:150px">
+                                                <span class="ui-column-title"> {{l('SelectedAttributes')}}</span>
+                                                {{record.selectedValues}}
+                                            </td>
+                                            </tr>
+                                    </ng-template>
+                                </p-table>
+                                <div class="primeng-no-data" *ngIf="primengTableHelper.totalRecordsCount == 0">
+                                    {{l('NoData')}}
+                                </div>
+                                <div class="primeng-paging-container">
+                                    <p-paginator [rows]="primengTableHelper.defaultRecordsCountPerPage" #paginator
+                                        (onPageChange)="getSelectedAttributes($event)"
+                                        [totalRecords]="primengTableHelper.totalRecordsCount"
+                                        [rowsPerPageOptions]="primengTableHelper.predefinedRecordsCountPerPage">
+                                    </p-paginator>
+                                    <span class="total-records-count">
+                                        {{l('TotalRecordsCount', primengTableHelper.totalRecordsCount)}}
+                                    </span>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+                <createInputDataModal #createInputDataModal (modalSave)="getSelectedAttributes()"></createInputDataModal>
+            </div> 
+        </div>
+
+
+    </div>
+</div>

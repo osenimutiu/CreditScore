@@ -1,0 +1,46 @@
+<div bsModal #approveModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="viewRequestModal" aria-hidden="true" [config]="{backdrop: 'static'}">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <form *ngIf="active" #form="ngForm" novalidate (ngSubmit)="approve()">
+            <div class="modal-header bg-danger">
+                <h4 class="modal-title">
+                    <span>{{l("Approve")}}</span>
+                </h4>
+                <button type="button" class="close" (click)="close()" aria-label="Close">
+                    <span aria-hidden="false">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-row">
+                    <div class="form-group col-md-12">  
+                        <input class="form-control" type="hidden" name="id" [(ngModel)]="item.id" required placeholder="Value">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-12">  
+                        <label>{{l("Reason For Approval")}}</label>
+                        <textarea class="form-control" name="reason" required id="" [(ngModel)]="item.reason" style="width: 50%;
+                        height: 150px;
+                        padding: 12px 20px;
+                        box-sizing: border-box;
+                        border: 2px solid #ccc;
+                        border-radius: 4px;
+                        background-color: #f8f8f8;
+                        font-size: 16px;
+                        resize: none;">
+
+                        </textarea>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button [disabled]="saving" type="button" class="btn btn-outline-danger" (click)="close()">{{l("Close")}}</button>
+                <button type="submit" class="btn btn-success" [disabled]="!form.valid" [buttonBusy]="saving" [busyText]="l('SavingWithThreeDot')"><i class="fal fa-battery-bolt"></i> <span>{{l("Approve")}}</span></button>
+            </div>
+        </form>
+        </div>
+    </div>
+
+</div>
+

@@ -1,0 +1,27 @@
+<div [@routerTransition]>
+  
+    <div class="content d-flex flex-column flex-column-fluid">
+     <sub-header [title]="'Gini Inclusive' | localize">
+          <div role="actions">
+          <button (click)="giniInclusiveModal.show()" class="btn btn-primary"><i class="fas fa-eye"></i> View Details</button>
+      </div>
+     </sub-header> 
+
+<div class="row" >
+    <div class="col-md-6">
+        <div class="" style="margin: 20px 0px 0px 15px;">
+            <div class="col-md-6" style="margin-top: 15px;">
+                <h3 class="text-center">{{title}}</h3>
+                <div class="chart-container" style="position: relative; height:40vh; width:70vw">    
+                    <canvas id="gini">{{ Linechart }}</canvas>    
+                </div> 
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+
+    </div>
+</div>
+</div>
+<giniInclusiveModal #giniInclusiveModal (modalSave)="plotginiInclusive()"></giniInclusiveModal>
+</div>

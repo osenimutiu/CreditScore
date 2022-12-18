@@ -1,0 +1,162 @@
+<div class="" style="background: white;">
+    <div class="row" style="margin-left: 15px;">
+        <div class="" style="background: white;">
+            <p style="padding-top: 20px;">Current Account Status:</p>
+            
+            <select #myInput [(ngModel)]="current_Account_Status" class="form-control" (ngModelChange)='onCurrentAccountStatusSelected($event)' style="width: 400px;">
+              <option value="All">All</option>
+              <option *ngFor="let x of listDistinctcurrent_Account_Status" value="{{x}}">{{x}}</option>
+            </select>
+            <br>
+            <br> 
+            <span class="alert-success">{{modifiedText}}</span>
+            
+            <br>
+            <br>
+            <div class="row">
+                <div class="col-md-2">
+                    <p>
+                        <b>For Good : Bad Count:</b> <br>
+                        <b style="color: #000;">Total rows: {{ getRowsValueForGood_Bad(null) }}</b> <br>
+                        <span style="color: green;">Good: {{ getRowsValueForGood_Bad(true) }} </span><br>
+                        <span style="color: red;">Bad : {{ getRowsValueForGood_Bad(false) }}</span>
+                     </p>
+                </div>
+                <div class="col-md-8"></div>
+                <div class="col-md-2">
+                    <button (click)="reload()" class="form-group btn btn-outline-danger" style="position: relative; left: 150px;">Refresh</button>
+                </div>
+            </div>
+        
+        
+            <br>
+            
+              
+        <table class="table table-borderless">
+            <thead class="table-dark">
+                <tr>
+                    <th (click)="sort('unique_ID')">Unique  Id&nbsp;<i class="fa fa-sort"></i></th>
+                    <th (click)="sort('trainingSample')">Training Sample&nbsp;<i class="fa fa-sort"></i></th>
+                    <th (click)="sort('date_opened')">Date Opened&nbsp;<i class="fa fa-sort"></i></th>
+                    <th (click)="sort('age')">Age&nbsp;<i class="fa fa-sort"></i></th>
+                    <th (click)="sort('income')">Income&nbsp;<i class="fa fa-sort"></i></th>
+                    <th (click)="sort('location')">Location&nbsp;<i class="fa fa-sort"></i></th>
+                    <th (click)="sort('resident_status')">Resident Status&nbsp;<i class="fa fa-sort"></i></th>
+                    <th (click)="sort('Time at Job')">Time at Job&nbsp;<i class="fa fa-sort"></i></th>
+                    <th (click)="sort('time_at_residence')">Time at Residence&nbsp;<i class="fa fa-sort"></i></th>
+                    <th (click)="sort('product')">Product&nbsp;<i class="fa fa-sort"></i></th>
+                    <th (click)="sort('current_Account_Status')">Current Account Status&nbsp;<i class="fa fa-sort"></i></th>
+                    <th (click)="sort('total_assets')">Total Assets&nbsp;<i class="fa fa-sort"></i></th>
+                    <th (click)="sort('rent')">Rent&nbsp;<i class="fa fa-sort"></i></th>
+                    <th (click)="sort('rent_to_Income')">rent_to_Income&nbsp;<i class="fa fa-sort"></i></th>
+                    <th (click)="sort('return_on_Assets')">Return on Assets&nbsp;<i class="fa fa-sort"></i></th>
+                    <th (click)="sort('time_at_Bank')">Time at Bank&nbsp;<i class="fa fa-sort"></i></th>
+                    <th (click)="sort('number_of_products')">Number of products&nbsp;<i class="fa fa-sort"></i></th>
+                    <th (click)="sort('payment_performance')">payment performance&nbsp;<i class="fa fa-sort"></i></th>
+                    <th (click)="sort('previous_claims')">Previous claims&nbsp;<i class="fa fa-sort"></i></th>
+                    <th (click)="sort('good_Bad')">Good Bad&nbsp;<i class="fa fa-sort"></i></th>
+                    <th (click)="sort('agebin')">Age bin&nbsp;<i class="fa fa-sort"></i></th>
+                    <th (click)="sort('time_at_Jobbin')">Time at Job bin&nbsp;<i class="fa fa-sort"></i></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let reg of listoutput | paginate: { itemsPerPage: 5, currentPage: p } | orderBy: key: reverse">
+                    <td>{{reg.unique_ID}}</td>
+                    <td>{{reg.trainingSample}}</td>
+                    <td>{{reg.date_opened | date }}</td>
+                    <td>{{reg.age}}</td>
+                    <td>{{reg.income}}</td>
+                    <td>{{reg.location}}</td>
+                    <td>{{reg.resident_status}}</td>
+                    <td>{{reg.time_at_Job}}</td>
+                    <td>{{reg.time_at_residence}}</td>
+                    <td>{{reg.product}}</td>
+                    <td>{{reg.current_Account_Status}}</td>
+                    <td>{{reg.total_assets}}</td>
+                    <td>{{reg.rent}}</td>
+                    <td>{{reg.rent_to_Income}}</td>
+                    <td>{{reg.return_on_Assets}}</td>
+                    <td>{{reg.time_at_Bank}}</td>
+                    <td>{{reg.number_of_products}}</td>
+                    <td>{{reg.payment_performance}}</td>
+                    <td>{{reg.previous_claims}}</td>
+                    <td>{{reg.good_Bad}}</td>
+                    <td>{{reg.agebin}}</td>
+                    <td>{{reg.time_at_Jobbin}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <pagination-controls (pageChange)="p = $event" class="pull-right"></pagination-controls>
+         
+    </div>
+    </div>
+    <div class="row">
+        <div class="" *ngIf="isActive">
+            <!-- <div class="chart-container" style="position: relative; height:40vh; width:70vw">    
+                <canvas id="canvas">{{ Linechart }}</canvas>    
+              </div>   -->
+              <h4 style="margin-left: 300px;">{{title}}</h4>
+              <div class="chart-container" style="position: relative; height:40vh; width:45vw">    
+                <canvas id="canvasc">{{ barchart }}</canvas>    
+              </div> 
+            
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <!-- <div>
+                <canvas id="chartJSContainer" width="600" height="400"></canvas>
+              </div> -->
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

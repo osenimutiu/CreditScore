@@ -1,0 +1,236 @@
+﻿<div bsModal #createOrEditModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="createOrEditModal" aria-hidden="true" [config]="{backdrop: 'static'}">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header text-center" style="background-color: red;">
+                <h4 class="modal-title w-100" >
+                    <span ><h2 style="color: white;">{{l("SCORECARD")}}</h2></span>
+                </h4>
+                <button type="button" class="close" (click)="close()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-6 mb-3">
+                        <h6>{{l("Customer")}} : {{ item.loanRequest.customer }}</h6>
+                        
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("LoanType")}} : {{ item.loanRequest.loanType }}</h6>
+                        
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("Requested Amount")}} : {{ item.loanRequest.amount | currency}}</h6>
+                        
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("Tenor")}} : {{ item.loanRequest.tenor }}</h6>
+                        
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("Status")}} : {{ "Under-Review" }}</h6>
+                        
+                    </div>
+
+                    
+
+                </div>
+                <hr>
+                <h2 >CREDIT BUREAU</h2>
+                <br>
+                <div class="row">
+                    <div class="col-6 mb-3">
+                        <h6>{{l("Probability Adverse")}} : {{ '10.2%'}}</h6>
+                        
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("Probability Failure")}} : {{ '0.3%'}}</h6>
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("Payment Default")}} : {{ '0'}}</h6>
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("Outstanding Balance With Other FI")}} : {{ 20000000 | currency}}</h6>
+                    </div>
+            
+                </div>
+                <hr>
+                <div class="row" style="display: flex; justify-content: center ;" >
+                    <table class="styled-table" style="align-self: center;">
+                        <thead>
+                            <tr>
+                                <th style="text-align:left"><h5>Recommendation</h5></th>
+                                <th style="text-align:left"><h5>AI Base Score</h5></th>
+                                <th style="text-align:left"><h5>Max Amount</h5></th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                           <tr>
+                           <td [style.background-color]="getColor(item.loanRequest.statua)"><h2 class="text-left">{{item.loanRequest.statua}}</h2></td>
+                           <td ><h2 class="text-left">{{758}}</h2></td>
+                           <td ><h2 class="text-left">{{ 20000000 | currency}}</h2></td>
+                           </tr>
+                       </tbody>
+                    </table>
+            
+            </div>
+                <hr>
+
+                 <h2>FINANCIAL OVERVIEW</h2>
+
+                <div class="row"  style="display: flex; justify-content: center ;" >         
+                    <table class="styled-table" style="align-self: center;">
+                        <thead>
+                            <tr>
+                                <td colspan="2"><h5>Financial Ratios- Leverage/Coverage</h5></td>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Equity Ratio:</td>
+                                <td>10.2%</td>
+                            </tr>
+                            <tr>
+                                <td>Assets Coverage ratio:</td>
+                                <td>105%</td>
+                            </tr>
+                            <tr>
+                                <td>Debt/EBITDA :</td>
+                                <td>7</td>
+                            </tr>
+                            <tr>
+                                <td>DSCR:</td>
+                                <td>0</td>
+                            </tr>
+                            <tr>
+                                <td>ICR :</td>
+                                <td>7</td>
+                            </tr>
+                            <tr>
+                                <td>Leverage Ratio : </td>
+                                <td>4</td>
+                            </tr>
+                        </tbody>
+                        <thead>
+                            <tr>
+                                <td colspan="2"><h5>Financial Ratios- Liquidity/TurnOver</h5></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Current Ratio:</td>
+                                <td>115%</td>
+                            </tr>
+                            <tr>
+                                <td>Quick Ratio :</td>
+                                <td> 115%</td>
+                            </tr>
+                            <tr>
+                                <td>Cash Ratio :</td>
+                                <td> 20%</td>
+                            </tr>
+                            <tr>
+                                <td>Cash Turnover :</td>
+                                <td>12</td>
+                            </tr>
+                            <tr>
+                                <td>Inventory Turnover : </td>
+                                <td>12</td>
+                            </tr>
+                            <tr>
+                                <td>Cash Conversion Ratio: </td>
+                                <td>10.6</td>
+                            </tr>
+                    
+                        </tbody>
+                        <thead>
+                            <tr>
+                                <td colspan="2"><h5>Profitability Ratios </h5> </td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>ROA :</td>
+                                <td>10%</td>
+                            </tr>
+                            <tr>
+                                <td>Profit Margin :</td>
+                                <td>37%</td>
+                            </tr>
+                            <tr>
+                                <td>Asset Turnover : </td>
+                                <td>9.5</td>
+                            </tr>
+                            <tr>
+                                <td>ROCE :</td>
+                                <td> 4%</td>
+                            </tr>
+                            <tr>
+                                <td>EBITDA Ratio : </td>
+                                <td>15%</td>
+                            </tr>        
+                        </tbody>
+                        <thead>
+                            <tr>
+                                <td colspan="2"><h5>Financial Trend </h5> </td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Equity (YOY):</td>
+                                <td> 70%</td>
+                            </tr>
+                            <tr>
+                                <td>Revenue (YOY):</td>
+                                <td>17%</td>
+                            </tr>
+                            <tr>
+                                <td>Net Profit (YOY):</td>
+                                <td>21%</td>
+                            </tr>
+                            <tr>
+                                <td>Leverage Ratio :</td>
+                                <td>4.5%</td>
+                            </tr>
+                           
+                        </tbody>
+
+
+
+
+                        <thead>
+                            <tr>
+                                <td colspan="2"><h5>Bank Account </h5> </td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Average monthly inflows: :</td>
+                                <td>750,000.00</td>
+                            </tr>
+                            <tr>
+                                <td>Inflow growth rate:</td>
+                                <td>95%</td>
+                            </tr>
+                            <tr>
+                                <td>Yearly debt repayments: </td>
+                                <td>3,500,000.00</td>
+                            </tr>
+                           
+                        </tbody>
+                    </table>
+                </div>
+                
+                
+
+            </div>
+            <div class="modal-footer">
+                <button [disabled]="saving" type="button" class="btn btn-danger red" (click)="close()">{{l("Close")}}</button>
+            </div>
+        </div>
+    </div>
+
+</div>

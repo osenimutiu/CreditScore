@@ -1,0 +1,83 @@
+<div bsModal #modal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal" aria-hidden="true" [config]="{backdrop: 'static'}">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content" style="width: 1300px;">
+            <form *ngIf="active" novalidate>
+                <div class="modal-header bg-danger">
+                    <h4 class="modal-title">
+                        <span class=" text-center text-white"><i class="fas fa-wrench"></i>&nbsp;&nbsp;{{l("Coefficient")}}</span>
+                    </h4>
+                    <button type="button" class="close" (click)="close()" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-row">
+                        <div class="form-group col-md-5">
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-header"><span style="font-weight: bold;">
+                          Logistic Regression Equation</span>
+                        </div>
+                        <ul class="list-group list-group-flush" *ngFor="let y of logRegEq">
+                          <li class="list-group-item"><span style="font-weight: bold;">Age</span>: {{y.age_bin | number : '.2-3'}}</li>
+                          <li class="list-group-item"><span style="font-weight: bold;">Location</span>: {{y.location| number : '.2-3'}}</li>
+                          <li class="list-group-item"><span style="font-weight: bold;">Resident Status</span>: {{y.resident_Status| number : '.2-3'}}</li>
+                          <li class="list-group-item"><span style="font-weight: bold;">Product</span>: {{y.product | number : '.2-3'}}</li>
+                          <li class="list-group-item"><span style="font-weight: bold;">Current Account Status</span>: {{y.current_Account_Status | number : '.2-3'}}</li>
+                          <li class="list-group-item"><span style="font-weight: bold;">Payment Performance</span>: {{y.payment_Performance | number : '.2-3'}}</li>
+                          <li class="list-group-item"><span style="font-weight: bold;">Time at Job</span>: {{y.time_at_Job_bin | number : '.2-3'}}</li>
+                          <li class="list-group-item"><span style="font-weight: bold;">Intercept</span>: {{y.intercept | number : '.2-3'}}</li>
+                        </ul>
+                      </div> 
+                    </div>
+
+                    <div class="form-group col-md-7">
+                            <table class="table table bordered">
+                                <thead>
+                                    <tr>
+                                        <th>R-squared(McFadden)</th>
+                                        <th>Mean</th>
+                                        <th>ROC Area</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let z of logRegEq">
+                                        <td>{{z.r_Square | number : '.2-3'}}</td>
+                                        <td>{{z.mean_Squared_Error | number : '.2-3'}}</td>
+                                        <td>{{z.roC_AUC | number : '.2-3' }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>     
+                            <br>
+                            <br>
+                            <br>
+                            <table class="table table bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Degree of Freedom</th>
+                                        <th>Deviance</th>
+                                        <th>p-value</th>
+                                        <th>ROC area</th>
+                                        <th>R-squared</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let t of logRegEq">
+                                        <td>{{t.degree_of_Freedom | number : '.2-3'}}</td>
+                                        <td>{{t.null_Deviance | number : '.2-3'}}</td>
+                                        <td>{{t.p_Value | number : '.2-3'}}</td>
+                                        <td>{{t.roC_AUC | number : '.2-3' }}</td>
+                                        <td>{{t.r_Square | number : '.2-3'}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                    </div>
+                </div>
+                </div>
+                <div class="modal-footer">
+                    <button [disabled]="saving" type="button" class="btn btn-secondary" (click)="close()">{{l("Cancel")}}</button>
+                    </div>
+            </form>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,43 @@
+
+    .some-class {
+        float: left;
+        clear: none;
+      }
+      
+      label {
+        float: left;
+        clear: none;
+        display: block;
+        padding: 0px 0em 0px 0px;
+        // padding: 0px 1em 0px 8px;
+      }
+      
+      input[type=radio],
+      input.radio {
+        float: left;
+        clear: none;
+        margin: 2px 0 0 0px;
+        // margin: 2px 0 0 2px;
+      }
+
+      //
+      .two-col {
+        overflow: hidden;/* Makes this div contain its floats */
+    }
+    
+    .two-col .col1,
+    .two-col .col2 {
+        width: 49%;
+    }
+    
+    .two-col .col1 {
+        float: left;
+    }
+    
+    .two-col .col2 {
+        float: right;
+    }
+    
+    .two-col label {
+        display: block;
+    }

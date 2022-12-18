@@ -1,0 +1,285 @@
+<style>
+ 
+    /* Table Styles */
+    
+    .table-wrapper{
+     margin: 10px 70px 70px;
+     box-shadow: 0px 35px 50px rgba( 0, 0, 0, 0.2 );
+    }
+    
+    .fl-table td, .fl-table th {
+     padding: 8px;
+    }
+    
+    .fl-table thead th:nth-child(odd) {
+     color: #ffffff;
+     background: #324960;
+    }
+    
+    .fl-table tr:nth-child(even) {
+     background: #F8F8F8;
+    }
+    
+    /* Responsive */
+    
+    @media (max-width: 700px) {
+     .fl-table {
+         display: block;
+         width: 70%;
+     }
+     .table-wrapper:before{
+         content: "Scroll horizontally >";
+         display: block;
+         text-align: right;
+         font-size: 11px;
+         color: white;
+         padding: 0 0 10px;
+     }
+     .fl-table thead, .fl-table tbody, .fl-table thead th {
+         display: block;
+     }
+     .fl-table thead th:last-child{
+         border-bottom: none;
+     }
+     .fl-table thead {
+         float: left;
+     }
+     .fl-table tbody {
+         width: auto;
+         position: relative;
+         overflow-x: auto;
+     }
+     .fl-table td, .fl-table th {
+         padding: 20px .625em .625em .625em;
+         height: 60px;
+         vertical-align: middle;
+         box-sizing: border-box;
+         overflow-x: hidden;
+         overflow-y: auto;
+         width: 80px;
+         font-size: 13px;
+         text-overflow: ellipsis;
+     }
+     .fl-table thead th {
+         text-align: left;
+         border-bottom: 1px solid #f7f7f9;
+     }
+     .fl-table tbody tr {
+         display: table-cell;
+     }
+     .fl-table tbody tr:nth-child(odd) {
+         background: none;
+     }
+     .fl-table tr:nth-child(even) {
+         background: transparent;
+     }
+     .fl-table tr td:nth-child(odd) {
+         background: #F8F8F8;
+         border-right: 1px solid #E6E4E4;
+     }
+     .fl-table tr td:nth-child(even) {
+         border-right: 1px solid #E6E4E4;
+     }
+     .fl-table tbody td {
+         display: block;
+         text-align: center;
+     }
+    }
+    </style>
+<div class="containerClass">
+    <div class="row" style="margin-left: 15px;">
+        <div class="col-md-6" style="background: white;">
+            <p style="padding-top: 10px;">TRAINING AND TESTING:</p>
+            
+            <select #myInput [(ngModel)]="training_Test" class="form-control" (ngModelChange)='onTraining_TestSelected($event)' style="width: 400px;">
+              <option value="">All</option>
+              <option value="1">Training</option>
+              <option value="0">Test</option>
+              <span>{{modifiedText}}</span>
+            </select>
+            <br>
+            <button (click)="reload()" class="form-group btn btn-outline-primary">Refresh</button>
+            <br>
+            <br>
+            <br>
+            
+              
+        <table class="fl-table table-borderless">
+            <thead class="table-dark">
+                <tr>
+                    <th style="width: 150px; background-color: #e90c0c; color: white;" (click)="sort('location')">LOCATION&nbsp;<i class="fa fa-sort"></i></th>
+                    <th style="width: 150px; background-color: #e90c0c; color: white;" (click)="sort('rent_bin')">RENT BIN&nbsp;<i class="fa fa-sort"></i></th>
+                    <th style="width: 150px; background-color: #e90c0c; color: white;" (click)="sort('rent_to_Income_bin')">RENT TO INCOME BIN&nbsp;<i class="fa fa-sort"></i></th>
+                    <th style="width: 150px; background-color: #e90c0c; color: white;" (click)="sort('return_on_Assets_bin')">RETURN ON ASSETS BIN&nbsp;<i class="fa fa-sort"></i></th>
+                    <th style="width: 150px; background-color: #e90c0c; color: white;" (click)="sort('total_assets_bin')">TOTAL ASSETS BIN&nbsp;<i class="fa fa-sort"></i></th>
+                    <th style="width: 150px; background-color: #e90c0c; color: white;" (click)="sort('good_Bad')">GOOD BAD&nbsp;<i class="fa fa-sort"></i></th>
+                    <th style="width: 150px; background-color: #e90c0c; color: white;" (click)="sort('training_Test')">TRAINING TEST&nbsp;<i class="fa fa-sort"></i></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let reg of regressions | paginate: { itemsPerPage: 50, currentPage: p } | orderBy: key: reverse">
+                    <td>{{reg.location}}</td>
+                    <td>{{reg.rent_bin}}</td>
+                    <td>{{reg.rent_to_Income_bin}}</td>
+                    <td>{{reg.return_on_Assets_bin}}</td>
+                    <td>{{reg.total_assets_bin}}</td>
+                    <td>{{reg.good_Bad}}</td>
+                    <td>{{reg.training_Test}}</td>
+                    
+                </tr>
+            </tbody>
+        </table>
+        <pagination-controls (pageChange)="p = $event" class="pull-right"></pagination-controls>
+        <!-- <div>80 Count : {{progressCount}}</div><div>20 Count : {{completedCount}}</div> -->
+        <br>
+        <p>
+            <b> For Training : Test Count:</b> <br>
+            <b>Total rows: {{ getRowsValue(null) }}</b> <br>
+            Training: {{ getRowsValue(80) }} <br>
+            Test : {{ getRowsValue(20) }}
+         </p>
+
+        <p>
+            <b>For Good : Bad Count:</b> <br>
+            <b>Total rows: {{ getRowsValueForGood_Bad(null) }}</b> <br>
+            Good: {{ getRowsValueForGood_Bad(true) }} <br>
+            Bad : {{ getRowsValueForGood_Bad(false) }}
+         </p>
+    </div>
+
+    <div class="col-md-6" *ngIf="isActive">
+        <!-- <div class="chart-container" style="position: relative; height:40vh; width:70vw">    
+            <canvas id="canvas">{{ Linechart }}</canvas>    
+          </div>   -->
+          <div class="chart-container" style="position: relative; height:40vh; width:45vw">    
+            <canvas id="canvasc">{{ barchart }}</canvas>    
+          </div> 
+        
+    </div>
+
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <!-- <div class="chart-container" style="position: relative; height:40vh; width:70vw">    
+                <canvas id="canvasb"></canvas>    
+              </div>  -->
+            
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <!-- <div>
+                <canvas id="chartJSContainer" width="600" height="400"></canvas>
+              </div> -->
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="container">
+    <div class="row">
+        <div class="col-md-8" style="background: white;">
+            <p style="padding-top: 20px;">Training and Testing:</p>
+            
+            <select #myInput [(ngModel)]="training_Test" class="form-control" (ngModelChange)='onTraining_TestSelected($event)'>
+              <option value="">All</option>
+              <option value="1">Training</option>
+              <option value="0">Testing</option>
+              <span>{{modifiedText}}</span>
+            </select>
+            <br>
+            <br>
+            <br>
+            
+              
+        <table class="table table-borderless">
+            <thead class="table-dark">
+                <tr>
+                    <th>Location</th>
+                    <th>Rent bin</th>
+                    <th>Rent to Income bin</th>
+                    <th>Return on Assets bin</th>
+                    <th>Total assets bin</th>
+                    <th>Good Bad</th>
+                    <th>Training Test</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let reg of regressions | paginate: { itemsPerPage: 5, currentPage: p }">
+                    <td>{{reg.location}}</td>
+                    <td>{{reg.rent_bin}}</td>
+                    <td>{{reg.rent_to_Income_bin}}</td>
+                    <td>{{reg.return_on_Assets_bin}}</td>
+                    <td>{{reg.total_assets_bin}}</td>
+                    <td>{{reg.good_Bad}}</td>
+                    <td>{{reg.training_Test}}</td>
+                    
+                </tr>
+            </tbody>
+        </table>
+        <pagination-controls (pageChange)="p = $event" class="pull-right"></pagination-controls>
+         <br>
+        <p>
+            <b> For Training : Testing Count:</b> <br>
+            <b>Total rows: {{ getRowsValue(null) }}</b> <br>
+            Training: {{ getRowsValue(80) }} <br>
+            Testing : {{ getRowsValue(20) }}
+         </p>
+
+        <p>
+            <b>For Good : Bad Count:</b> <br>
+            <b>Total rows: {{ getRowsValueForGood_Bad(null) }}</b> <br>
+            Good: {{ getRowsValueForGood_Bad(true) }} <br>
+            Bad : {{ getRowsValueForGood_Bad(false) }}
+         </p>
+    </div>
+    </div>
+</div> -->

@@ -1,0 +1,238 @@
+<!-- <div bsModal #modal="bs-modal" (onShown)="onShown()" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal" aria-hidden="true" [config]="{backdrop: 'static'}">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <form *ngIf="active" #applicationScoringForm="ngForm" novalidate (ngSubmit)="computeScore()">
+                <div class="modal-header bg-primary">
+                    <h4 class="modal-title">
+                        <span class=" text-center text-white"><i class="far fa-chart-bar text-white"></i>&nbsp;{{l("Application Scoring")}}</span>
+                    </h4>
+                    <button type="button" class="close" (click)="close()" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>{{l("Applicant Type")}}</label>
+                        <select name="appld" id="" class="form-control" [(ngModel)]="applicationScoring.appld">
+                            <option name="appld" value="0">Select Applicant Type</option>
+                            <option name="appld" *ngFor="let x of appTypes" value="{{x.id}}">{{x.applicanType}}</option>
+                        </select>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>{{l("Applicant")}}</label>
+                            <input #applicantInput class="form-control" type="text" name="applicantId" [(ngModel)]="applicationScoring.applicantId" required maxlength="32" placeholder="Accountno - Name">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>{{l("Loan Request")}}</label>
+                            <input class="form-control" type="text" name="amount" [(ngModel)]="applicationScoring.amount" required maxlength="32" placeholder="Enter loan request">
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>{{l("Tenor(In Month)")}}</label>
+                            <input class="form-control" type="text" name="tenorMonth" [(ngModel)]="applicationScoring.tenorMonth" required placeholder="Enter loan tenor">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>{{l("Product Type")}}</label>
+                            <select name="productTypeId" id="productTypeId" class="form-control" [(ngModel)]="applicationScoring.productTypeId">
+                                <option name="productTypeId" value="0">Select Product Type</option>
+                                <option name="productTypeId" *ngFor="let productType of productTypes" value="{{productType.productTypeId}}">{{productType.productType}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>{{l("BVN")}}</label>
+                            <input class="form-control" type="text" name=""  required placeholder="Enter valid BVN">
+                            <a href="" class="text-primary">Verify BVN</a>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>{{l("Age Range")}}</label>
+                            <select name="ageAttributeId" id="ageAttributeId" class="form-control" [(ngModel)]="applicationScoring.ageAttributeId">
+                                <option name="ageAttributeId" value="0">Select Age Range</option>
+                                <option name="ageAttributeId" *ngFor="let age of ages" value="{{age.ageAttributeId}}">{{age.ageGroup}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>{{l("Income Range")}}</label>
+                            <select name="incomeAttributeId" id="incomeAttributeId" class="form-control" [(ngModel)]="applicationScoring.incomeAttributeId">
+                                <option name="incomeAttributeId" value="0">Select Income Range</option>
+                                <option name="incomeAttributeId" *ngFor="let income of incomes" value="{{income.incomeAttributeId}}">{{income.incomeRange}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>{{l("Rent Range")}}</label>
+                            <select name="rentAttributeId" id="rentAttributeId" class="form-control" [(ngModel)]="applicationScoring.rentAttributeId">
+                                <option name="rentAttributeId" value="0">Select Rent Range</option>
+                                <option name="rentAttributeId" *ngFor="let rent of rents" value="{{rent.rentAttributeId}}">{{rent.rentGroup}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>{{l("Rent to Income")}}</label>
+                            <select name="renttoIncomeAttributeId" id="renttoIncomeAttributeId" class="form-control" [(ngModel)]="applicationScoring.renttoIncomeAttributeId">
+                                <option name="renttoIncomeAttributeId" value="0">Select Rent to Income</option>
+                                <option name="renttoIncomeAttributeId" *ngFor="let renttoIncome of renttoIncomes" value="{{renttoIncome.renttoIncomeAttributeId}}">{{renttoIncome.rentToIncomeGroup}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>{{l("Return on assets")}}</label>
+                            <select name="returnonAssetsAttributeId" id="returnonAssetsAttributeId" class="form-control" [(ngModel)]="applicationScoring.returnonAssetsAttributeId">
+                                <option name="returnonAssetsAttributeId" value="0">Select Return on assets</option>
+                                <option name="returnonAssetsAttributeId" *ngFor="let returnonAsset of returnonAssets" value="{{returnonAsset.returnonAssetsAttributeId}}">{{returnonAsset.returnonAssets}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>{{l("Sector")}}</label>
+                            <select name="subSectorAttributeId" id="subSectorAttributeId" class="form-control" [(ngModel)]="applicationScoring.subSectorAttributeId">
+                                <option name="subSectorAttributeId" value="0">Select Sector</option>
+                                <option name="subSectorAttributeId" *ngFor="let subSector of subSectors" value="{{subSector.subSectorAttributeId}}">{{subSector.sectorGroup}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>{{l("Location")}}</label>
+                            <select name="locationAttributeId" id="locationAttributeId" class="form-control" [(ngModel)]="applicationScoring.locationAttributeId">
+                                <option name="locationAttributeId" value="0">Select Location</option>
+                                <option name="locationAttributeId" *ngFor="let location of locations" value="{{location.locationAttributeId}}">{{location.locationGroup}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>{{l("ExtraParam1")}}</label>
+                            <input class="form-control" type="text" name="extraParam1" [(ngModel)]="applicationScoring.extraParam1" required maxlength="32" placeholder="ExtraParam1">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>{{l("ExtraParam2")}}</label>
+                            <input class="form-control" type="text" name="extraParam2" [(ngModel)]="applicationScoring.extraParam2" required maxlength="32" placeholder="ExtraParam2">
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="modal-footer">
+                    <button [disabled]="saving" type="button" class="btn btn-secondary" (click)="close()">{{l("Cancel")}}</button>
+                    <button type="submit" class="btn btn-primary" [disabled]="!applicationScoringForm.form.valid" [buttonBusy]="saving" [busyText]="l('SavingWithThreeDot')"><i class="fal fa-battery-bolt"></i> <span>{{l("Generate Scores")}}</span></button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div> -->
+
+<div bsModal #modal="bs-modal" (onShown)="onShown()" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal" aria-hidden="true" [config]="{backdrop: 'static'}">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <form *ngIf="active" #applicationScoringForm="ngForm" novalidate (ngSubmit)="computeScore()">
+                <div class="modal-header bg-primary">
+                    <h4 class="modal-title">
+                        <span class=" text-center text-white"><i class="far fa-chart-bar text-white"></i>&nbsp;{{l("Application Scoring")}}</span>
+                    </h4>
+                    <button type="button" class="close" (click)="close()" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                   <div class="form-group">
+                     <input class="form-control" type="text" name="param8" [(ngModel)]="param8" [disabled]="true"/>
+                   </div>
+                   
+                
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>{{l("Applicant")}}</label>
+                            <input #applicantInput class="form-control" type="text" name="param9" [(ngModel)]="param9" required maxlength="32" placeholder="Accountno - Name">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>{{l("Loan Request")}}</label>
+                            <input class="form-control" type="text" name="amount" [(ngModel)]="applicationScoring.amount" required maxlength="32" placeholder="Enter loan request">
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>{{l("Tenor(In Month)")}}</label>
+                            <input class="form-control" type="number" name="tenorMonth" [(ngModel)]="applicationScoring.tenorMonth" required placeholder="Enter loan tenor">
+                        </div>
+                        <div class="form-group col-md-6"> 
+                            <label>{{l("Product Type")}}</label>
+                            <select name="param1" id="param1" (change)="onChangeProductType($event.target.value)" class="form-control" [(ngModel)]="param1">
+                               <option name="param1" *ngFor="let productType of productTypes"  [value]="productType.id">{{productType.productType}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>{{l("BVN")}}</label>
+                            <input class="form-control" type="text" name="" maxlength="10"  required placeholder="Enter valid BVN">
+                            <a href="" class="text-primary">Verify BVN</a>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>{{l("Age Range")}}</label>
+                            <select name="param2" id="param2" class="form-control" [(ngModel)]="param2">
+                                <option name="param2" *ngFor="let age of ages" [value]="age.id">{{age.ageGroup}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>{{l("Income Range")}}</label>
+                            <select name="param3" id="param3" class="form-control" [(ngModel)]="param3">
+                                <option name="param3" *ngFor="let income of incomes" [value]="income.id">{{income.incomeRange}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>{{l("Rent Range")}}</label>
+                           <select name="param4" id="param4" class="form-control" [(ngModel)]="param4">
+                                <option name="param4" *ngFor="let rent of rents" [value]="rent.id">{{rent.rentGroup}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>{{l("Rent to Income")}}</label>
+                             <select name="param5" id="param5" class="form-control" [(ngModel)]="param5">
+                                <option name="param5" *ngFor="let renttoIncome of renttoIncomes" [value]="renttoIncome.id">{{renttoIncome.rentToIncomeGroup}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>{{l("Return on assets")}}</label>
+                             <select name="param6" id="param6" class="form-control" [(ngModel)]="param6">
+                                <option name="param6" *ngFor="let returnonAsset of returnonAssets" [value]="returnonAsset.id">{{returnonAsset.returnonAssets}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>{{l("Sector")}}</label>
+                            <select name="param7" id="param7" class="form-control" [(ngModel)]="param7">
+                                <option name="param7" *ngFor="let subSector of subSectors" [value]="subSector.id">{{subSector.sectorGroup}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>{{l("Location")}}</label>
+                            <select name="locationAttributeId" id="locationAttributeId" class="form-control" [(ngModel)]="applicationScoring.locationAttributeId">
+                                <option name="locationAttributeId" *ngFor="let location of locations" [value]="location.id">{{location.locationGroup}}</option>
+                            </select>
+                        </div>
+                    </div>
+                   
+                </div>
+                <div class="modal-footer">
+                    <button [disabled]="saving" type="button" class="btn btn-secondary" (click)="close()">{{l("Cancel")}}</button>
+                    <button type="submit" class="btn-primary" [disabled]="!applicationScoringForm.form.valid" [buttonBusy]="saving" [busyText]="l('SavingWithThreeDot')"><i class="fal fa-battery-bolt"></i> <span>{{l("Scores")}}</span></button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

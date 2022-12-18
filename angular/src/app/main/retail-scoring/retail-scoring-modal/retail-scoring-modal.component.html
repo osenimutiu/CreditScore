@@ -1,0 +1,77 @@
+<div bsModal #modal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal" aria-hidden="true" [config]="{backdrop: 'static'}">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <form *ngIf="active" #form="ngForm" novalidate (ngSubmit)="save()">
+                <div class="modal-header bg-danger">
+                    <h4 class="modal-title">
+                        <span class=" text-center text-white"><i class="fas fa-wrench"></i>&nbsp;&nbsp;{{l("Qualitative Analysis")}}</span>
+                    </h4>
+                    <button type="button" class="close" (click)="close()" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="">Customer name</label>
+                            <select name="" id="" class="form-control" style="width: 330px;">
+                                <option value=""></option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="">Account Number</label>
+                            <input class="form-control" style="width: 330px;" [disabled]="true">
+                        </div>
+                    </div>
+                       <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>{{l("Attribute")}}</label>
+                            <select id="attribute" class="form-control" name="attribute" [(ngModel)]="retScg.attribute" (change)="getValue()">
+                                <option *ngFor="let x of distAtt" [value]="x">{{x}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>{{l("Weight")}}</label>
+                            <input class="form-control" type="number" name="weight" [(ngModel)]="retScg.weight" (input)="updateWeight()" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6"> 
+                            <label>{{l("Percentage")}}</label>
+                            <input class="form-control" type="number" name="percentage" [(ngModel)]="retScg.percentage" required>
+                        </div>
+                        <div class="form-group col-md-6"> 
+                            <label>{{l("MaxScore")}}</label>
+                            <input class="form-control" type="number" name="maxScore" [(ngModel)]="retScg.maxScore" [disabled]="true" required>
+                        </div>
+                    </div>
+                     <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>{{l("Value")}}</label>
+                            <select id="value" class="form-control" name="value" [(ngModel)]="retScg.value" (change)="UpdateScore($event.target)">
+                                <option *ngFor="let cp of retailItems" [value]="cp.value">{{cp.value}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>{{l("Attribute Score")}}</label>
+                            <input class="form-control" type="number" name="attributeScore" [(ngModel)]="retScg.attributeScore" required [disabled]="disableScore">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6"> 
+                            <label>{{l("Weighted Attribute")}}</label>
+                            <input class="form-control" type="number" name="weightedAttribute" [(ngModel)]="retScg.weightedAttribute" required [disabled]="true">
+                        </div>
+                    </div>
+                   
+                </div>
+                <div class="modal-footer">
+                    <button [disabled]="saving" type="button" class="btn btn-secondary" (click)="close()">{{l("Cancel")}}</button>
+                    <button type="submit" class="btn btn-primary" [disabled]="!form.form.valid" [buttonBusy]="saving" [busyText]="l('SavingWithThreeDot')"><i class="fal fa-battery-bolt"></i> <span>{{l("Save")}}</span></button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+

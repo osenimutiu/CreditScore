@@ -1,0 +1,83 @@
+<div bsModal #viewRequestModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="viewRequestModal" aria-hidden="true" [config]="{backdrop: 'static'}">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-danger">
+                <h4 class="modal-title">
+                    <span>{{l("Loan Request")}}</span>
+                </h4>
+                <button type="button" class="close" (click)="close()" aria-label="Close">
+                    <span aria-hidden="false">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-6 mb-3">
+                        <h6>{{l("Application Number")}} :</h6>
+                        {{ item.applicatioNo }}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("Business Name")}} :</h6>
+                        {{ item.businessName }}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("LoanAmount")}} :</h6>
+                        {{ item.loanAmount }}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("LoanType")}} :</h6>
+                        {{ item.loanTypeDescription }}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("TenorMonth")}} :</h6>
+                        {{ item.loanTenor }}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("Email")}} :</h6>
+                        {{ item.email }}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("Business Account Number")}} :</h6>
+                        {{ item.businessAccountNo }}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("First Name")}} :</h6>
+                        {{ item.firstName }}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("Last Name")}} :</h6>
+                        {{ item.lastName }}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("Middle Name")}} :</h6>
+                        {{ item.middleName }}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("Date Of Birth")}} :</h6>
+                        {{ item.dateOfBirth }}
+                    </div>
+
+                    <div class="col-6 mb-3">
+                        <h6>{{l("Phone")}} :</h6>
+                        {{ item.phone }}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("Bank")}} :</h6>
+                        {{ item.bankSelection }}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("Bank Account Number")}} :</h6>
+                        {{ item.bankAccountNo }}
+                    </div>
+                   
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button [disabled]="saving" type="button" class="btn btn-outline-danger" (click)="close()">{{l("Close")}}</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+

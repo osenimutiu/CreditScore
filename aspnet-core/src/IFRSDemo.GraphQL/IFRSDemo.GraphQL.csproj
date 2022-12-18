@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="Current">
+  <Import Project="..\..\common.props">
+  </Import>
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
+    <RootNamespace>IFRSDemo</RootNamespace>
+    <FileUpgradeFlags>40</FileUpgradeFlags>
+    <UpgradeBackupLocation>D:\PageIntegration\aspnet-core\Backup\src\IFRSDemo.GraphQL\</UpgradeBackupLocation>
+    <OldToolsVersion>2.0</OldToolsVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="GraphQL" Version="2.4.0" />
+    <PackageReference Include="GraphQL.Server.Transports.AspNetCore" Version="3.4.0" />
+    <PackageReference Include="GraphQL.Server.Ui.Playground" Version="3.4.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\IFRSDemo.Application.Shared\IFRSDemo.Application.Shared.csproj" />
+    <ProjectReference Include="..\IFRSDemo.Core\IFRSDemo.Core.csproj" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,450 @@
+
+  <style>
+ 
+    /* Table Styles */
+    
+    .table-wrapper{
+     margin: 10px 70px 70px;
+     box-shadow: 0px 35px 50px rgba( 0, 0, 0, 0.2 );
+    }
+    
+    .fl-table td, .fl-table th {
+     text-align: center;
+     padding: 8px;
+    }
+    
+    .fl-table thead th:nth-child(odd) {
+     color: #ffffff;
+     background: #324960;
+    }
+    
+    .fl-table tr:nth-child(even) {
+     background: #F8F8F8;
+    }
+    
+    /* Responsive */
+    
+    @media (max-width: 767px) {
+     .fl-table {
+         display: block;
+         width: 100%;
+     }
+     .table-wrapper:before{
+         content: "Scroll horizontally >";
+         display: block;
+         text-align: right;
+         font-size: 11px;
+         color: white;
+         padding: 0 0 10px;
+     }
+     .fl-table thead, .fl-table tbody, .fl-table thead th {
+         display: block;
+     }
+     .fl-table thead th:last-child{
+         border-bottom: none;
+     }
+     .fl-table thead {
+         float: left;
+     }
+     .fl-table tbody {
+         width: auto;
+         position: relative;
+         overflow-x: auto;
+     }
+     .fl-table td, .fl-table th {
+         padding: 20px .625em .625em .625em;
+         height: 60px;
+         vertical-align: middle;
+         box-sizing: border-box;
+         overflow-x: hidden;
+         overflow-y: auto;
+         width: 120px;
+         font-size: 13px;
+         text-overflow: ellipsis;
+     }
+     .fl-table thead th {
+         text-align: left;
+         border-bottom: 1px solid #f7f7f9;
+     }
+     .fl-table tbody tr {
+         display: table-cell;
+     }
+     .fl-table tbody tr:nth-child(odd) {
+         background: none;
+     }
+     .fl-table tr:nth-child(even) {
+         background: transparent;
+     }
+     .fl-table tr td:nth-child(odd) {
+         background: #F8F8F8;
+         border-right: 1px solid #E6E4E4;
+     }
+     .fl-table tr td:nth-child(even) {
+         border-right: 1px solid #E6E4E4;
+     }
+     .fl-table tbody td {
+         display: block;
+         text-align: center;
+     }
+    }
+    </style>
+  <div class="container">
+    <b class="text-center"><i class="fas fa-chart-bar"></i>&nbsp;DATA ANALYSIS |</b>&nbsp;<span>DATA PREPARATION
+      OUTPUT</span>
+      <br>
+      <div class="row">
+        <button (click)="reload()" class="form-group btn-lg btn btn-outline-primary" style="margin-top: 2em;">Refresh</button>
+      </div>  
+    <div class="row">
+      <div class="col-md-6 styled-table" style="margin-left: px; border: 2px solid red;">
+  
+        <div class="form-group"> 
+          <div class="row btgreen">PRE-PROCESSING</div>
+          <div class="row">
+            <label style="margin-top: 10px;">Training/Validation:</label>
+            <div class="some-class">
+               <input type="number" class="radio form-control" [(ngModel)]="training" (keyup)="updateTest()" (click)="updateTest()" style="width: 60px;"/>
+              <input type="number" class="radio form-control" [(ngModel)]="test" (keyup)="updateTraining()" (click)="updateTraining()" style="width: 60px" />
+            </div>
+            
+          </div> 
+          </div>
+        
+          <div class="some-class"> 
+           FeatureName:
+            <div class="row">
+              <div class="col-md-6">
+            <select #myInput [(ngModel)]="featurename" class="form-control" (ngModelChange)='onFeaturenameSelected($event)'>
+              <option value=""></option>
+              <option *ngFor="let featurename of distinctFeatures">{{featurename}}</option>
+            </select>
+            
+              </div>
+              <div class="col-md-6" id="myoptions" style="margin-top: 10px;">
+                <input type="radio" id="r1"  name="group1" value="Mean" class="radio" />
+                <label for="mean">&nbsp;Mean &nbsp;&nbsp;</label>
+                <input type="radio" id="r2" name="group1" value="Median" class="radio" />
+                <label for="median">&nbsp;Median&nbsp;&nbsp;</label>
+                <input type="radio" id="r3" name="group1" value="Mode" checked="checked" class="radio" />
+                <label for="mode">&nbsp;Mode&nbsp;&nbsp;</label>
+              </div>
+              <span class="text-success " style="margin-left: 25px;">{{modifiedText}}</span>
+            </div>
+        
+            
+          <!-- <div id="myoptions">
+            <input type="radio" id="r1" name="group1" value="Mean">Mean
+            <input type="radio" id="r2"  name="group1"  value="Median">Median
+            <input type="radio" id="r3"  name="group1"  value="Mode">Mode
+            <input type="submit" value="Apply" (click)="apply()">
+          
+          </div> -->
+            Operation:
+            <div class="row">
+              <div class="col-md-6">
+                <select class="form-control">
+                  <!-- <option value=""></option> -->
+                  <option *ngFor="let operation of operations" [value]="operation.id">{{operation.operationName}}</option> 
+                </select>
+              </div>
+              <div class="col-md-6" style="margin-top: 10px;">
+                <input type="radio" class="radio" name="group2" value="delete" id="a1" />
+            <label for="delete">&nbsp;Delete&nbsp;&nbsp;</label>
+            <input type="radio" class="radio" name="group2" checked="checked" value="remove" id="a2" />
+            <label for="remove">&nbsp;Remove&nbsp;&nbsp;</label>
+              </div>
+            </div>
+            <div class="form-group">
+              Component:
+              <div class="row">
+                <div class="col-md-6">
+                  <select class="form-control" >
+                    <!-- <option value=""></option> -->
+                    <option *ngFor="let combination of combinations">{{combination}}</option>
+                  </select>
+                </div>
+    
+              </div>
+            </div>          
+        </div>
+  
+         <br>
+         .
+          <div class="form-group">
+            <button type="button" class="btn btn-primary" (click)="apply()">Apply</button>
+          </div>
+  
+          <div class="row">
+            <div class="col-md-3">
+               <p><label for="" class="control-label"><h5>Null Value : {{nu_ll}} </h5></label> </p>                  
+            </div>
+            <div class="col-md-3">
+                <p><label for="" class="control-label"><h5>Outliers : {{outl_ier}} </h5></label></p>
+             </div>                
+            
+          <br>
+          <br>
+          <br>
+          <div>
+            <!-- <ul>
+                <li *ngFor="let  histogram of histograms" >
+                    {{histogram.lowerBound}} : {{histogram.percent}}
+                </li>
+            </ul> -->
+           
+        </div> 
+        <!-- <ngx-charts-bar-vertical 
+        [view]="[600,250]"
+        [results]="hischartData"
+        [xAxisLabel]="'lowerBound'"
+        [legendTitle]="'lowerBound'"
+        [yAxisLabel]="'percent'"
+        [legend]="true"
+        [showXAxisLabel]="true"
+        [showYAxisLabel]="true"
+        [xAxis]="true"
+        [yAxis]="true"
+        [gradient]="true">
+    </ngx-charts-bar-vertical> -->
+        
+        </div>
+      </div>
+     
+      <!-- 7 -->
+      <div class="col-md-6"> 
+        
+        <div class="">
+         
+          <table class="styled-table">
+            <thead>
+                <tr>
+                    <th>{{"FEATURE NAME" | localize}}</th>
+                    <th>{{"LOWER BOUND" | localize}}</th>
+                    <th>{{"UPPER BOUND" | localize}}</th>
+                    <th>{{"COUNT" | localize}}</th>
+                    <th>{{"PERCENTAGE(%)" | localize}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let histogram of histograms | paginate: { itemsPerPage: 5, currentPage: p }">
+                  <td>{{histogram.featurename}}</td>
+                  <td>{{histogram.lowerBound}}</td>
+                  <td>{{histogram.upperBound}}</td>
+                  <td>{{histogram.count}}</td>
+                  <td>{{histogram.percent}}</td>
+                </tr>
+                
+               
+            </tbody>
+            
+        </table>
+        <pagination-controls (pageChange)="p = $event" class="pull-left"></pagination-controls>
+        <h3 class="text-left">{{"Total" | localize}} ({{histograms.length}})</h3>
+        </div>
+        
+        <!-- <chart type="pie" [data]="datab"></chart> -->
+      </div>
+      <ngx-charts-bar-vertical 
+      [view]="[600,250]"
+      [results]="saleData"
+      [xAxisLabel]="'lowerBound'"
+      [legendTitle]="'lowerBound percentage Chart'"
+      [yAxisLabel]="'percentage'"
+      [legend]="true"
+      [showXAxisLabel]="true"
+      [showYAxisLabel]="true"
+      [xAxis]="true"
+      [yAxis]="true"
+      [gradient]="true">
+      </ngx-charts-bar-vertical>
+      <div class="row center">
+            <div class="center" >
+      
+        <ngx-charts-bar-vertical 
+        [view]="[600,250]"
+        [results]="hischartsData"
+        [xAxisLabel]="'lowerBound'"
+        [legendTitle]="'lowerBound'"
+        [yAxisLabel]="'percent'"
+        [legend]="true"
+        [showXAxisLabel]="true"
+        [showYAxisLabel]="true"
+        [xAxis]="true"
+        [yAxis]="true"
+        [gradient]="true">
+      </ngx-charts-bar-vertical>
+      </div>
+      </div>
+    </div>
+    
+  </div>
+  
+  <!-- <ngx-charts-bar-vertical 
+  [view]="[500,400]"
+  [results]="histograms"
+  [xAxisLabel]="'lowerBound'"
+  [legendTitle]="'lowerBound'"
+  [yAxisLabel]="'percent'"
+  [legend]="true"
+  [showXAxisLabel]="true"
+  [showYAxisLabel]="true"
+  [xAxisTickFormatting]='xAxisTickFormatting'
+  [xAxis]="true"
+  [yAxis]="true"
+  [gradient]="false"
+  (select)="onSelect($event)">
+  
+  </ngx-charts-bar-vertical> -->
+  
+  
+            <!-- <chart type="pie" [data]="datab"></chart> -->
+
+<!-- <div class="container">
+  <b class="text-center"><i class="fas fa-chart-bar"></i>&nbsp;DATA ANALYSIS |</b>&nbsp;<span>Data Preparation
+    Output</span>
+    <div class="row">
+      <button (click)="reload()" class="form-group btn-lg btn btn-outline-success" style="margin-top: 30px;">Refresh</button>
+    </div>
+    
+  <div class="row">
+    <div class="col-md-6" style="margin-top: 25px; border: 2px solid gray;">
+      
+     
+      <div class="form-group"> 
+        <div class="row">
+          <label style="margin-top: 10px;">Training/Test(%)</label>
+          <div class="some-class">
+             <input type="number" class="radio form-control" [(ngModel)]="training" (keyup)="updateTest()" (click)="updateTest()" style="width: 70px;" />
+            <input type="number" class="radio form-control"[(ngModel)]="test" (keyup)="updateTraining()" (click)="updateTraining()" style="width: 70px;" />
+          </div>
+          
+        </div> 
+        </div>
+      
+        <br>
+        <div class="some-class"> 
+         FeatureName:
+          <div class="row">
+            <div class="col-md-6">
+          <select #myInput [(ngModel)]="featurename" class="form-control" (ngModelChange)='onFeaturenameSelected($event)'>
+            <option value=""></option>
+            <option *ngFor="let featurename of distinctFeatures">{{featurename}}</option>
+          </select>
+          
+            </div>
+            <div class="col-md-6" id="myoptions" style="margin-top: 10px;" >
+              <input type="radio" id="r1"  name="group1" value="Mean" class="radio" />
+              <label for="mean">Mean</label>
+              
+              <input type="radio" id="r2" name="group1" value="Median" class="radio" />
+              <label for="median">Median</label>
+              <input type="radio" id="r3" name="group1" value="Mode" checked="checked" class="radio" />
+              <label for="mode">Mode</label>
+            </div>
+            <span class="text-success " style="margin-left: 25px;">{{modifiedText}}</span>
+          </div>
+      
+          
+        
+          <div class="form-group">
+          Operation:
+          <div class="row">
+            <div class="col-md-7">
+              <select class="form-control">
+               
+                <option *ngFor="let operation of operations" [value]="operation.id">{{operation.operationName}}</option> 
+              </select>
+            </div>
+            <div class="col-md-5" style="margin-top: 10px;">
+              <input type="radio" class="radio" name="group2" value="delete" id="a1" />
+          <label for="delete">Delete</label>
+          <input type="radio" class="radio" name="group2" checked="checked" value="remove" id="a2" />
+          <label for="remove">Remove</label>
+
+            </div>
+          </div>
+       
+          
+         
+        </div>
+
+
+
+        <div class="form-group">
+          Component:
+          <select class="form-control" style="width: 70%;">
+            
+            <option *ngFor="let combination of combinations">{{combination}}</option>
+          </select>
+         
+        </div>
+      </div>
+
+       
+        <div class="form-group">
+          <button type="button" class="btn-block btn-lg btn btn-primary" (click)="apply()" style="width: 70%;">Apply</button>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+             <p><label for="" class="control-label"> Null Value : {{nu_ll}} </label> </p>                  
+          </div>
+          <div class="col-md-6">
+              <p><label for="" class="control-label">Outliers : {{outl_ier}} </label></p>
+           </div>                
+          
+        <br>
+        <br>
+        <br>
+        <div>
+         
+      </div> 
+      
+      
+      </div>
+    </div>
+   
+   
+    <div class="col-md-6"> 
+      
+      <div class="">
+       
+        <table class="styled-table">
+          <thead>
+              <tr>
+                  <th>{{"Feature Name" | localize}}</th>
+                  <th>{{"Lower Bound" | localize}}</th>
+                  <th>{{"Upper Bound" | localize}}</th>
+                  <th>{{"Count" | localize}}</th>
+                  <th>{{"Percentage(%)" | localize}}</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let histogram of histograms | paginate: { itemsPerPage: 5, currentPage: p }">
+                <td>{{histogram.featurename}}</td>
+                <td>{{histogram.lowerBound}}</td>
+                <td>{{histogram.upperBound}}</td>
+                <td>{{histogram.count}}</td>
+                <td>{{histogram.percent}}</td>
+              </tr>         
+          </tbody>
+          
+      </table>
+      <pagination-controls (pageChange)="p = $event" class="pull-right"></pagination-controls>
+      </div>
+     
+      <h3 class="pull-left">{{"Total" | localize}} ({{histograms.length}})</h3>
+      
+    </div>
+  
+  </div>
+  
+</div>
+
+    <div class="row center">
+          <div class="center" >
+            
+      
+          </div>
+          </div> -->
+          <!-- <chart type="pie" [data]="datab"></chart> -->

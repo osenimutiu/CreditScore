@@ -1,0 +1,158 @@
+
+<div [@routerTransition]>
+  
+    <div class="content d-flex flex-column flex-column-fluid">
+     <sub-header [title]="'SetUp' | localize">
+          <div role="actions">
+          <button (click)="exportExcel()" class="btn btn-outline-success"><i class="fas fa-file-excel"></i> Export</button>
+          <button (click)="reload()" class="btn btn-outline-primary"><i class="fas fa-sync"></i> Refresh</button>
+      </div>
+              </sub-header> 
+      
+      <!-- <div [class]="containerClass"> -->
+      <div [class]="">
+          <div class="card card-custom gutter-b">
+            
+              <div class="card-body">
+                  <form class="form" autocomplete="off">
+                      <div>
+                          <div class="row align-items-center">
+                              <div class="col-xl-12">
+                                 <div class="col-xl-3">
+                                    <div class="form-group m-form__group align-items-center">
+                                        <div class="input-group">
+                                        </div>
+                                        <br>
+                                    </div>
+                                  </div>
+                              </div>
+                          </div>
+                           
+                      </div>
+                  </form>
+                  <br>
+                  <br>
+                  <br>
+                  <table class="table fl-table table-borderless">
+                    <thead class="table-dark">
+                        <tr>
+                            <th style="width: 150px; background-color: #e90c0c; color: white;">Action</th>
+                            <!-- <th style="width: 150px; background-color: #e90c0c; color: white;">Event of bad debt /collections payment</th> -->
+                            <th style="width: 150px; background-color: #e90c0c; color: white;">Event of bad debt</th>
+                            <th style="width: 150px; background-color: #e90c0c; color: white;">Fraud event</th>
+                            <th style="width: 150px; background-color: #e90c0c; color: white;">Frequent adverse payments</th>
+                            <!-- <th style="width: 150px; background-color: #e90c0c; color: white;">Not enough bank account data for scoring &#60; 90 days</th> -->
+                            <th style="width: 150px; background-color: #e90c0c; color: white;">Not enough bank account</th>
+                            <th style="width: 150px; background-color: #e90c0c; color: white;">Major new lending obligations identified</th>
+                            <!-- <th style="width: 150px; background-color: #e90c0c; color: white;">Not enough inflows to grant s credit line</th> -->
+                            <th style="width: 150px; background-color: #e90c0c; color: white;">Not enough inflows</th>
+                            <!-- <th style="width: 150px; background-color: #e90c0c; color: white;">High prediction model default probability</th> -->
+                            <th style="width: 150px; background-color: #e90c0c; color: white;">High prediction model</th>
+                            <th style="width: 150px; background-color: #e90c0c; color: white;">Not enough space for a credit line</th>
+                            <!-- <th style="width: 150px; background-color: #e90c0c; color: white;">Affordable credit line amount too low compared to the requested amount</th> -->
+                            <th style="width: 150px; background-color: #e90c0c; color: white;">Affordable credit line amount</th>
+                            <th style="width: 150px; background-color: #e90c0c; color: white;">Insufficient bank account buffer</th>
+                            <!-- <th style="width: 150px; background-color: #e90c0c; color: white;">Insufficient level of inflows versus the stated revenues</th> -->
+                            <th style="width: 150px; background-color: #e90c0c; color: white;">Insufficient level of inflows</th>
+                            <th style="width: 150px; background-color: #e90c0c; color: white;">Not enough overdraft buffer available</th>
+                            <!-- <th style="width: 150px; background-color: #e90c0c; color: white;">Significant reduction in the bank account inflows</th> -->
+                            <th style="width: 150px; background-color: #e90c0c; color: white;">Significant reduction </th>
+                            <th style="width: 150px; background-color: #e90c0c; color: white;">High leverage</th>
+                            <!-- <th style="width: 150px; background-color: #e90c0c; color: white;">Negative or insufficient Debt Service Coverage Ratio</th> -->
+                            <th style="width: 150px; background-color: #e90c0c; color: white;">Insufficient Debt Service</th>
+                            <th style="width: 150px; background-color: #e90c0c; color: white;">Insufficient Profit Margin</th>
+                            <!-- <th style="width: 150px; background-color: #e90c0c; color: white;">Email address identified as automatically generated</th> -->
+                            <th style="width: 150px; background-color: #e90c0c; color: white;">Email address identified</th>
+                            <!-- <th style="width: 150px; background-color: #e90c0c; color: white;">Email address is from a disposable email service</th> -->
+                            <th style="width: 150px; background-color: #e90c0c; color: white;">Email address disposable</th>
+                            <th style="width: 150px; background-color: #e90c0c; color: white;">The email address bounces</th>
+                            <!-- <th style="width: 150px; background-color: #e90c0c; color: white;">No mix records found for domain of the email address</th> -->
+                            <th style="width: 150px; background-color: #e90c0c; color: white;">No mix records</th>
+                            <!-- <th style="width: 150px; background-color: #e90c0c; color: white;">Connection to the SMTP server fails</th> -->
+                            <th style="width: 150px; background-color: #e90c0c; color: white;">Connection to the SMTP</th>
+                            <th style="width: 150px; background-color: #e90c0c; color: white;">Company years in business &#60; 1.5</th>
+                            <th style="width: 150px; background-color: #e90c0c; color: white;">Share capital</th>
+                            <!-- <th style="width: 150px; background-color: #e90c0c; color: white;">Unable to verify user payment accounts</th> -->
+                            <th style="width: 150px; background-color: #e90c0c; color: white;">Unable to verify user payment account</th>
+                            <th style="width: 150px; background-color: #e90c0c; color: white;">Court actions</th>
+                            <th style="width: 150px; background-color: #e90c0c; color: white;">Court writs</th>
+                            <th style="width: 150px; background-color: #e90c0c; color: white;">Credit enquries</th>
+                            <th style="width: 150px; background-color: #e90c0c; color: white;">Default status</th>
+                            <th style="width: 150px; background-color: #e90c0c; color: white;">External administration</th>
+                            <th style="width: 150px; background-color: #e90c0c; color: white;">Payment defaults</th>
+                            <th style="width: 150px; background-color: #e90c0c; color: white;">Petition occurrence</th>
+                            <th style="width: 150px; background-color: #e90c0c; color: white;">Current Directorships</th>
+                            <th style="width: 150px; background-color: #e90c0c; color: white;">Director Age</th>
+                            <th style="width: 150px; background-color: #e90c0c; color: white;">Bankruptcy</th>
+                            <th style="width: 150px; background-color: #e90c0c; color: white;">Commercial Defaults</th>
+                            <th style="width: 150px; background-color: #e90c0c; color: white;">Court Actions</th>
+                            <th style="width: 150px; background-color: #e90c0c; color: white;">Disqualified directorships</th>
+                            <th style="width: 150px; background-color: #e90c0c; color: white;">Probability of future adverse events</th>
+                            <th style="width: 150px; background-color: #e90c0c; color: white;">Probability of future serious events</th>
+                            <th style="width: 150px; background-color: #e90c0c; color: white;">Low credit bureau score</th>
+                            <th style="width: 150px; background-color: #e90c0c; color: white;">Previous Directorships</th>
+                           
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let cal of setUpList| paginate: { itemsPerPage: 10, currentPage: p }; let i = index;">
+                            <td> <button class="btn btn-primary" (click)="digSetupModal.edit(cal.id)"><i class="fas fa-edit"></i></button> &nbsp; </td>
+                            <td>{{cal.eventBadCollPayment}}</td>
+                            <td>{{cal.fraudEvent}}</td>
+                            <td>{{cal.freqAdvPayments}}</td>
+                            <td>{{cal.notEnoughBankAccforScoring}}</td>
+                            <td>{{cal.majorNewLendingObligationsIdentified}}</td>
+                            <td>{{cal.notEnoughInflowsGrantCreditLine}}</td>
+                            <td>{{cal.highPredModelDefProb }}</td>
+                            <td>{{cal.notEnoughSpaceCreditLine }}</td>
+                            <td>{{cal.affordableCreditLineAmount }}</td>
+                            <td>{{cal.insufficientBankAccountBuffer }}</td>
+                            <td>{{cal.insufficientLevelInflowVersusStatedRev }}</td>
+                            <td>{{cal.notEnoughOverdraftBufferAvailable }}</td>
+                            <td>{{cal.significantReductionBankAccInflows }}</td>
+                            <td>{{cal.highLeverage }}</td>
+                            <td>{{cal.negativeInsufficientDebtServiceCovRatio}}</td>
+                            <td>{{cal.insufficientProfitMargin}}</td>
+                            <td>{{cal.emailAddIdentAutGen}}</td>
+                            <td>{{cal.emailAddDisEmailServ}}</td>
+                            <td>{{cal.emailAddBounces}}</td>
+                            <td>{{cal.noMixRecordFoundDomainEmailAdd}}</td>
+                            <td>{{cal.connSMTP}}</td>
+                            <td>{{cal.compYearBusiness}}</td>
+                            <td>{{cal.shareCapital}}</td>
+                            <td>{{cal.unableVerifyUserPayAcc}}</td>
+                            <td>{{cal.courtActions}}</td>
+                            <td>{{cal.courtWrits}}</td>
+                            <td>{{cal.creditEnquries}}</td>
+                            <td>{{cal.defaultStatus}}</td>
+                            <td>{{cal.externalAdmin}}</td>
+                            <td>{{cal.paymentDefaults}}</td>
+                            <td>{{cal.petOccurrence}}</td>
+                            <td>{{cal.currDirectorships}}</td>
+                            <td>{{cal.direcAge}}</td>
+                            <td>{{cal.bankruptcy}}</td>
+                            <td>{{cal.commercialDefaults}}</td>
+                            <td>{{cal.courtActionsForCreditBureau}}</td>
+                            <td>{{cal.disqDirectorship}}</td>
+                            <td>{{cal.probFutureAdverseEvent}}</td>
+                            <td>{{cal.probFutureSeriousEvent}}</td>
+                            <td>{{cal.lowCreditBureauScore}}</td>
+                            <td>{{cal.previouDirectorships}}</td>
+                        </tr>
+                    </tbody>
+                </table> 
+                <div class="row">
+                    <div class="col-md-2">
+                        <!-- <input type="text" class="form-control" value="{{totalamount | number : '.0-0'}}" disabled="true" style="width: 150px;"> -->
+                       </div>
+                    <!-- <div class="col-md-10"> 
+                        <pagination-controls (pageChange)="p = $event" class="pull-right"></pagination-controls>
+                    </div> -->
+                </div>
+               
+              </div>
+          </div>
+      </div>
+    </div>
+    <digSetupModal #digSetupModal (modalSave)="getSetUp()"></digSetupModal>
+  </div>

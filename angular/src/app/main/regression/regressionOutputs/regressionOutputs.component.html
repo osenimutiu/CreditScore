@@ -1,0 +1,202 @@
+﻿<div [@routerTransition]>
+  
+  <div class="content d-flex flex-column flex-column-fluid">
+   <sub-header [title]="'RegressionOutputs' | localize" [description]="'RegressionOutputsHeaderInfo' | localize">
+             <div role="actions">
+                 <button (click)="exportToExcel()" class="btn btn-outline-success"><i class="fa fa-file-excel"></i> {{l("ExportToExcel")}}</button>
+                
+                 <button *ngIf="isGranted('Pages.RegressionOutputs.Create')" (click)="createRegressionOutput()" 
+                                        class="btn btn-primary blue"><i class="fa fa-plus"></i> {{l("CreateNewRegressionOutput")}}</button>
+             </div>
+            </sub-header>
+    
+    <div [class]="containerClass">
+        <div class="card card-custom gutter-b">
+            <div class="card-body">
+                <form class="form" autocomplete="off">
+                    <div>
+                        <div class="row align-items-center">
+                            <div class="col-xl-12">
+                                <div class="form-group m-form__group align-items-center">
+                                    <div class="input-group">
+                                        <input [(ngModel)]="filterText" name="filterText" autoFocus class="form-control m-input" [placeholder]="l('SearchWithThreeDot')" type="text">
+                                        <span class="input-group-btn">
+                                            <button (click)="getRegressionOutputs()" class="btn btn-primary" type="submit"><i class="flaticon-search-1"></i></button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+						 <div class="row" [hidden]="!advancedFiltersAreShown">
+						 	<div class="col-md-12">
+						         <div class="kt-separator kt-separator--border-dashed"></div>
+						     </div>
+
+
+							<div class="col-md-3">
+								<div class="form-group">
+									<label for="ParamNameFilter">{{l("ParamName")}}</label>
+									<input type="text" class="form-control" id="ParamNameFilter" name="paramNameFilter" [(ngModel)]="paramNameFilter">
+								</div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+									<label for="MinCoeff_EstimateFilter">{{l("MinMax")}} {{l("Coeff_Estimate")}}</label>
+									<div class="input-group">
+                                        <input type="number" class="form-control" id="MinCoeff_EstimateFilter" [(ngModel)]="minCoeff_EstimateFilter" placeholder="{{l('MinValue')}}" name="minCoeff_EstimateFilter" />
+                                        <input type="number" class="form-control" [(ngModel)]="maxCoeff_EstimateFilter" placeholder="{{l('MaxValue')}}" name="maxCoeff_EstimateFilter" />
+									</div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+									<label for="MinStd_ErrorFilter">{{l("MinMax")}} {{l("Std_Error")}}</label>
+									<div class="input-group">
+                                        <input type="number" class="form-control" id="MinStd_ErrorFilter" [(ngModel)]="minStd_ErrorFilter" placeholder="{{l('MinValue')}}" name="minStd_ErrorFilter" />
+                                        <input type="number" class="form-control" [(ngModel)]="maxStd_ErrorFilter" placeholder="{{l('MaxValue')}}" name="maxStd_ErrorFilter" />
+									</div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+									<label for="Mint_valueFilter">{{l("MinMax")}} {{l("t_value")}}</label>
+									<div class="input-group">
+                                        <input type="number" class="form-control" id="Mint_valueFilter" [(ngModel)]="mint_valueFilter" placeholder="{{l('MinValue')}}" name="mint_valueFilter" />
+                                        <input type="number" class="form-control" [(ngModel)]="maxt_valueFilter" placeholder="{{l('MaxValue')}}" name="maxt_valueFilter" />
+									</div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+									<label for="Minp_valueFilter">{{l("MinMax")}} {{l("p_value")}}</label>
+									<div class="input-group">
+                                        <input type="number" class="form-control" id="Minp_valueFilter" [(ngModel)]="minp_valueFilter" placeholder="{{l('MinValue')}}" name="minp_valueFilter" />
+                                        <input type="number" class="form-control" [(ngModel)]="maxp_valueFilter" placeholder="{{l('MaxValue')}}" name="maxp_valueFilter" />
+									</div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-sm-12">
+                                <span class="clickable-item text-muted" *ngIf="!advancedFiltersAreShown" (click)="advancedFiltersAreShown=!advancedFiltersAreShown"><i class="fa fa-angle-down"></i> {{l("ShowAdvancedFilters")}}</span>
+                                <span class="clickable-item text-muted" *ngIf="advancedFiltersAreShown" (click)="advancedFiltersAreShown=!advancedFiltersAreShown"><i class="fa fa-angle-up"></i> {{l("HideAdvancedFilters")}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+                <div class="row align-items-center">
+                    <!--<Primeng-Datatable-Start>-->
+                    <div class="primeng-datatable-container col-12"
+                         [busyIf]="primengTableHelper.isLoading">
+                        <p-table #dataTable
+                                     (onLazyLoad)="getRegressionOutputs($event)"
+                                     [value]="primengTableHelper.records"
+                                     rows="{{primengTableHelper.defaultRecordsCountPerPage}}"
+                                     [paginator]="false"
+                                     [lazy]="true"
+                                     [scrollable]="true"
+                                     ScrollWidth="100%"
+                                     [responsive]="primengTableHelper.isResponsive"
+                                     [resizableColumns]="primengTableHelper.resizableColumns">
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <!-- <th style="width: 130px" [hidden]="!isGrantedAny('Pages.RegressionOutputs.Edit', 'Pages.RegressionOutputs.Delete')">{{l('Actions')}}</th> -->
+                                    <th style="width: 150px" pSortableColumn="paramName">
+                                        {{l('ParamName')}}
+                                        <p-sortIcon field="regressionOutput.paramName"></p-sortIcon>
+                                    </th>
+                                    <th style="width: 150px" pSortableColumn="coeff_Estimate">
+                                        {{l('Coeff_Estimate')}}
+                                        <p-sortIcon field="regressionOutput.coeff_Estimate"></p-sortIcon>
+                                    </th>
+                                    <th style="width: 150px" pSortableColumn="std_Error">
+                                        {{l('Std_Error')}}
+                                        <p-sortIcon field="regressionOutput.std_Error"></p-sortIcon>
+                                    </th>
+                                    <th style="width: 150px" pSortableColumn="t_value">
+                                        {{l('t_value')}}
+                                        <p-sortIcon field="regressionOutput.t_value"></p-sortIcon>
+                                    </th>
+                                    <th style="width: 150px" pSortableColumn="p_value">
+                                        {{l('p_value')}}
+                                        <p-sortIcon field="regressionOutput.p_value"></p-sortIcon>
+                                    </th>
+
+                                </tr>
+                            </ng-template>                           
+							<ng-template pTemplate="body" let-record="$implicit" let-i="rowIndex">
+                                <tr>
+                                    <!-- <td style="width: 130px"
+                                        [hidden]="!isGrantedAny('Pages.RegressionOutputs.Edit', 'Pages.RegressionOutputs.Delete')">
+                                       <div class="btn-group dropdown" dropdown container="body">
+                                            <button class="dropdown-toggle btn btn-sm btn-primary" dropdownToggle>
+                                                <i class="fa fa-cog"></i><span class="caret"></span> {{l("Actions")}}
+                                            </button>
+												<ul class="dropdown-menu"  *dropdownMenu>
+												<li>
+													<a href="javascript:;" class="dropdown-item"
+														(click)="viewRegressionOutputModal.show(record)">{{l('View')}}</a>
+												</li>
+												<li>
+                                                <a href="javascript:;" *ngIf="permission.isGranted('Pages.RegressionOutputs.Edit')" class="dropdown-item"
+														(click)="createOrEditRegressionOutputModal.show(record.regressionOutput.id)">{{l('Edit')}}</a>												
+                                                </li>
+												<li>
+											        <a class="dropdown-item" href="javascript:;" *ngIf="permission.isGranted('Pages.RegressionOutputs.Delete')"
+														(click)="deleteRegressionOutput(record.regressionOutput)">{{l('Delete')}}</a>
+												</li>
+                                            </ul>
+                                        </div>
+                                    </td> -->
+                                    <td style="width:150px">
+											<span class="ui-column-title"> {{l('ParamName')}}</span>
+											{{record.regressionOutput.paramName}}
+										</td>
+                                    <td style="width:150px">
+											<span class="ui-column-title"> {{l('Coeff_Estimate')}}</span>
+											{{record.regressionOutput.coeff_Estimate}}
+										</td>
+                                    <td style="width:150px">
+											<span class="ui-column-title"> {{l('Std_Error')}}</span>
+											{{record.regressionOutput.std_Error}}
+										</td>
+                                    <td style="width:150px">
+											<span class="ui-column-title"> {{l('t_value')}}</span>
+											{{record.regressionOutput.t_value}}
+										</td>
+                                    <td style="width:150px">
+											<span class="ui-column-title"> {{l('p_value')}}</span>
+											{{record.regressionOutput.p_value}}
+										</td>
+
+                                </tr>
+                               
+                            </ng-template>
+                        </p-table>
+						<div class="primeng-no-data" *ngIf="primengTableHelper.totalRecordsCount == 0">
+                            {{l('NoData')}}
+                        </div>
+                        <div class="primeng-paging-container">
+                            <p-paginator [rows]="primengTableHelper.defaultRecordsCountPerPage"
+                                         #paginator
+                                         (onPageChange)="getRegressionOutputs($event)"
+                                         [totalRecords]="primengTableHelper.totalRecordsCount"
+                                         [rowsPerPageOptions]="primengTableHelper.predefinedRecordsCountPerPage">
+                            </p-paginator>
+                            <span class="total-records-count">
+                                {{l('TotalRecordsCount', primengTableHelper.totalRecordsCount)}}
+                            </span>
+                        </div>
+                    </div>
+                    <!--<Primeng-Datatable-End>-->
+                </div>
+            </div>
+        </div>
+    </div>
+    <createOrEditRegressionOutputModal #createOrEditRegressionOutputModal (modalSave)="getRegressionOutputs()"></createOrEditRegressionOutputModal>    
+    <viewRegressionOutputModal #viewRegressionOutputModal></viewRegressionOutputModal>
+    
+  </div>
+</div>

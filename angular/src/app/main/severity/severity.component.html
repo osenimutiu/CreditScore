@@ -1,0 +1,524 @@
+<div class="container">
+    <h4><span class="text-center">
+        <!-- Digital Lending -->
+    </span></h4>
+        <button (click)="reload()" class="form-group btn btn-outline-danger" ><i class="fas fa-sync"></i>{{l("Refresh")}}</button>
+        <a class="form-group btn btn-outline-secondary" routerLink="../severity-list"><i class="fa fa-table"></i> Severity </a>
+<div class="row">
+    <div class="col styled-table">
+          <div class="btgreen">
+            <h6><b>Severity</b></h6>
+          </div>
+          <br>
+            <div [class]="containerClass">
+                <div class="card card-custom gutter-b">
+                    <div class="card-body">
+                        <tabset>
+                            <tab class="p-5" heading="{{'Bank Account' | localize}}">
+                               <form #form="ngForm" novalidate (ngSubmit)="postBanAcc()" autocomplete="off">
+                                <div class="mb-3 row">
+                                    <label for="staticEmail" class="col-sm-2 col-form-label" style="font-size: 15px; font-weight: bold;">Event of bad debt /collections payment</label>
+                                    <div class="col-sm-4">
+                                      <input type="number" name="param1" [(ngModel)]="param1" required class="form-control" id="">
+                                    </div>
+                                  </div>
+                                  <div class="mb-3 row">
+                                    <label for="staticEmail" class="col-sm-2 col-form-label" style="font-size: 15px; font-weight: bold;">Fraud Event</label>
+                                    <div class="col-sm-4">
+                                      <input type="number" name="param2" [(ngModel)]="param2" required class="form-control" id="">
+                                    </div>
+                                  </div>
+
+                                  <div class="mb-3 row">
+                                    <label for="staticEmail" class="col-sm-2 col-form-label" style="font-size: 15px; font-weight: bold;">Frequent adverse payments</label>
+                                    <div class="col-sm-4">
+                                      <input type="number" name="param3" [(ngModel)]="param3" required class="form-control" id="">
+                                    </div>
+                                  </div>
+                                  <div class="mb-3 row">
+                                    <label for="staticEmail" class="col-sm-2 col-form-label" style="font-size: 15px; font-weight: bold;">Not enough bank account data for scoring &#60; 180 days</label>
+                                    <div class="col-sm-4">
+                                      <input type="number" name="param4" [(ngModel)]="param4" required class="form-control" id="">
+                                    </div>
+                                  </div>
+                                  <div class="mb-3 row">
+                                    <label for="staticEmail" class="col-sm-2 col-form-label" style="font-size: 15px; font-weight: bold;">Major new lending obligations identified</label>
+                                    <div class="col-sm-4">
+                                      <input type="number" name="param5" [(ngModel)]="param5" required class="form-control" id="">
+                                    </div>
+                                  </div>
+                                  <div class="mb-3 row">
+                                    <label for="staticEmail" class="col-sm-2 col-form-label" style="font-size: 15px; font-weight: bold;">Not enough inflows to grant s credit line</label>
+                                    <div class="col-sm-4">
+                                      <input type="number" name="param6" [(ngModel)]="param6" required class="form-control" id="">
+                                    </div>
+                                  </div>
+
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-danger" [disabled]="!form.form.valid" [buttonBusy]="saving" [busyText]="l('SavingWithThreeDot')"><i class="fal fa-battery-bolt"></i> <span>{{l("Save")}}</span></button>
+                                    </div>
+                                </form>
+                            </tab>
+                            <tab class="p-5" heading="{{'Credit Line' | localize}}">
+                                <form #form="ngForm" novalidate (ngSubmit)="postCreditLine()">
+                                    <!-- <div class="form-group">
+                                        <label>{{l("Not enough space for a credit line")}}</label>
+                                        <input class="form-control" type="number" name="param8" [(ngModel)]="param8" required/>
+                                     </div> -->
+                                     <div class="mb-3 row">
+                                        <label for="param8" class="col-sm-2 col-form-label" style="font-size: 15px; font-weight: bold;">Not enough space for a credit line</label>
+                                        <div class="col-sm-4">
+                                          <input type="number" name="param8" [(ngModel)]="param8" required class="form-control" id="">
+                                        </div>
+                                      </div>
+                                    <!-- <div class="form-group">
+                                        <label>{{l("Affordable credit line amount too low compared to the requested amount")}}</label>
+                                        <input class="form-control" type="number" name="param9" [(ngModel)]="param9" required/>
+                                    </div> -->
+                                    <div class="mb-3 row">
+                                        <label for="param9" class="col-sm-2 col-form-label" style="font-size: 15px; font-weight: bold;">Affordable credit line amount too low compared to the requested amount</label>
+                                        <div class="col-sm-4">
+                                          <input type="number" name="param9" [(ngModel)]="param9" required class="form-control" id="">
+                                        </div>
+                                      </div>
+                                    <!-- <div class="form-group">
+                                        <label>{{l("Insufficient bank account buffer")}}</label>
+                                        <input type="number" name="param10" class="form-control"  [(ngModel)]="param10" required>
+                                    </div> -->
+                                    <div class="mb-3 row">
+                                        <label for="param10" class="col-sm-2 col-form-label" style="font-size: 15px; font-weight: bold;">Insufficient bank account buffer</label>
+                                        <div class="col-sm-4">
+                                          <input type="number" name="param10" [(ngModel)]="param10" required class="form-control" id="">
+                                        </div>
+                                      </div>
+                                    <!-- <div class="form-group">
+                                        <label>{{l("Insufficient level of inflows versus the stated revenues")}}</label>
+                                        <input type="number" name="param11" class="form-control" [(ngModel)]="param11" required>
+                                    </div> -->
+                                    <div class="mb-3 row">
+                                        <label for="param11" class="col-sm-2 col-form-label" style="font-size: 15px; font-weight: bold;">Insufficient level of inflows versus the stated revenues</label>
+                                        <div class="col-sm-4">
+                                          <input type="number" name="param11" [(ngModel)]="param11" required class="form-control" id="">
+                                        </div>
+                                      </div>
+                                    <!-- <div class="form-group">
+                                        <label>{{l("Not enough overdraft buffer available")}}</label>
+                                        <input type="number" name="param12" class="form-control"  [(ngModel)]="param12" required>
+                                    </div> -->
+                                    <div class="mb-3 row">
+                                        <label for="param12" class="col-sm-2 col-form-label" style="font-size: 15px; font-weight: bold;">Not enough overdraft buffer available</label>
+                                        <div class="col-sm-4">
+                                          <input type="number" name="param12" [(ngModel)]="param12" required class="form-control" id="">
+                                        </div>
+                                      </div>
+                                    <!-- <div class="form-group">
+                                        <label>{{l("Significant reduction in the bank account inflows")}}</label>
+                                        <input type="number" name="param13" class="form-control"  [(ngModel)]="param13" required>
+                                    </div> -->
+                                    <div class="mb-3 row">
+                                        <label for="param13" class="col-sm-2 col-form-label" style="font-size: 15px; font-weight: bold;">Significant reduction in the bank account inflows</label>
+                                        <div class="col-sm-4">
+                                          <input type="number" name="param13" [(ngModel)]="param13" required class="form-control" id="">
+                                        </div>
+                                      </div>
+
+                                   <div class="form-group">
+                                    <button type="submit" class="btn btn-danger" [buttonBusy]="saving" [disabled]="!form.form.valid" [busyText]="l('SavingWithThreeDot')"><i class="fal fa-battery-bolt"></i> <span>{{l("Save")}}</span></button>
+                                </div>
+                            </form>
+                            </tab>
+                            <tab class="p-5" heading="{{'Financial' | localize}}">
+                                <form #form="ngForm" novalidate (ngSubmit)="postFinancials()">
+                                    <!-- <div class="form-group">
+                                        <label>{{l("High leverage")}}</label>
+                                        <input class="form-control" type="number" name="param14" [(ngModel)]="param14" required/>
+                                     </div> -->
+                                     <div class="mb-3 row">
+                                        <label for="param14" class="col-sm-2 col-form-label" style="font-size: 15px; font-weight: bold;">High leverage</label>
+                                        <div class="col-sm-4">
+                                          <input type="number" name="param14" [(ngModel)]="param14" required class="form-control" id="">
+                                        </div>
+                                      </div>
+                                    <!-- <div class="form-group">
+                                        <label>{{l("Negative or insufficient Debt Service Coverage Ratio")}}</label>
+                                        <input class="form-control" type="number" name="param15" [(ngModel)]="param15" required/>
+                                    </div> -->
+                                    <div class="mb-3 row">
+                                        <label for="param15" class="col-sm-2 col-form-label" style="font-size: 15px; font-weight: bold;">Negative or insufficient Debt Service Coverage Ratio</label>
+                                        <div class="col-sm-4">
+                                          <input type="number" name="param15" [(ngModel)]="param15" required class="form-control" id="">
+                                        </div>
+                                      </div>
+                                    <!-- <div class="form-group">
+                                        <label>{{l("Insufficient Profit Margin")}}</label>
+                                        <input type="number" name="param16" class="form-control"  [(ngModel)]="param16" required>
+                                    </div> -->
+                                    <div class="mb-3 row">
+                                        <label for="param16" class="col-sm-2 col-form-label" style="font-size: 15px; font-weight: bold;">Insufficient Profit Margin</label>
+                                        <div class="col-sm-4">
+                                          <input type="number" name="param16" [(ngModel)]="param16" required class="form-control" id="">
+                                        </div>
+                                      </div>
+                                   <div class="form-group">
+                                    <button type="submit" class="btn btn-danger" [buttonBusy]="saving" [disabled]="!form.form.valid" [busyText]="l('SavingWithThreeDot')"><i class="fal fa-battery-bolt"></i> <span>{{l("Save")}}</span></button>
+                                </div>
+                            </form>
+                            </tab>
+                            <tab class="p-5" heading="{{'Fraud Check' | localize}}">
+                                <form #form="ngForm" novalidate (ngSubmit)="postFraudCheck()">
+                                    <!-- <div class="form-group">
+                                        <label>{{l("Email address identified as automatically generated")}}</label>
+                                        <input class="form-control" type="number" name="param17" [(ngModel)]="param17" required/>
+                                     </div> -->
+                                     <div class="mb-3 row">
+                                        <label for="param17" class="col-sm-2 col-form-label" style="font-size: 15px; font-weight: bold;">Email address identified as automatically generated</label>
+                                        <div class="col-sm-4">
+                                          <input type="number" name="param17" [(ngModel)]="param17" required class="form-control" id="">
+                                        </div>
+                                      </div>
+                                    <!-- <div class="form-group">
+                                        <label>{{l("Email address is from a disposable email service")}}</label>
+                                        <input class="form-control" type="number" name="param18" [(ngModel)]="param18" required/>
+                                    </div> -->
+                                    <div class="mb-3 row">
+                                        <label for="param18" class="col-sm-2 col-form-label" style="font-size: 15px; font-weight: bold;">Email address is
+                                            from a disposable email service</label>
+                                        <div class="col-sm-4">
+                                            <input type="number" name="param18" [(ngModel)]="param18" required class="form-control" id="">
+                                        </div>
+                                    </div>
+                                    <!-- <div class="form-group">
+                                        <label>{{l("The email address bounces")}}</label>
+                                        <input type="number" name="param19" class="form-control"  [(ngModel)]="param19" required>
+                                    </div> -->
+                                    <div class="mb-3 row">
+                                        <label for="param19" class="col-sm-2 col-form-label" style="font-size: 15px; font-weight: bold;">The email address bounces
+                                        </label>
+                                        <div class="col-sm-4">
+                                            <input type="number" name="param19" [(ngModel)]="param19" required class="form-control" id="">
+                                        </div>
+                                    </div>
+                                    <!-- <div class="form-group">
+                                        <label>{{l("No mix records found for domain of the email address")}}</label>
+                                        <input type="number" name="param20" class="form-control" [(ngModel)]="param20" required>
+                                    </div> -->
+                                    <div class="mb-3 row">
+                                        <label for="param20" class="col-sm-2 col-form-label" style="font-size: 15px; font-weight: bold;">No mix records found for domain of the email address
+                                        </label>
+                                        <div class="col-sm-4">
+                                            <input type="number" name="param20" [(ngModel)]="param20" required class="form-control" id="">
+                                        </div>
+                                    </div>
+                                    <!-- <div class="form-group">
+                                        <label>{{l("connection to the SMTP server fails")}}</label>
+                                        <input type="number" name="param21" class="form-control"  [(ngModel)]="param21" required>
+                                    </div> -->
+                                    <div class="mb-3 row">
+                                        <label for="param21" class="col-sm-2 col-form-label" style="font-size: 15px; font-weight: bold;">connection to the SMTP server fails
+                                        </label>
+                                        <div class="col-sm-4">
+                                            <input type="number" name="param21" [(ngModel)]="param21" required class="form-control" id="">
+                                        </div>
+                                    </div>
+
+                                   <div class="form-group">
+                                    <button type="submit" class="btn btn-danger" [buttonBusy]="saving" [disabled]="!form.form.valid" [busyText]="l('SavingWithThreeDot')"><i class="fal fa-battery-bolt"></i> <span>{{l("Save")}}</span></button>
+                                </div>
+                            </form>
+                            </tab>
+                            <tab class="p-5" heading="{{'Non-Financial Risk' | localize}}">
+                                <form #form="ngForm" novalidate (ngSubmit)="postNonFinancialRisk()">
+                                    <!-- <div class="form-group">
+                                        <label>{{l("Company years in business &#60; 1.5")}}</label>
+                                        <input class="form-control" type="number" name="param22" [(ngModel)]="param22" required/>
+                                     </div> -->
+                                     <div class="mb-3 row">
+                                        <label for="param22" class="col-sm-2 col-form-label" style="font-size: 15px; font-weight: bold;">Company years in business &#60; 1.5
+                                        </label>
+                                        <div class="col-sm-4">
+                                            <input type="number" name="param22" [(ngModel)]="param22" required class="form-control" id="">
+                                        </div>
+                                    </div>
+                                    <!-- <div class="form-group">
+                                        <label>{{l("Share capital")}}</label>
+                                        <input class="form-control" type="number" name="param23" [(ngModel)]="param23" required/>
+                                    </div> -->
+                                    <div class="mb-3 row">
+                                        <label for="param23" class="col-sm-2 col-form-label" style="font-size: 15px; font-weight: bold;">Share capital
+                                        </label>
+                                        <div class="col-sm-4">
+                                            <input type="number" name="param23" [(ngModel)]="param23" required class="form-control" id="">
+                                        </div>
+                                    </div>
+                                   <div class="form-group">
+                                    <button type="submit" class="btn btn-danger" [buttonBusy]="saving" [disabled]="!form.form.valid" [busyText]="l('SavingWithThreeDot')"><i class="fal fa-battery-bolt"></i> <span>{{l("Save")}}</span></button>
+                                </div>
+                            </form>
+                            </tab>
+                            <tab class="p-5" heading="{{'Credit Bureau' | localize}}">
+                                <form #form="ngForm" novalidate (ngSubmit)="postCreditBureau()">
+                                    <!-- <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label>{{l("Unable to verify user payment accounts")}}</label>
+                                            <input class="form-control" type="number" name="param24" [(ngModel)]="param24" required>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label>{{l("Court actions")}}</label>
+                                            <input class="form-control" type="number" name="param25" [(ngModel)]="param25" required>
+                                        </div>
+                                    </div> -->
+                                    <div class="mb-3 row">
+                                        <label for="param24" class="col-sm-2 col-form-label" style="font-size: 15px; font-weight: bold;">Unable to verify user payment accounts
+                                        </label>
+                                        <div class="col-sm-4">
+                                            <input type="number" name="param24" [(ngModel)]="param24" required class="form-control" id="">
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                        <label for="param25" class="col-sm-2 col-form-label" style="font-size: 15px; font-weight: bold;">Court actions
+                                        </label>
+                                        <div class="col-sm-4">
+                                            <input type="number" name="param25" [(ngModel)]="param25" required class="form-control" id="">
+                                        </div>
+                                    </div>
+                                    <!-- <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label>{{l("Court writs")}}</label>
+                                            <input class="form-control" type="number" name="param26" [(ngModel)]="param26" required>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label>{{l("Credit enquries")}}</label>
+                                            <input class="form-control" type="number" name="param27" [(ngModel)]="param27" required>
+                                        </div>
+                                    </div> -->
+                                    <div class="mb-3 row">
+                                        <label for="param26" class="col-sm-2 col-form-label" style="font-size: 15px; font-weight: bold;">Court writs
+                                        </label>
+                                        <div class="col-sm-4">
+                                            <input type="number" name="param26" [(ngModel)]="param26" required class="form-control" id="">
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                        <label for="param27" class="col-sm-2 col-form-label" style="font-size: 15px; font-weight: bold;">Credit enquries
+                                        </label>
+                                        <div class="col-sm-4">
+                                            <input type="number" name="param27" [(ngModel)]="param27" required class="form-control" id="">
+                                        </div>
+                                    </div>
+                                    <!-- <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label>{{l("Default status")}}</label>
+                                            <input class="form-control" type="number" name="param28" [(ngModel)]="param28" required>
+                                        </div>
+                                        <div class="form-group col-md-6">
+
+
+                                    </div>
+                                        <div class="form-group crol-md-6">
+                                            <label>{{l("External administration")}}</label>
+                                            <input class="fom-control" type="number" name="param29" [(ngModel)]="param29" required>
+
+                                        </div>
+                                    </div> -->
+                                     <div class="mb-3 row">
+                                        <label for="param28" class="col-sm-2 col-form-label" style="font-size: 15px; font-weight: bold;">Default status
+                                        </label>
+                                        <div class="col-sm-4">
+                                            <input type="number" name="param28" [(ngModel)]="param28" required class="form-control" id="">
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                        <label for="param29" class="col-sm-2 col-form-label" style="font-size: 15px; font-weight: bold;">External administration
+                                        </label>
+                                        <div class="col-sm-4">
+                                            <input type="number" name="param29" [(ngModel)]="param29" required class="form-control" id="">
+                                        </div>
+                                    </div>
+
+
+                                    <!-- <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label>{{l("Payment defaults")}}</label>
+                                            <input class="form-control" type="number" name="param30" [(ngModel)]="param30" required>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label>{{l("Petition occurrence")}}</label>
+                                            <input class="form-control" type="number" name="param31" [(ngModel)]="param31" required>
+                                        </div>
+                                    </div> -->
+                                    <div class="mb-3 row">
+                                        <label for="param30" class="col-sm-2 col-form-label" style="font-size: 15px; font-weight: bold;">Payment defaults
+                                        </label>
+                                        <div class="col-sm-4">
+                                            <input type="number" name="param30" [(ngModel)]="param30" required class="form-control" id="">
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                        <label for="param31" class="col-sm-2 col-form-label" style="font-size: 15px; font-weight: bold;">Petition occurrence
+                                        </label>
+                                        <div class="col-sm-4">
+                                            <input type="number" name="param31" [(ngModel)]="param31" required class="form-control" id="">
+                                        </div>
+                                    </div>
+                                    <!-- <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label>{{l("Current Directorships")}}</label>
+                                            <input class="form-control" type="number" name="param32" [(ngModel)]="param32" required>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label>{{l("Director Age")}}</label>
+                                            <input class="form-control" type="number" name="param33" [(ngModel)]="param33" required>
+                                        </div>
+                                    </div> -->
+                                    <div class="mb-3 row">
+                                        <label for="param32" class="col-sm-2 col-form-label" style="font-size: 15px; font-weight: bold;">Current Directorships
+                                        </label>
+                                        <div class="col-sm-4">
+                                            <input type="number" name="param32" [(ngModel)]="param32" required class="form-control" id="">
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                        <label for="param33" class="col-sm-2 col-form-label" style="font-size: 15px; font-weight: bold;">Director Age
+                                        </label>
+                                        <div class="col-sm-4">
+                                            <input type="number" name="param33" [(ngModel)]="param33" required class="form-control" id="">
+                                        </div>
+                                    </div>
+                                    <!-- <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label>{{l("Bankruptcy")}}</label>
+                                            <input class="form-control" type="number" name="param34" [(ngModel)]="param34" required>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label>{{l("Commercial Defaults")}}</label>
+                                            <input class="form-control" type="number" name="param35" [(ngModel)]="param35" required>
+                                        </div>
+                                    </div> -->
+
+                                    <div class="mb-3 row">
+                                        <label for="param34" class="col-sm-2 col-form-label" style="font-size: 15px; font-weight: bold;">Bankruptcy
+                                        </label>
+                                        <div class="col-sm-4">
+                                            <input type="number" name="param34" [(ngModel)]="param34" required class="form-control" id="">
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                        <label for="param35" class="col-sm-2 col-form-label" style="font-size: 15px; font-weight: bold;">Commercial Defaults
+                                        </label>
+                                        <div class="col-sm-4">
+                                            <input type="number" name="param35" [(ngModel)]="param35" required class="form-control" id="">
+                                        </div>
+                                    </div>
+                                    <!-- <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label>{{l("Consumer Defaults")}}</label>
+                                            <input class="form-control" type="number" name="param36" [(ngModel)]="param36" required>
+                                        </div> -->
+                                        <!-- <div class="form-group col-md-6">
+                                            <label>{{l("Court Actions")}}</label>
+                                            <input class="form-control" type="number" name="param37" [(ngModel)]="param37" required>
+                                        </div> -->
+                                    <!-- </div> -->
+                                    <div class="mb-3 row">
+                                        <label for="param36" class="col-sm-2 col-form-label" style="font-size: 15px; font-weight: bold;">Consumer Defaults
+                                        </label>
+                                        <div class="col-sm-4">
+                                            <input type="number" name="param36" [(ngModel)]="param36" required class="form-control" id="">
+                                        </div>
+                                    </div>
+
+                                    <!-- <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label>{{l("Disqualified directorships")}}</label>
+                                            <input class="form-control" type="number" name="param38" [(ngModel)]="param38" required>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label>{{l("Probability of future adverse events")}}</label>
+                                            <input class="form-control" type="number" name="param39" [(ngModel)]="param39" required>
+                                        </div>
+                                    </div> -->
+
+                                    <div class="mb-3 row">
+                                        <label for="param38" class="col-sm-2 col-form-label" style="font-size: 15px; font-weight: bold;">Disqualified directorships
+                                        </label>
+                                        <div class="col-sm-4">
+                                            <input type="number" name="param38" [(ngModel)]="param38" required class="form-control" id="">
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                        <label for="param39" class="col-sm-2 col-form-label" style="font-size: 15px; font-weight: bold;">Probability of future adverse events
+                                        </label>
+                                        <div class="col-sm-4">
+                                            <input type="number" name="param39" [(ngModel)]="param39" required class="form-control" id="">
+                                        </div>
+                                    </div>
+                                    <!-- <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label>{{l("Probability of future serious events")}}</label>
+                                            <input class="form-control" type="number" name="param40" [(ngModel)]="param40" required>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label>{{l("Low credit bureau score")}}</label>
+                                            <input class="form-control" type="number" name="param41" [(ngModel)]="param41" required>
+                                        </div>
+                                    </div> -->
+                                    <div class="mb-3 row">
+                                        <label for="param40" class="col-sm-2 col-form-label" style="font-size: 15px; font-weight: bold;">Probability of future serious events
+                                        </label>
+                                        <div class="col-sm-4">
+                                            <input type="number" name="param40" [(ngModel)]="param38" required class="form-control" id="">
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                        <label for="param41" class="col-sm-2 col-form-label" style="font-size: 15px; font-weight: bold;">Low credit bureau score
+                                        </label>
+                                        <div class="col-sm-4">
+                                            <input type="number" name="param41" [(ngModel)]="param41" required class="form-control" id="">
+                                        </div>
+                                    </div>
+                                    <!-- <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label>{{l("Previous Directorships")}}</label>
+                                            <input class="form-control" type="number" name="param42" [(ngModel)]="param42" required>
+                                        </div>
+                                    </div> -->
+                                    <div class="mb-3 row">
+                                        <label for="param42" class="col-sm-2 col-form-label" style="font-size: 15px; font-weight: bold;">Previous Directorships
+                                        </label>
+                                        <div class="col-sm-4">
+                                            <input type="number" name="param42" [(ngModel)]="param42" required class="form-control" id="">
+                                        </div>
+                                    </div>
+                                   <div class="form-group">
+                                    <button type="submit" class="btn btn-danger" [buttonBusy]="saving" [disabled]="!form.form.valid" [busyText]="l('SavingWithThreeDot')"><i class="fal fa-battery-bolt"></i> <span>{{l("Save")}}</span></button>
+                                </div>
+                            </form>
+                            </tab>
+                        </tabset>
+                    </div>
+                </div>
+            </div>
+
+    </div>
+   <!-- <div class="col" id="elem" >
+    <table class="styled-table">
+        <thead>
+            <tr>
+                <th  class="text-center"><b>Category</b></th>
+                <th class="text-center"><b>Description</b></th>
+                <th class="text-center"><b>Severity</b></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let z of severityList">
+                <td>{{z.category}}</td>
+                <td>{{z.description}}</td>
+                <td>{{z.severity}}</td>
+            </tr>
+
+        </tbody>
+    </table>
+   </div> -->
+</div>
+</div>
+

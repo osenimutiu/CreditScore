@@ -1,0 +1,280 @@
+<!-- <div [@routerTransition]>
+
+    <div class="content d-flex flex-column flex-column-fluid">
+        <sub-header [title]="'With Weight of Evidence' | localize">
+             <div role="actions">
+              <button (click)="reload()" class="btn btn-outline-danger"><i class="fas fa-sync"></i> {{l("Refresh")}}</button>
+         </div>
+                 </sub-header> 
+                 <div [class]="containerClass">
+                    <div class="card card-custom gutter-b">
+                        <div class="card-body">
+                            <form class="form" autocomplete="off">
+                                <div>
+                                    <div class="row align-items-center">
+                                        <div class="col-xl-12">
+                                           <div class="col-xl-3">
+                                              <div class="form-group m-form__group align-items-center">
+                                                  <div class="input-group">
+                                                    <select [(ngModel)]="xteristic" name="xteristic" class="form-control" (change)='getWOECurve()' style="width: 100px;" (ngModelChange)='getSelectedItem($event)'>
+                                                       <option *ngFor="let y of distinctList" [value]=y>{{y}}</option>
+                                                      </select>
+                                                    </div>
+                                                  <br>  
+                                                  <br>
+                                                  <p> <span class="alert-success">{{modifiedText}}</span></p>
+                                              </div>
+                                              <div class="row">
+                                              </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                     
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row" *ngIf="displayTable">
+                    <div class="col-md-8">
+                        <table style="margin-left: 30px;"  class="table table-borderless">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>#</th>
+                                    <th>Characteristic</th>
+                                    <th>Attributes</th>
+                                    <th>Weight</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let score of creditWoeList | paginate: { itemsPerPage: 10, currentPage: p }; let i = index;">
+                                    <td>{{i + 1}}</td>
+                                    <td>{{score.characteristic}}</td>
+                                    <td>{{score.attribute}}</td>
+                                    <td>{{score.woe | number : '.2-4'}}</td>
+                                </tr> 
+                            </tbody>
+                        </table>
+                        <br>
+                        <br>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-2">
+                                
+                            </div>
+                            <div class="col-md-10"> 
+                                <pagination-controls (pageChange)="p = $event" class="pull-right"></pagination-controls>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+               
+<div class="row" >
+    <div class="col-md-3">
+        <div class="" style="margin: 20px 0px 0px 15px;">
+            <div class="col-md-6" style="margin-top: 15px;">
+                <h3 class="text-center" style="margin-left: 5em;"> </h3>
+                  <div class="chart-container" style="position: relative; height:40vh; width:70vw">    
+                      <canvas id="canvas">{{ Linechart }}</canvas>    
+                 </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+</div>
+</div> -->
+<style>
+ 
+    /* Table Styles */
+    
+    .table-wrapper{
+     margin: 10px 70px 70px;
+     box-shadow: 0px 35px 50px rgba( 0, 0, 0, 0.2 );
+    }
+    
+    .fl-table td, .fl-table th {
+     padding: 8px;
+    }
+    
+    .fl-table thead th:nth-child(odd) {
+     color: #ffffff;
+     background: #324960;
+    }
+    
+    .fl-table tr:nth-child(even) {
+     background: #F8F8F8;
+    }
+    
+    /* Responsive */
+    
+    @media (max-width: 767px) {
+     .fl-table {
+         display: block;
+         width: 100%;
+     }
+     .table-wrapper:before{
+         content: "Scroll horizontally >";
+         display: block;
+         text-align: right;
+         font-size: 11px;
+         color: white;
+         padding: 0 0 10px;
+     }
+     .fl-table thead, .fl-table tbody, .fl-table thead th {
+         display: block;
+     }
+     .fl-table thead th:last-child{
+         border-bottom: none;
+     }
+     .fl-table thead {
+         float: left;
+     }
+     .fl-table tbody {
+         width: auto;
+         position: relative;
+         overflow-x: auto;
+     }
+     .fl-table td, .fl-table th {
+         padding: 20px .625em .625em .625em;
+         height: 60px;
+         vertical-align: middle;
+         box-sizing: border-box;
+         overflow-x: hidden;
+         overflow-y: auto;
+         width: 120px;
+         font-size: 13px;
+         text-overflow: ellipsis;
+     }
+     .fl-table thead th {
+         text-align: left;
+         border-bottom: 1px solid #f7f7f9;
+     }
+     .fl-table tbody tr {
+         display: table-cell;
+     }
+     .fl-table tbody tr:nth-child(odd) {
+         background: none;
+     }
+     .fl-table tr:nth-child(even) {
+         background: transparent;
+     }
+     .fl-table tr td:nth-child(odd) {
+         background: #F8F8F8;
+         border-right: 1px solid #E6E4E4;
+     }
+     .fl-table tr td:nth-child(even) {
+         border-right: 1px solid #E6E4E4;
+     }
+     .fl-table tbody td {
+         display: block;
+         text-align: center;
+     }
+    }
+    </style>
+<div [@routerTransition]>
+    <div class="content d-flex flex-column flex-column-fluid">
+        <sub-header [title]="'WITH WEIGHT OF EVIDENCE' | localize">
+            <div role="actions">
+                <button (click)="reload()" class="btn btn-outline-primary"><i class="fas fa-sync"></i>
+                    {{l("Refresh")}}</button>
+            </div>
+        </sub-header>
+        <div [class]="containerClass">
+            <div class="card card-custom gutter-b">
+                <div class="card-body">
+                    <!-- <tabset> -->
+                        <!-- <tab class="p-5" heading="{{'With Weight of Evidence' | localize}}"> -->
+                        <div class="">
+                            <div class="row align-items-center">
+                               
+                                <br>
+                                <br>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        
+                                        <!-- <p style="font-size: 20px; font-weight: bold; margin-top: 14px;">{{productTitleRaw}}</p> -->
+                                        <select #myInput [(ngModel)]="xteristic" name="xteristic" class="form-control"
+                                        (ngModelChange)='getSelectedItem($event)' (change)='getWOECurve()'
+                                        style="width: 400px;">
+                                        <option *ngFor="let y of distinctList" [value]=y>{{y}}</option>
+                                    </select>
+                                        <br>
+                                        
+                                        <span style="color: #227d52; font-weight: bold;">{{modifiedText}}</span>
+                                        <br>
+                                        <br>
+                                        <br>
+                                        <div class="6" *ngIf="displayTable">
+                                            <table class="table fl-table table-borderless">
+                                                <thead class="table-dark">
+                                                    <tr>
+                                                        <th style="width: 150px; background-color: #e90c0c; color: white;">#</th>
+                                                        <th style="width: 150px; background-color: #e90c0c; color: white;">Characteristic</th>
+                                                        <th style="width: 150px; background-color: #e90c0c; color: white;">Attributes</th>
+                                                        <th style="width: 150px; background-color: #e90c0c; color: white;">Weight</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr
+                                                        *ngFor="let score of creditWoeList | paginate: { itemsPerPage: 10, currentPage: p }; let i = index;">
+                                                        <td>{{i + 1}}</td>
+                                                        <td>{{score.characteristic}}</td>
+                                                        <td>{{score.attribute}}</td>
+                                                        <td>{{score.woe | number : '.2-4'}}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <div class="row">
+                                                <div class="col-md-2">
+
+                                                </div>
+                                                <div class="col-md-10">
+                                                    <pagination-controls (pageChange)="p = $event" class="pull-right">
+                                                    </pagination-controls>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <br>
+                                        <br>
+
+                                    </div>
+                                    
+                                    <div class="col-md-6">
+                                       
+                                        <!-- <p style="font-size: 20px; font-weight: bold;">{{productTitle}}</p> -->
+                                        <div class="6">
+
+                                            <div class="chart-container"
+                                                style="position: relative; height:40vh; width:45vw">
+                                                <canvas id="canvas">{{ Linechart }}</canvas>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <br>
+                                        <br>
+                                        <br>
+                                        <br>
+
+                                    </div>
+                                    <div class="col-md-2"></div>
+                                </div>
+
+                                <div class="row">
+
+                                </div>
+                            </div>
+                        </div>
+
+                    <!-- </tabset> -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

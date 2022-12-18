@@ -1,0 +1,108 @@
+{
+  "IsRegenerate": false,
+  "MenuPosition": "main",
+  "RelativeNamespace": "Cooperate",
+  "EntityName": "SetupQualitative",
+  "EntityNamePlural": "SetupQualitatives",
+  "TableName": "SetupQualitatives",
+  "PrimaryKeyType": "int",
+  "BaseClass": "Entity",
+  "EntityHistory": false,
+  "AutoMigration": true,
+  "UpdateDatabase": false,
+  "CreateUserInterface": true,
+  "CreateViewOnly": true,
+  "CreateExcelExport": true,
+  "IsNonModalCRUDPage": true,
+  "IsMasterDetailPage": false,
+  "PagePermission": {
+    "Host": true,
+    "Tenant": true
+  },
+  "Properties": [
+    {
+      "Name": "Qualitative",
+      "Type": "string",
+      "MaxLength": -1,
+      "MinLength": -1,
+      "Range": {
+        "IsRangeSet": false,
+        "MinimumValue": 0.0,
+        "MaximumValue": 0.0
+      },
+      "Required": false,
+      "Nullable": false,
+      "Regex": "",
+      "UserInterface": {
+        "AdvancedFilter": true,
+        "List": true,
+        "CreateOrUpdate": true
+      }
+    },
+    {
+      "Name": "Value",
+      "Type": "int",
+      "MaxLength": 0,
+      "MinLength": 0,
+      "Range": {
+        "IsRangeSet": false,
+        "MinimumValue": 0.0,
+        "MaximumValue": 0.0
+      },
+      "Required": false,
+      "Nullable": false,
+      "Regex": "",
+      "UserInterface": {
+        "AdvancedFilter": true,
+        "List": true,
+        "CreateOrUpdate": true
+      }
+    },
+    {
+      "Name": "Status",
+      "Type": "bool",
+      "MaxLength": 0,
+      "MinLength": 0,
+      "Range": {
+        "IsRangeSet": false,
+        "MinimumValue": 0.0,
+        "MaximumValue": 0.0
+      },
+      "Required": false,
+      "Nullable": false,
+      "Regex": "",
+      "UserInterface": {
+        "AdvancedFilter": true,
+        "List": true,
+        "CreateOrUpdate": true
+      }
+    }
+  ],
+  "NavigationProperties": [
+    {
+      "Namespace": "IFRSDemo.Cooperate",
+      "ForeignEntityName": "SectionSetup",
+      "IdType": "int",
+      "IsNullable": false,
+      "PropertyName": "SectionSetupId",
+      "DisplayPropertyName": "Section",
+      "DuplicationNumber": 0,
+      "RelationType": "single",
+      "ViewType": "Dropdown"
+    },
+    {
+      "Namespace": "IFRSDemo.Cooperate",
+      "ForeignEntityName": "SetupSubHeading",
+      "IdType": "int",
+      "IsNullable": false,
+      "PropertyName": "SetupSubHeadingId",
+      "DisplayPropertyName": "SubHeading",
+      "DuplicationNumber": 0,
+      "RelationType": "single",
+      "ViewType": "Dropdown"
+    }
+  ],
+  "NavigationPropertyOneToManyTables": [],
+  "EnumDefinitions": [],
+  "DbContext": null
+}

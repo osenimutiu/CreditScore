@@ -1,0 +1,46 @@
+<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="Current">
+  <Import Project="..\..\common.props">
+  </Import>
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
+    <AssemblyName>IFRSDemo.Core</AssemblyName>
+    <PackageId>IFRSDemo.Core</PackageId>
+    <GenerateAssemblyTitleAttribute>false</GenerateAssemblyTitleAttribute>
+    <GenerateAssemblyDescriptionAttribute>false</GenerateAssemblyDescriptionAttribute>
+    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+    <UserSecretsId>MyCompanyName-IFRSDemo-894FDFC1-6482-4A56-926A-3C46C9FE0329</UserSecretsId>
+    <RootNamespace>IFRSDemo</RootNamespace>
+    <FileUpgradeFlags>40</FileUpgradeFlags>
+    <UpgradeBackupLocation>D:\PageIntegration\aspnet-core\Backup\src\IFRSDemo.Core\</UpgradeBackupLocation>
+    <OldToolsVersion>2.0</OldToolsVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Localization\IFRSDemo\*.xml;Net\Emailing\EmailTemplates\default.html" Exclude="bin\**;obj\**;**\*.xproj;packages\**;@(EmbeddedResource)" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="3.1.5" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.1.5" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.AzureKeyVault" Version="3.1.5" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="3.1.5" />
+    <PackageReference Include="Castle.Windsor.MsDependencyInjection" Version="3.3.1" />
+    <PackageReference Include="PayPalHttp" Version="1.0.0" />
+    <PackageReference Include="Stripe.net" Version="39.11.0" />
+    <PackageReference Include="PayPalCheckoutSdk" Version="1.0.3" />
+    <PackageReference Include="TimeZoneConverter" Version="3.2.0" />
+    <PackageReference Include="Abp.AspNetZeroCore" Version="2.2.0 " />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Abp.ZeroCore.IdentityServer4.EntityFrameworkCore" Version="5.14.0" />
+    <PackageReference Include="Abp.AutoMapper" Version="5.14.0" />
+    <PackageReference Include="Abp.MailKit" Version="5.14.0" />
+    <PackageReference Include="Abp.Zero.Ldap" Version="5.14.0" />
+    <PackageReference Include="Twilio" Version="5.44.0" />
+    <PackageReference Include="Z.EntityFramework.Extensions.EFCore" Version="3.1.15" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\IFRSDemo.Core.Shared\IFRSDemo.Core.Shared.csproj" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,73 @@
+<!-- <div bsModal #modal="bs-modal" (onShown)="onShown()" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal" aria-hidden="true" [config]="{backdrop: 'static'}">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <form *ngIf="active" #form="ngForm" novalidate (ngSubmit)="save()">
+                <div class="modal-header bg-danger">
+                    <h4 class="modal-title">
+                        <span class=" text-center text-white"><i class="fas fa-wrench"></i>&nbsp;&nbsp;{{l("Individual Application")}}</span>
+                    </h4>
+                    <button type="button" class="close" (click)="close()" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                       <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>{{l("Unique Id")}}</label>
+                            <input #uniqueIdInput class="form-control" name="uniqueId" [(ngModel)]="ind.uniqueId" required readonly placeholder="Unique Id">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>{{l("Source of Income")}}</label>
+                            <input class="form-control" name="srcIncome" [(ngModel)]="ind.srcIncome" required placeholder="Source of Income">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6"> 
+                            <label>{{l("Date of Birth")}}</label>
+                            <input class="form-control" type="date" name="dob" [(ngModel)]="ind.dob" required placeholder="Date of Birth">
+                        </div>
+                        <div class="form-group col-md-6"> 
+                            <label>{{l("Application")}}</label>
+                            <select name="application" id="application" class="form-control" [(ngModel)]="ind.application">
+                               <option value="New">New</option>
+                               <option value="Existing">Existing</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>{{l("Request Amount")}}</label>
+                            <input class="form-control" type="number" name="requestAmount" [(ngModel)]="ind.requestAmount" required placeholder="Request Amount">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>{{l("Annual Inflow")}}</label>
+                            <input class="form-control" type="number" name="annualInflow" [(ngModel)]="ind.annualInflow" required placeholder="Annual Inflow">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6"> 
+                            <label>{{l("Loan Purpose")}}</label>
+                            <input class="form-control" name="loanPurpose" [(ngModel)]="ind.loanPurpose" required placeholder="Loan Purpose">
+                        </div>
+                        <div class="form-group col-md-6"> 
+                            <label>{{l("Application Date")}}</label>
+                            <input class="form-control" type="date" name="applicationDate" [(ngModel)]="ind.applicationDate" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6"> 
+                            <label>{{l("Duration")}}</label>
+                            <input class="form-control" type="number" name="duration" [(ngModel)]="ind.duration" required>
+                        </div>
+                    </div>
+                 
+                </div>
+                <div class="modal-footer">
+                    <button [disabled]="saving" type="button" class="btn btn-secondary" (click)="close()">{{l("Cancel")}}</button>
+                    <button type="submit" class="btn btn-primary" [disabled]="!form.form.valid" [buttonBusy]="saving" [busyText]="l('SavingWithThreeDot')"><i class="fal fa-battery-bolt"></i> <span>{{l("Save")}}</span></button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+ -->

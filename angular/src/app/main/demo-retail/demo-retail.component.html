@@ -1,0 +1,75 @@
+
+<div [@routerTransition]>
+  
+    <div class="content d-flex flex-column flex-column-fluid">
+     <sub-header [title]="'Retail' | localize">
+          <div role="actions">
+          <button (click)="createDemoModal.show()" class="btn btn-outline-success"><i class="fas fa-plus-square"></i> Create</button>
+          <button (click)="reload()" class="btn btn-outline-primary"><i class="fas fa-sync"></i> Refresh</button>
+      </div>
+              </sub-header> 
+      
+      <!-- <div [class]="containerClass"> -->
+      <div [class]="">
+          <div class="card card-custom gutter-b">
+            
+              <div class="card-body">
+                  <form class="form" autocomplete="off">
+                      <div>
+                          <div class="row align-items-center">
+                              <div class="col-xl-12">
+                                 <div class="col-xl-3">
+                                    <div class="form-group m-form__group align-items-center">
+                                        <div class="input-group">
+                                        </div>
+                                        <br>
+                                    </div>
+                                  </div>
+                              </div>
+                          </div>
+                           
+                      </div>
+                  </form>
+                  <table class="table fl-table table-borderless">
+                    <thead class="table-dark">
+                        <tr>
+                            <th style="width: 150px; background-color: #e90c0c; color: white;">#</th>
+                            <th style="width: 150px; background-color: #e90c0c; color: white;">Attribute</th>
+                            <th style="width: 150px; background-color: #e90c0c; color: white;">Position </th>
+                            <th style="width: 150px; background-color: #e90c0c; color: white;">Active</th>
+                            <th style="width: 150px; background-color: #e90c0c; color: white;">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let ret of retailDemoList | paginate: { itemsPerPage: 10, currentPage: p }; let i = index;">
+                            <td>{{i + 1}}</td>
+                            <td>{{ret.attribute}}</td>
+                            <td>{{ret.position}}</td>
+                            <td>{{ret.active}}</td>
+                            <td>
+                                <!-- <button class="btn btn-primary" (click)="editdemoModal.show(ret.id)" [disabled]="ret.position < 40">
+                                    Edit
+                                </button> -->
+                                <button class="btn btn-primary" (click)="editdemoModal.show(ret.id)"><i class="fa fa-edit"></i>
+                                    
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table> 
+                <div class="row">
+                    <div class="col-md-2">
+                        <!-- <input type="text" class="form-control" value="{{totalamount | number : '.0-0'}}" disabled="true" style="width: 150px;"> -->
+                       </div>
+                    <div class="col-md-10"> 
+                        <pagination-controls (pageChange)="p = $event" class="pull-right"></pagination-controls>
+                    </div>
+                </div>
+               
+              </div>
+          </div>
+      </div>
+    </div>
+    <createDemoModal #createDemoModal (modalSave)="getDemoRetail()"></createDemoModal>
+    <editdemoModal #editdemoModal (modalSave)="getDemoRetail()"></editdemoModal>
+  </div>

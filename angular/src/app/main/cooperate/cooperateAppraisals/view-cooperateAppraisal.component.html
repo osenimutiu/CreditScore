@@ -1,0 +1,39 @@
+﻿<div [@routerTransition]>
+  
+  <div class="content d-flex flex-column flex-column-fluid">
+  
+                 <sub-header [title]="('CooperateAppraisals' | localize) +' '+ ('Details' | localize)" [breadcrumbs]="breadcrumbs">
+                 </sub-header>
+             
+    <div [class]="containerClass">
+        <div class="card card-custom gutter-b">
+            <div class="card-body">
+                <div class="row align-items-center">
+                                     <div class="col-6 mb-3">
+                        <h6>{{l("CompanyName")}} :</h6>
+                        {{ item.cooperateAppraisal.companyName }}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("RCNumber")}} :</h6>
+                        {{ item.cooperateAppraisal.rcNumber }}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("AccountNumber")}} :</h6>
+                        {{ item.cooperateAppraisal.accountNumber }}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("Score")}} :</h6>
+                        {{ item.cooperateAppraisal.score }}
+                    </div>
+
+                                     <div class="col-6 mb-3">
+                        <h6>({{l("SetupQualitative")}}) {{l("Qualitative")}} :</h6>
+                        {{item.setupQualitativeQualitative}}
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>

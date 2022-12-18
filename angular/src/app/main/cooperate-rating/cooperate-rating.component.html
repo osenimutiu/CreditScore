@@ -1,0 +1,267 @@
+<div [@routerTransition] style="width: 1200px; ">
+  <div class="content d-flex flex-column flex-column-fluid">  
+  <sub-header [title]="'Cooperate' | localize">
+    <div role="actions">
+      <button (click)="cooperateratingmodal.show()" class="btn btn-outline-success"><i class="fas fa-plus-square"></i> {{l("New Cooperate")}}</button> 
+    <button (click)="reload()" class="btn btn-outline-danger"><i class="fas fa-sync"></i> {{l("Refresh")}}</button>
+    <button id="viewscore" (click)="scorecardModal.show()" class="btn btn-outline-success"><i class="fas fa-fa-database"></i>View Score</button> 
+
+</div>
+        </sub-header> 
+  </div>
+  <div [class]="containerClass + ' kt-grid_item kt-grid_item--fluid'">
+    <div class="kt-portlet kt-portlet--mobile">
+      <div class="kt-portlet__body">
+<!-- sks -->
+        <div class="bs-stepper">
+           <div class="bs-stepper-header" role="tablist">
+            <div class="step" data-target="#eligibility-part">
+              <button type="button" class="step-trigger" role="tab" aria-controls="eligibility-part" id="eligibility-part-trigger">
+                <!-- <span class="bs-stepper-circle">1</span> -->
+                <!-- <span class="bs-stepper-label"></span> -->
+              </button>
+            </div>
+            <div class="line"></div>
+            <div class="step" data-target="#loan-request-part">
+              <button type="button" class="step-trigger" role="tab" aria-controls="loan-request-part"
+                id="loan-request-part-trigger">
+                <!-- <span class="bs-stepper-circle">2</span> -->
+                <!-- <span class="bs-stepper-label"></span> -->
+              </button>
+            </div>
+            <div class="line"></div>
+            <div class="step" data-target="#third-part">
+              <button type="button" class="step-trigger" role="tab" aria-controls="third-part"
+                id="third-part-trigger">
+                <!-- <span class="bs-stepper-circle">3</span> -->
+                <!-- <span class="bs-stepper-label"></span> -->
+              </button>
+            </div>
+     
+            
+          </div>
+          <div class="bs-stepper-content">
+            <form #form="ngForm" (ngSubmit)="save()">
+              <div id="eligibility-part" class="content" role="tabpanel" aria-labelledby="eligibility-part-trigger">
+                <div style="width: 1700px; background-color: white; position: relative; left: 0px;">
+                  <div style="margin: 0 45px;">
+
+                    <label for="" style="margin-top: 20px;"></label>
+                    <div>
+                      <div class="form-row">
+                       
+                        <div class="form-group col-md-12">
+                          <label for="" style="font-weight: bold;">Account Number</label>
+                          <select name="nameId" class="form-control" [(ngModel)]="cooperate.companyId">
+                            <option *ngFor="let x of custList" value="{{x.id}}">{{x.accountNo}}</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- <h2>TARGET MARKET</h2> -->
+                <div class="form-row" style="margin-top: 20px;">
+                  <fieldset id="group1" class="form-group col-md-6">
+                  <b>Cashflow</b>:
+                  <br>
+                  <ul class="list-group">
+                      <li class="list-group-item" *ngFor="let item of cashflowList">
+                          <input type="radio" [(ngModel)]="cashflowSelected" name="group1" [value]="item.value"
+                              (change)="oncashflowChange(item)"  />
+                          {{item.qualitative}}
+                      </li>
+                  </ul>
+                  </fieldset>
+                    <fieldset id="group2" class="form-group col-md-6" >
+                        <b>Management Experience</b>:
+                        <br>
+                        <ul class="list-group">
+                          <li class="list-group-item" *ngFor="let item of ManagementList">
+                              <input type="radio" [(ngModel)]="ManagementSelected" name="group2" [value]="item.value"
+                                  (change)="onManagementChange(item)"  />
+                              {{item.qualitative}}
+                          </li>
+                      </ul>
+                    </fieldset>
+                </div>
+                <div class="form-row">
+                    <fieldset id="group3" class="form-group col-md-6">
+                      <b>Trend and Ratios</b>: 
+                        <br>
+                        <ul class="list-group">
+                          <li class="list-group-item" *ngFor="let it of TrendList">
+                              <input type="radio" [(ngModel)]="TrendSelected" name="group3" [value]="it.value"
+                                  (change)="onTrendChange($event.target)"  />
+                              {{it.qualitative}}
+                          </li>
+                      </ul>
+                    </fieldset>
+                    <fieldset id="group4" class="form-group col-md-6">
+                      <b>Liquidity</b>:
+                      <br>
+                        <ul class="list-group">
+                          <li class="list-group-item" *ngFor="let item of LiquidityList">
+                              <input type="radio" [(ngModel)]="LiquiditySelected" name="group4" [value]="item.value"
+                                  (change)="onLiquidityChange($event.target)"  />
+                              {{item.qualitative}}
+                          </li>
+                      </ul>
+                    </fieldset>
+                </div>
+                    
+                  <div class="form-row">
+                    <div class="form-group col-md-6 text-left">
+                       </div>
+                    <div class="form-group col-md-6 text-right">
+                      <button type="button" (click)="next()" style="margin-bottom: 15px;" class="btn btn-danger">Proceed<i class="fas fa-arrow-right"></i></button>
+                    </div>
+                  </div>
+                
+              </div>
+              </div>
+     
+              </div>
+
+              <div id="loan-request-part" class="content" role="tabpanel" aria-labelledby="loan-request-part-trigger">
+                <div style="width: 1700px; background-color: white; position: relative; left: 0px;">
+                  <div style="margin: 0px 45px;">
+                      <label for="" style="margin-top: 20px;"></label>
+                      <div class="form-row">
+                        <fieldset id="group5" class="form-group col-md-6">
+                        <b>Leverage</b>: 
+                        <br>
+                        <ul class="list-group">
+                          <li class="list-group-item" *ngFor="let it of LeverageList">
+                              <input type="radio" [(ngModel)]="LeverageSelected" name="group5" [value]="it.value"
+                                  (change)="onLeverageChange($event.target)"  />
+                              {{it.qualitative}}
+                          </li>
+                      </ul>
+                        </fieldset>
+                          <fieldset id="group6" class="form-group col-md-6">
+                            <b>Target Market</b>:
+                              <br>
+                              <ul class="list-group">
+                                <li class="list-group-item" *ngFor="let item of TargetList">
+                                    <input type="radio" [(ngModel)]="TargetSelected" name="group6" [value]="item.value"
+                                        (change)="onTargetChange(item)"  />
+                                    {{item.qualitative}}
+                                </li>
+                            </ul>
+                          </fieldset>
+                      </div>
+    
+                      <div class="form-row">
+                        <fieldset id="group7" class="form-group col-md-6">
+                         <b>legal/Regulatory/Governance-Environment</b>:
+                        <br>
+                        <ul class="list-group">
+                            <li class="list-group-item" *ngFor="let item of legalList">
+                                <input type="radio" [(ngModel)]="legalSelected" name="group7" [value]="item.value"
+                                    (change)="onlegalChange(item)"  />
+                                {{item.qualitative}}
+                            </li>
+                        </ul>
+                        </fieldset>
+                        <fieldset id="group8" class="form-group col-md-6">
+                          <b>Industrial Cyclicality</b>:
+                          <br>
+                            <ul class="list-group">
+                              <li class="list-group-item" *ngFor="let item of IndustrialList">
+                                  <input type="radio" [(ngModel)]="IndustrialSelected" name="group8" [value]="item.value"
+                                      (change)="onIndustrialChange($event.target)"  />
+                                  {{item.qualitative}}
+                              </li>
+                          </ul>
+                        </fieldset>
+                    </div>
+
+                    <p style="color: red; margin-left: 20px;">{{existResponse}}</p>
+    
+                    <div class="form-group row">
+                      <div class="col-md-6 text-left">
+                        <button type="button" (click)="previous()" style="margin-bottom: 15px;" class="btn btn-danger"><i class="fas fa-arrow-left"></i>Back</button>
+                     </div>
+                      <!-- <div class="col-md-6 text-right">
+                        <div class="form-group col-md-6 text-right">
+                          <button type="button" (click)="next()" style="margin-bottom: 15px;" class="btn btn-danger">Next<i class="fas fa-arrow-right"></i></button>
+                        </div>
+                      </div> -->
+                      <div class="col-md-6 text-right">
+                        <button type="button" (click)="next()" style="margin-bottom: 15px;" class="btn btn-danger">Next<i class="fas fa-arrow-right"></i></button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- third-part -->
+              <div id="third-part" class="content" role="tabpanel" aria-labelledby="third-part-trigger">
+                <div style="width: 1700px; background-color: white; position: relative; left: 0px;">
+                  <div style="margin: 0px 45px;">
+                    <label for="" style="margin-top: 20px;"></label>
+                    <div class="form-row">
+                      <fieldset id="group9" class="form-group col-md-6">
+                      <b>Years in Business</b>: 
+                      <br>
+                      <ul class="list-group9">
+                        <li class="list-group-item" *ngFor="let it of YearsList">
+                            <input type="radio" [(ngModel)]="YearsSelected" name="group9" [value]="it.value"
+                                (change)="onYearsChange($event.target)"  />
+                            {{it.qualitative}}
+                        </li>
+                    </ul>
+                      </fieldset>
+                        <fieldset id="group10" class="form-group col-md-6">
+                          <b>Seasoning/Credit-Relationship</b>:
+                            <br>
+                            <ul class="list-group">
+                              <li class="list-group-item" *ngFor="let item of SeasoningList">
+                                  <input type="radio" [(ngModel)]="SeasoningSelected" name="group10" [value]="item.value"
+                                      (change)="onSeasoningChange(item)"  />
+                                  {{item.qualitative}}
+                              </li>
+                          </ul>
+                        </fieldset>
+                    </div>
+  
+                    <div class="form-row">
+                      <fieldset id="group11" class="form-group col-md-6">
+                       <b>Character issues</b>:
+                      <br>
+                      <ul class="list-group">
+                          <li class="list-group-item" *ngFor="let item of CharacterList">
+                              <input type="radio" [(ngModel)]="CharacterSelected" name="group11" [value]="item.value"
+                                  (change)="onCharacterChange(item)"  />
+                              {{item.qualitative}}
+                          </li>
+                      </ul>
+                      </fieldset>
+                      
+                  </div>
+                  <div class="form-group row">
+                    <div class="col-md-6 text-left">
+                      <button type="button" (click)="previous()" style="margin-bottom: 15px;" class="btn btn-danger"><i class="fas fa-arrow-left"></i>Back</button>
+                   </div>
+                    <div class="col-md-6 text-right">
+                      <button type="submit" style="margin-bottom: 15px;" class="btn btn-danger"><i class="fas fa-fa-database"></i>Submit</button>
+                      <button id="openModalButton" [hidden]="true" data-toggle="modal" data-target="#scorecardModal" style="margin-bottom: 15px;" class="btn btn-danger"><i class="fas fa-fa-database"></i>open modal</button>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+              <!-- third-part end -->
+            </form>
+
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+<cooperateratingmodal #cooperateratingmodal></cooperateratingmodal>
+<scorecardModal #scorecardModal></scorecardModal>
+
+
+  </div>

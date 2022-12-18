@@ -1,0 +1,31 @@
+<div bsModal #modal="bs-modal" (onShown)="onShown()" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal" aria-hidden="true" [config]="{backdrop: 'static'}">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <form *ngIf="active" #form="ngForm" novalidate (ngSubmit)="save()">
+                <div class="modal-header " style="background-color: #e90c0c;">
+                    <h4 class="modal-title">
+                        <span class=" text-center text-white"><i class="fas fa-wrench"></i>&nbsp;&nbsp;{{l("Set CutOff")}}</span>
+                    </h4>
+                    <button type="button" class="close" (click)="close()" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body"> 
+                       
+                       <div class="form-row">
+                        <div class="form-group">
+                            <label>{{l("Rating")}}</label>
+                            <input #itemInput class="form-control" style="width: 400px;" name="items" [(ngModel)]="rating.items" required placeholder="Rating">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button [disabled]="saving" type="button" class="btn btn-secondary" (click)="close()">{{l("Cancel")}}</button>
+                    <button type="submit" class="btn btn-primary" [disabled]="!form.form.valid" [buttonBusy]="saving" [busyText]="l('SavingWithThreeDot')"><i class="fal fa-battery-bolt"></i> <span>{{l("Save")}}</span></button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+

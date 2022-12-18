@@ -1,0 +1,1374 @@
+<div [@routerTransition] style="width: 1200px; ">
+  <div class="kt-subheader kt-grid__item">
+    <div [class]="containerClass">
+      <div class="kt-subheader__main">
+        <h3 class="kt-subheader__title">
+          <!-- <span>{{l("")}}</span> -->
+        </h3>
+        <span class="kt-subheader_separator kt-subheader_separator--v"></span>
+        <span class="kt-subheader__desc">
+          <!-- {{l("ApplicationScoringHeaderInfo")}} -->
+        </span>
+      </div>
+      <div class="kt-subheader__toolbar">
+        <div class="kt-subheader__wrapper">
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div [class]="containerClass + ' kt-grid_item kt-grid_item--fluid'">
+    <div class="kt-portlet kt-portlet--mobile">
+      <div class="kt-portlet__body">
+        <!-- <form class="kt-form" autocomplete="off"> -->
+
+        <div class="bs-stepper">
+          <div class="bs-stepper-header" role="tablist">
+            <!-- your steps here -->
+            <!-- Eligibility start-->
+            <div class="step" data-target="#eligibility-part">
+              <button type="button" class="step-trigger" role="tab" aria-controls="eligibility-part" id="eligibility-part-trigger">
+                <span class="bs-stepper-circle">1</span>
+                <span class="bs-stepper-label">Eligibility</span>
+              </button>
+            </div>
+            <div class="line"></div>
+            <!-- Eligibility end -->
+            
+            <div class="step" data-target="#loan-request-part">
+              <button type="button" class="step-trigger" role="tab" aria-controls="loan-request-part"
+                id="loan-request-part-trigger">
+                <span class="bs-stepper-circle">2</span>
+                <span class="bs-stepper-label">Your Data</span>
+              </button>
+            </div>
+            <div class="line"></div>
+            <div class="step" data-target="#bvn-input-part">
+              <button type="button" class="step-trigger" role="tab" aria-controls="bvn-input-part"
+                id="bvn-input-part-trigger">
+                <span class="bs-stepper-circle">3</span>
+                <span class="bs-stepper-label">Get Started</span>
+              </button>
+            </div>
+            <div class="line"></div>
+            <div class="step" data-target="#custom-validation-part">
+              <button type="button" class="step-trigger" role="tab" aria-controls="custom-validation-part"
+                id="custom-validation-part-trigger">
+                <span class="bs-stepper-circle">4</span>
+                <span class="bs-stepper-label">Checks/Validations</span>
+              </button>
+            </div>
+           
+            <div class="line"></div>
+            <div class="step" data-target="#personal-information-part">
+              <button type="button" class="step-trigger" role="tab" aria-controls="personal-information-part"
+                id="personal-information-part-trigger">
+                <span class="bs-stepper-circle">5</span>
+                <span class="bs-stepper-label">Personal Information</span>
+              </button>
+            </div>
+            <div class="line"></div>
+            <div class="step" data-target="#otp-part">
+              <button type="button" class="step-trigger" role="tab" aria-controls="otp-part" id="otp-part-trigger">
+                <span class="bs-stepper-circle">6</span>
+                <span class="bs-stepper-label">OTP Confirmation</span>
+              </button>
+            </div>
+            <div class="line"></div>
+            <div class="step" data-target="#complete-part">
+              <button type="button" class="step-trigger" role="tab" aria-controls="complete-part"
+                id="complete-part-trigger">
+                <span class="bs-stepper-circle">7</span>
+                <span class="bs-stepper-label">Completion</span>
+              </button>
+            </div>
+            <div class="line"></div>
+            <div class="step" data-target="#business-info-part">
+              <button type="button" class="step-trigger" role="tab" aria-controls="business-info-part"
+                id="business-info-part-trigger">
+                <span class="bs-stepper-circle">8</span>
+                <span class="bs-stepper-label">Business Information</span>
+              </button>
+            </div>
+            <div class="line"></div>
+            <div class="step" data-target="#support-document-part">
+              <button type="button" class="step-trigger" role="tab" aria-controls="support-document-part"
+                id="support-document-part-trigger">
+                <span class="bs-stepper-circle">9</span>
+                <span class="bs-stepper-label">Supporting Documents</span>
+              </button>
+            </div>
+            <div class="line"></div>
+            <div class="step" data-target="#profit-or-loss-part">
+              <button type="button" class="step-trigger" role="tab" aria-controls="profit-or-loss-part"
+                id="profit-or-loss-part-trigger">
+                <span class="bs-stepper-circle">10</span>
+                <span class="bs-stepper-label">Profit or Loss Account</span>
+              </button>
+            </div>
+            <div class="line"></div>
+            <div class="step" data-target="#statement-financial-part">
+              <button type="button" class="step-trigger" role="tab" aria-controls="statement-financial-part"
+                id="statement-financial-part-trigger">
+                <span class="bs-stepper-circle">11</span>
+                <span class="bs-stepper-label">Statement of Financial Position</span>
+              </button>
+            </div>
+            <div class="line"></div>
+            <div class="step" data-target="#cashflow-part">
+              <button type="button" class="step-trigger" role="tab" aria-controls="cashflow-part"
+                id="cashflow-part-trigger">
+                <span class="bs-stepper-circle">12</span>
+                <span class="bs-stepper-label">Cashflow</span>
+              </button>
+            </div>
+            <!-- <div class="line"></div>
+            <div class="step" data-target="#go-to-dashboard-part">
+              <button type="button" class="step-trigger" role="tab" aria-controls="go-to-dashboard-part"
+                id="go-to-dashboard-part-trigger">
+                <span class="bs-stepper-circle">13</span>
+                <span class="bs-stepper-label"></span>
+              </button>
+            </div> -->
+          </div>
+          <div class="bs-stepper-content">
+            <!-- your steps content here -->
+            <form #smelending="ngForm" (ngSubmit)="save(smelending)">
+              <div id="eligibility-part" class="content" role="tabpanel" aria-labelledby="eligibility-part-trigger">
+              
+                <div style="width: 600px; background-color: white; position: relative; left: 500px;">
+                  <div style="margin: 0 45px;">
+                    <label class="text-center" style="margin: 30px 0px 0px 47px; font-size: 15px; font-weight: bold;">Am i eligible? No stress, Fill the page to find out</label>
+                  <div class="form-group">
+                  <label style="margin-top: 20px;">Business Registered in Nigeria</label>
+                  <select name="" id="" class="form-control">
+                    <option value=""></option>
+                    <option *ngFor="let b of busRegs" [value]="b.id">{{b.option}}</option>
+                </select>
+                </div>
+                <label>Annual Turn Over in Naira</label>
+                <input id="busRegNig" class="form-control" type="number" name="anuulTurnOver" required
+                maxlength="15">
+               <div class="form-group">
+                    <label style="margin-top: 10px;">Operating for 18 months or more</label>
+                    <!-- <input type="text" class="form-control" id="eligi" [(ngModel)]="eligi" (keyup)="enableEligibility()" placeholder="Enter Yes or No"> -->
+                  <select name="eligibilityCheck" id="eligibilityCheck" class="form-control" [(ngModel)]="eligibilityCheck" (change)="enableEligibility()">
+                              
+                    <option value=""> </option> 
+                    <option *ngFor="let o of opElibilities" [value]="o.option">{{o.option}}</option>
+                </select>
+                  </div>
+                  <div class="form-group">
+                    <label>Have a Nigeria Bank Account</label>
+                    <select name="" id="" class="form-control">
+                      <option value=""></option>
+                      <option *ngFor="let h of haveBankAccounts" [value]="h.id">{{h.option}}</option>
+                  </select>
+                  </div>
+                  <div class="form-group">
+                    <label>Have a NIN/BVN</label>
+                    <select name="" id="" class="form-control">
+                      <option value=""></option>
+                      <option *ngFor="let n of haveNINs" [value]="n.id">{{n.option}}</option>
+                  </select>
+                  </div>
+                  <div class="form-group">
+                    <label>You are authorizred to account for this business</label>
+                    <select name="" id="" class="form-control">
+                      <option value=""></option>
+                      <option *ngFor="let a of accountAuthorize" [value]="a.id">{{a.option}}</option>
+                  </select>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group col-md-6 text-left">
+                       </div>
+                    <div class="form-group col-md-6 text-right">
+                      <button type="button" (click)="next()" style="margin-bottom: 15px;" class="btn btn-danger" [disabled]="eligibleTrue">Proceed<i class="fas fa-arrow-right"></i></button>
+                    </div>
+                  </div>
+                
+              </div>
+              </div>
+     
+              </div>
+
+              <div id="loan-request-part" class="content" role="tabpanel" aria-labelledby="loan-request-part-trigger">
+                
+                
+                  <div style="background-color: white; width: 500px; position: relative; left: 550px;">
+                    <div style="margin: 0px 45px;">
+
+                    <div class="form-group">
+                      <label for="applicatioNo" style="margin-top: 30px;">{{"Application Number" | localize}}</label>
+                      <input id="applicatioNo" type="number" name="applicatioNo" class="form-control" style="width: 400px;"
+                      [(ngModel)]="smeLending.applicatioNo" required maxlength="7" [disabled]="true" />
+                    </div>
+                    <div class="form-group">
+                      <label for="LoanTypeId" style="margin-top: 30px;">{{"Loan Type" | localize}}</label>
+                      <select name="loanTypeId" #loanTypeInput id="loanTypeId" class="form-control"
+                        [(ngModel)]="smeLending.loanTypeId" aria-placeholder="" style="width: 400px;">
+                        <option name="loanTypeId" *ngFor="let y of loanTypes" value="{{y.id}}">{{y.loanTypes}}</option>
+                      </select>
+                    </div>
+    
+                    <div class="form-group">
+                      <label for="customRange3" class="">How much do you need? (1million - 50million)</label>
+                      <input type="range" class="form-control" min="1000000" max="50000000" step="5000"
+                        (input)="valueChanged($event)" name="loanAmount" [(ngModel)]="smeLending.loanAmount"
+                        id="customRange3" style="width: 400px;">
+                    </div>
+                    <div class="form-group">
+                      <label for="LoanAmount">Loan Amount</label>
+                      <input id="loanAmount" type="number" name="loanAmount" class="form-control" style="width: 400px;"
+                        [(ngModel)]="smeLending.loanAmount" required maxlength="7" />
+                    </div>
+    
+    
+                    <div class="form-group">
+                      <label for="LoanTenor">Tenor (Number of months)</label>
+                      <input id="loanTenor" type="number" name="loanTenor" class="form-control"
+                        [(ngModel)]="smeLending.loanTenor" required maxlength="2" style="width: 400px;" />
+                      <label for="loanTenor" class="control-label">
+                        <p class="text-muted">Loan tenor between 1 and 12.</p>
+                      </label>.
+                    </div>
+                    <div>
+                      <table class="table">
+                        <tr>
+                          <th>Loan</th>
+                          <th>Tenor</th>
+                          <th>Monthly Principal Repayments</th>
+                        </tr>
+                        <tr>
+                          <td>{{smeLending.loanAmount | currency}}</td>
+                          <td>{{smeLending.loanTenor}}</td>
+                          <td>{{smeLending.loanAmount / smeLending.loanTenor | currency }}</td>
+                        </tr>
+                      </table>
+                    </div>
+    
+                    <div class="form-group row">
+                      <div class="col-md-6 text-left">
+                        <button type="button" (click)="previous()" style="margin-bottom: 15px;" class="btn btn-danger"><i class="fas fa-arrow-left"></i>Back</button>
+                     </div>
+                      <div class="col-md-6 text-right">
+                        <button  type="button" (click)="next()" class="btn btn-danger" style="margin-bottom: 15px;">Next <i class="fas fa-arrow-right"></i></button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+              
+              </div>
+
+
+
+
+              <div id="bvn-input-part" class="content" role="tabpanel" aria-labelledby="bvn-input-part-trigger">
+               
+               <div style="background-color: white; width: 500px; position: relative; left: 550px;">
+                <div style="margin-left: 45px;">
+                <div class="form-group">
+                  <label for="Bvn" style="margin-top: 30px;">Bank Verification Number</label>
+                  <input id="bvn" type="number" name="bvn" class="form-control" [(ngModel)]="smeLending.bvn" required
+                    maxlength="10" style="width: 400px;" />
+                </div>
+                <div class="form-group">
+                  <label for="Email">Email Address</label>
+                  <input id="email" type="text" name="email" class="form-control" [(ngModel)]="smeLending.email"
+                    required maxlength="256" style="width: 400px;" />
+                </div>
+                <div class="form-group">
+                  <label for="Password">Password</label>
+                  <input id="password" type="password" name="password" class="form-control"
+                    [(ngModel)]="smeLending.password" required maxlength="256" style="width: 400px;" />
+                </div>
+                <div class="form-group">
+                  <label for="ConfirmPassword">Confirm Password</label>
+                  <input id="" type="password" name="" class="form-control" required maxlength="256"
+                    style="width: 400px;" />
+                </div>
+                <div class="form-group">
+                  <label for="" class="label-control" style="width: 400px;">
+                    
+                    <input type="checkbox" name="list_name" value=""><span style="margin-left: 2px;">I accept all Terms &amp; Conditions and also give consent to <span style="margin-left: 10px;">source for other related data for adequate assessment.</span></span>
+                    
+                  </label>
+                
+                </div>
+
+                <div class="form-group row">
+                  <div class="col-md-6 text-left">
+                    <button  type="button" (click)="previous()"  style="margin-bottom: 15px;" class="btn btn-danger"><i class="fas fa-arrow-left"></i>Back</button>
+                  </div>
+                  <div class="col-md-6 text-right">
+                    <button  type="button" (click)="next()"  style="margin: 0px 55px 15px 0px;" class="btn btn-danger">Next <i class="fas fa-arrow-right"></i></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+              </div>
+              <div id="custom-validation-part" class="content" role="tabpanel" aria-labelledby="custom-validation-part-trigger">
+                <div class="" style="background-color: white; width: 600px; height: 640px; position: relative; left: 500px;">
+                  <div style="padding-top: 45px; margin: 0px 70px;">
+                    <hr>
+                    <h2 style="margin-left: 5em;">BVN VALIDATIONS</h2>
+                    <table class="table-borderless" style="margin-left: 8em; margin-top: 1em;">
+                      <thead>
+                      <tr>
+                      <th></th>
+                      <th></th>
+                      <th></th>
+                      <th></th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr>
+                      <td><i class="fas fa-check-circle text-success"></i></td>
+                      <td></td>
+                      <td></td>
+                      <td style="font-size: 20px;">Validated BVN {{smeLending.bvn}} </td>
+                      </tr>
+                      
+                      </tbody>
+                      </table>
+                      <hr>
+                      <!-- CREDIT BUREAU CHECK -->
+                      <h2 style="margin-left: 5em;  margin-top: 2em;"> CREDIT BUREAU CHECK</h2>
+                      <table class="table-borderless" style="margin-left: 8em; margin-top: 1em;">
+                        <thead>
+                        <tr>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                        <td><i class="fas fa-check-circle text-success"></i></td>
+                        <td></td>
+                        <td></td>
+                        <td style="font-size: 20px;">CRC Credit Bureau</td>
+                        </tr>
+                        <tr>
+                        <td><i class="fas fa-check-circle text-success"></i></td>
+                        <td></td>
+                        <td></td>
+                        <td style="font-size: 20px;">First Central Credit Bureau</td>
+                        </tr>
+                        <tr>
+                        <td><i class="fas fa-check-circle text-success"></i></td>
+                        <td></td>
+                        <td></td>
+                        <td style="font-size: 20px;">CBN CRMS Check</td>
+                        </tr>
+                        </tbody>
+                        </table>
+                        <hr>
+                        <!-- DUD & NEGATIVE LIST CHECK -->
+                        <h2 style="margin-left: 5em;  margin-top: 2em;">DUD & NEGATIVE LIST CHECK</h2>
+                <table class="table-borderless" style="margin-left: 8em; margin-top: 1em;">
+                  <thead>
+                  <tr>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                  <td><i class="fas fa-check-circle text-success"></i></td>
+                  <td></td>
+                   <td></td>
+                  <td style="font-size: 20px;">DUD Cheque 3 in 6 Months</td>
+                  </tr>
+                  <tr>
+                  <td><i class="fas fa-check-circle text-success"></i></td>
+                  <td></td>
+                  <td></td>
+                  <td style="font-size: 20px;"> Negative List Check</td>
+                  </tr>
+                  
+                  </tbody>
+                  </table>
+                  <hr>
+                      <div class="form-group row">
+                        <div class="col-md-6 text-left">
+                          <button  type="button" (click)="previous()" style="margin-top: 4em;" class="btn btn-danger"><i class="fas fa-arrow-left"></i>Back</button>
+                        </div>
+                        <div class="col-md-6 text-right">
+                          <button  type="button" (click)="next()" style="margin-top: 4em;" class="btn btn-danger">Next <i class="fas fa-arrow-right"></i></button>
+                        </div>
+                      </div>
+                  </div>
+                </div>
+              </div>
+             
+              <div id="personal-information-part" class="content" role="tabpanel" aria-labelledby="personal-information-part-trigger">
+                <div style="background-color: white; width: 600px; position: relative; left: 500px;">
+                  <div style="margin: 0px 45px;">
+                
+                <div class="form-row">
+                  <div class="form-group col-md-4">
+                    <label for="TitleId" style="margin-top: 30px;">Title</label>
+                    <select name="titleId" id="titleId" class="form-control" [(ngModel)]="smeLending.titleId"
+                      aria-placeholder="">
+                      <option name="titleId" *ngFor="let x of titles" [value]="x.id">{{x.indivividualTitle}}</option>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label for="BusinessAccountNo" style="margin-top: 30px;">Business Account No</label>
+                    <input id="businessAccountNo" type="number" name="businessAccountNo" class="form-control"
+                      [(ngModel)]="smeLending.businessAccountNo" required maxlength="10" />
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label for="bvn" style="margin-top: 30px;">BVN</label>
+                    <input id="bvn" type="number" name="bvn" class="form-control" [(ngModel)]="smeLending.bvn"
+                      maxlength="10" />
+                    <!-- <p class="text-muted">We'll never share your bvn with anyone else.</p> -->
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-4">
+                    <label for="Title">{{"First Name" | localize}}</label>
+                    <!-- <input id="firstName" type="text" name="firstName" class="form-control" [(ngModel)]="smeLending.firstName" (ngModelChange)="smeLending.firstName = $event.toUpperCase()"/> -->
+                    <input id="firstName" type="text" name="firstName" class="form-control" [(ngModel)]="smeLending.firstName" />
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label for="LastName">Last Name</label>
+                    <!-- <input id="lastName" type="text" name="lastName" class="form-control" [(ngModel)]="smeLending.lastName" (ngModelChange)="smeLending.lastName = $event.toCapitaliseCase()"/> -->
+                    <input id="lastName" type="text" name="lastName" class="form-control" [(ngModel)]="smeLending.lastName"/>
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label for="MiddleName">MiddleName</label>
+                    <input id="middleName" type="text" name="middleName" class="form-control"
+                      [(ngModel)]="smeLending.middleName" (ngModelChange)="smeLending.middleName = $event.toLowerCase()" />
+                    <!-- <p class="text-muted">We'll never share your bvn with anyone else.</p> -->
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-4">
+                    <label for="DateOfBirth">Date Of Birth</label>
+                    <input id="dateOfBirth" type="date" name="dateOfBirth" class="form-control"
+                      [(ngModel)]="smeLending.dateOfBirth" />
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label for="GenderId">Gender</label>
+                    <select name="genderId" id="genderId" class="form-control" [(ngModel)]="smeLending.genderId"
+                      aria-placeholder="">
+                      <option name="title" *ngFor="let p of genderTypes" value="{{p.id}}">{{p.type}}</option>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label for="Phone">Phone</label>
+                    <input id="phone" type="tel" name="phone" class="form-control" [(ngModel)]="smeLending.phone" />
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="Email">Email Address</label>
+                    <input id="email" type="text" name="email" class="form-control" [(ngModel)]="smeLending.email"
+                      required maxlength="256" />
+                    <!-- <p class="text-muted">We'll never share your email with anyone else.</p> -->
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="Password">Password</label>
+                    <input id="password" type="password" name="password" class="form-control"
+                      [(ngModel)]="smeLending.password" required maxlength="256" />
+                    <!-- <p class="text-muted">Your password must be 8-20 characters long.</p> -->
+                  </div>
+
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="BankId">Bank</label>
+                    <select name="bankId" id="bankId" class="form-control" [(ngModel)]="smeLending.bankId"
+                      aria-placeholder="">
+                      <option name="bankId" *ngFor="let b of banks" value="{{b.id}}">{{b.bankNames}}</option>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="BankAccountNo">Account No</label>
+                    <input id="bankAccountNo" type="number" name="bankAccountNo" class="form-control"
+                      [(ngModel)]="smeLending.bankAccountNo" required maxlength="10" />
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-md-6 text-left">
+                    <button  type="button" (click)="previous()" style="margin-bottom: 15px;" class="btn btn-danger"><i class="fas fa-arrow-left"></i>Back</button>
+                  </div>
+                  <div class="col-md-6 text-right">
+                    <button  type="button" (click)="next()" style="margin-bottom: 15px;" class="btn btn-danger">Next <i class="fas fa-arrow-right"></i></button>
+                  </div>
+                </div>
+                  </div>
+                </div>
+              </div>
+              <div id="otp-part" class="content" role="tabpanel" aria-labelledby="otp-part-trigger">
+                <div style="background-color: white; width: 500px; height: 400px; position: relative; left: 500px;">
+                  <div style="margin: 0px 45px;">
+
+
+                <div class="input-group mb-3" style="width: 400px; margin-top: 30px;">
+                 
+                  <input type="text" name="otpCheck" class="form-control" style="margin-top: 135px;" [(ngModel)]="otpCheck" placeholder="Enter OTP" aria-label="Recipient's username"
+                    aria-describedby="button-addon2">
+                  <button  type="button" class="btn btn-outline-danger" style="margin-top: 135px;" id="button-addon2" (click)="validateOTP()">Confirm</button>
+                </div>
+                <p class="text-align">Kindly enter the code sent to <span style="font-weight: bold;">{{smeLending.phone}}</span> <br>and click 'Confirm' to validate
+                  the phone number.</p>
+
+                  <div class="text-primary">
+                    {{otpResponseMessage}}
+                  </div>
+
+                <div class="form-group row">
+                  <div class="col-md-6 text-left">
+                    <button  type="button" (click)="previous()" style="margin-top: 8em;" class="btn btn-danger"><i class="fas fa-arrow-left"></i>Back</button>
+                  </div>
+                  <div class="col-md-6 text-right">
+                    <button  type="button" (click)="next()" style="margin-top: 8em;" class="btn btn-danger">Next <i class="fas fa-arrow-right"></i></button>
+                  </div>
+                </div>
+                  </div>
+                </div>
+              </div>
+              <div id="complete-part" class="content" role="tabpanel" aria-labelledby="complete-part-trigger">
+                <div style="background-color: white; width: 500px; height: 400px; position: relative; left: 500px;">
+                  <div style="margin: 50px 45px;">
+               
+                  <!-- <label style="margin-top: 100px; font-size: 25px; font-weight: bold;">Lets Complete This</label> -->
+                  <h3 style="padding: 100px 0px 10px 100px; margin-left: 10px;">Lets Complete This</h3>
+                  <div style="margin-left: 5px;">
+                    <p>You will be logged in with the provided email & password to <span style="margin-left: 6em;">enable you complete your loan
+                      process.</span></p>
+                    <!-- <button type="submit" class="btn btn-outline-danger">Continue</button> -->
+                  </div>
+                
+
+                <div class="form-group row">
+                  <div class="col-md-6 text-left">
+                    <button  type="button" (click)="previous()" style="margin-top: 140px;" class="btn btn-danger"><i class="fas fa-arrow-left"></i>Back</button>
+                  </div>
+                  <div class="col-md-6 text-right">
+                    <button  type="button" (click)="next()" style="margin-top: 140px;" class="btn btn-danger">Continue<i class="fas fa-arrow-right"></i></button>
+                  </div>
+
+                </div>
+                  </div>
+                </div>
+
+
+              </div>
+            <!-- </form> -->
+
+            <div id="business-info-part" class="content" role="tabpanel" aria-labelledby="business-info-part-trigger">
+              <div style="background-color: white; width: 600px; position: relative; left: 500px;">
+                <div style="margin: 50px 45px;">
+                <label style="margin-top: 30px; font-size: 25px; font-weight: bold;">Business Information</label>
+                <hr>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label>Business Name</label>
+                    <input class="form-control" type="text" name="businessName" [(ngModel)]="smeLending.businessName" placeholder="Enter business name">
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label>How soon would you need the money?</label>
+                    <select name="" id="" class="form-control">
+                      <option value="0">Within 48 hrs</option>
+                      <option value="0">Within 72 hrs</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label>What do you need the money for?</label>
+                    <textarea style="resize: none;" class="form-control" placeholder="Loan reason"></textarea>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label>Where is your business located?</label>
+                    <textarea style="resize: none;" class="form-control"
+                      placeholder="Business physical address..."></textarea>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label>{{l("Sector")}}</label>
+                    <select name="param7" id="param7" class="form-control">
+                        <option name="param7" *ngFor="let sector of sectors" [value]="sector.id">{{sector.sectorGroup}}</option>
+                    </select>
+                </div>
+                  <div class="form-group col-md-6">
+                    <label>When did you start the business?</label>
+                    <select name="" id="" class="form-control">
+                      <option value="0">1990</option>
+                      <option value="1">1991</option>
+                      <option value="2">1992</option>
+                      <option value="3">1993</option>
+                      <option value="4">1994</option>
+                      <option value="5">1995</option>
+                      <option value="6">1996</option>
+                      <option value="7">1997</option>
+                      <option value="8">1998</option>
+                      <option value="9">1999</option>
+                      <option value="10">2000</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label>How much did you start with?</label>
+                    <input type="number" class="form-control" placeholder="Enter amount">
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label>Changed your line of business?</label>
+                    <select name="" id="" class="form-control">
+                      <option value="0">Yes</option>
+                      <option value="1">No</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-md-6 text-left">
+                    <button  type="button" (click)="previous()" style="margin-bottom: 15px;" class="btn btn-danger"><i class="fas fa-arrow-left"></i>Back</button>
+                  </div>
+                  <div class="col-md-6 text-right">
+                    <button  type="button" (click)="next()" style="margin-bottom: 15px;" class="btn btn-danger">Next<i class="fas fa-arrow-right"></i></button>
+                  </div>
+  
+                </div>
+                </div>
+              </div>
+             
+            </div>
+            <div id="support-document-part" class="content" role="tabpanel"
+              aria-labelledby="support-document-part-trigger">
+
+              <div style="background-color: white; width: 800px; position: relative; left: 500px;">
+                <div style="margin: 50px 45px;">
+
+              <button type="button" class="btn btn-primary" (click)="smelendingModal.show()" style="margin-top: 30px;">Add Document</button>
+              <button type="button" class="btn btn-primary" (click)="testOkra()" style="margin-top: 30px;">Add Statement</button>
+              <div class="row">
+                <table class="table table-bordered" style="margin-top: 45px;">
+                  <thead>
+                    <tr>
+                      <th>DOCUMENT TITLE</th>
+                      <th>FILE TYPE</th>
+                      <th>DISTRIPTION</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>National ID</td>
+                      <td>.png</td>
+                      <td>Uploaded my national ID with NIN 12345</td>
+                      <td>
+                        <button style="height: 30px;" class="btn btn-danger" type="button">
+                          Remove
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <br>
+              <br>
+              <br>
+              <h3 class="text-center">My Bank Statement</h3>
+              <div class="row">
+                <button  type="button" class="btn btn-primary" style="float: right;">Load Statement From Bank</button>
+                <table class="table table-stripped">
+                  <thead>
+                    <tr>
+                      <th>TRANS.DATE</th>
+                      <th>DESCRIPTION</th>
+                      <th>DR.AMT</th>
+                      <th>CR.AMT</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="row">
+                <h3 style="margin-left: 15em;">Alternative Data</h3>
+                <table class="table table-borderless">
+                  <thead>
+                    <tr>
+                      <th></th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Official Website</td>
+                      <td>
+                        <input name="officialWebsite" type="email" [(ngModel)]="officialWebsite" class="form-control">
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Facebook Page</td>
+                      <td>
+                        <input type="email" name="faceBookPage" [(ngModel)]="faceBookPage" class="form-control">
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="form-group row">
+                <div class="col-md-6 text-left">
+                  <button  type="button" (click)="previous()" class="btn btn-danger" style="margin-bottom: 5px;"><i class="fas fa-arrow-left"></i>Back</button>
+                </div>
+                <div class="col-md-6 text-right">
+                  <button  type="button" (click)="next()" class="btn btn-danger" style="margin-bottom: 5px;">Next<i class="fas fa-arrow-right"></i></button>
+                </div>
+
+              </div>
+                </div>
+              </div>
+            </div>
+
+              <div id="profit-or-loss-part" class="content" role="tabpanel" aria-labelledby="profit-or-loss-part-trigger">
+                
+                <div  style="background-color: white; width: 600px; position: relative; left: 500px;">
+                  <div style="margin: 50px 90px;">
+                
+                <div class="row">
+                  <label style="margin-top: 30px; font-weight: bold; font-size: 25px;">Profit or Loss Account</label>  
+                </div>
+                <div class="row">
+                  <table class="table-bordered">
+                    <thead>
+                      <tr>
+                        <th >ITEMS</th>
+                        <th>VALUE</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th>Sales(goods or services)</th>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>Credit Sales</td>
+                        <td>
+                          <input name="financeVal4" type="number" [(ngModel)]="financeVal4" class="form-control" placeholder="Enter value">
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Cash Sales</td>
+                        <td>
+                          <input type="number" name="financeVal3" [(ngModel)]="financeVal3" class="form-control" placeholder="Enter value">
+                        </td>
+                      </tr>
+                      <tr>
+                        <th>COST OF GOOD SOLD</th>
+                        <th></th>
+                      </tr>
+                      <tr>
+                        <td>Opening Inventory</td>
+                        <td>
+                          <input type="number" name="financeVal" [(ngModel)]="financeVal" class="form-control" placeholder="Enter value">
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Purchases</td>
+                        <td>
+                          <input type="number" name="financeVal2" [(ngModel)]="financeVal2" class="form-control" placeholder="Enter value">
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Return Outward</td>
+                        <td>
+                          <input type="number" name="financeVal" [(ngModel)]="financeVal" class="form-control" placeholder="Enter value">
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Return Inward</td>
+                        <td>
+                          <input type="number" name="financeVal5" [(ngModel)]="financeVal5" class="form-control" placeholder="Enter value">
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Closing Inventory</td>
+                        <td>
+                          <input type="number" name="financeVal3" [(ngModel)]="financeVal3" class="form-control" placeholder="Enter value">
+                        </td>
+                      </tr>
+                      <tr>
+                        <th>ADMISTRATIVE COST</th>
+                        <th></th>
+                      </tr>
+                      <tr>
+                        <td>Salary</td>
+                        <td>
+                          <input type="number" name="financeVal6" [(ngModel)]="financeVal6" class="form-control" placeholder="Enter value">
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Rent</td>
+                        <td>
+                          <input type="number" name="financeVal5" [(ngModel)]="financeVal5" class="form-control" placeholder="Enter value">
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Transportation</td>
+                        <td>
+                          <input type="number" name="financeVal2" [(ngModel)]="financeVal2" class="form-control" placeholder="Enter value">
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Maintenance</td>
+                        <td>
+                          <input type="number" name="financeVal4" [(ngModel)]="financeVal4" class="form-control" placeholder="Enter value">
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Repairs</td>
+                        <td>
+                          <input type="number" name="financeVal8" [(ngModel)]="financeVal8" class="form-control" placeholder="Enter value">
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Utilities</td>
+                        <td>
+                          <input type="number" name="financeVal6" [(ngModel)]="financeVal6" class="form-control" placeholder="Enter value">
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Communication</td>
+                        <td>
+                          <input type="number" name="financeVal" [(ngModel)]="financeVal" class="form-control" placeholder="Enter value">
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Insurance</td>
+                        <td>
+                          <input type="number" name="financeVal2" [(ngModel)]="financeVal2" class="form-control" placeholder="Enter value">
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Taxes</td>
+                        <td>
+                          <input type="number" name="financeVal7" [(ngModel)]="financeVal7" class="form-control" placeholder="Enter value">
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Security</td>
+                        <td>
+                          <input [(ngModel)]="financeVal5" name="financeVal5" type="number" class="form-control" placeholder="Enter value">
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>License</td>
+                        <td>
+                          <input type="number" name="financeVal" [(ngModel)]="financeVal" class="form-control" placeholder="Enter value">
+                        </td>
+                      </tr>
+                      <tr>
+                        <th>DISTRIBUTION COST</th>
+                        <th></th>
+                      </tr>
+                      <tr>
+                        <td>Distribution / Selling Expenses</td>
+                        <td>
+                          <input type="number" name="financeVal3" [(ngModel)]="financeVal3" class="form-control" placeholder="Enter value">
+                        </td>
+                      </tr>
+                      <tr>
+                        <th>FINANCE COST</th>
+                        <th></th>
+                      </tr>
+                      <tr>
+                        <td>Interest on servicing loans / verdraft</td>
+                        <td>
+                          <input type="number" name="financeVal8" [(ngModel)]="financeVal8" class="form-control" placeholder="Enter value">
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Bank charges</td>
+                        <td>
+                          <input type="number" name="financeVal6" [(ngModel)]="financeVal6" class="form-control" placeholder="Enter value">
+                        </td>
+                      </tr>
+                      <tr>
+                        <th>OTHER EXPENSES</th>
+                        <th></th>
+                      </tr>
+                      <tr>
+                        <td>Other Expenses</td>
+                        <td>
+                          <input type="number" name="financeVal2" [(ngModel)]="financeVal2" class="form-control" placeholder="Enter value">
+                        </td>
+                      </tr>
+                      <tr>
+                        <th>OTHER INCOMES</th>
+                        <th></th>
+                      </tr>
+                      <tr>
+                        <td>Profit on asset disposed</td>
+                        <td>
+                          <input type="number" name="financeVal2" [(ngModel)]="financeVal7" class="form-control" placeholder="Enter value">
+                        </td>
+                      </tr>
+                    
+                      <tr>
+                        <th>TAX</th>
+                        <th></th>
+                      </tr>
+                      <tr>
+                        <td>Income Tax Expense</td>
+                        <td>
+                          <input type="number" name="financeVal5" [(ngModel)]="financeVal5" class="form-control" placeholder="Enter value">
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="form-group row">
+                  <div class="col-md-6 text-left">
+                    <button  type="button" (click)="previous()" style="margin: 15px 0px;" class="btn btn-danger"><i class="fas fa-arrow-left"></i>Back</button>
+                  </div>
+                  <div class="col-md-6 text-right">
+                    <button  type="button" (click)="next()" style="margin: 15px 0px;" class="btn btn-danger">Next<i class="fas fa-arrow-right"></i></button>
+                  </div>
+  
+                </div>
+                  </div>
+                </div>
+              </div>
+
+              <div id="statement-financial-part" class="content" role="tabpanel" aria-labelledby="statement-financial-part-trigger">
+                <div style="background-color: white; width: 600px; position: relative; left: 500px;">
+                  <div style="margin: 50px 90px;">
+               
+                <div class="row">
+                  <label style="margin-top: 30px; font-weight: bold; font-size: 25px;">Statement of Financial Position</label>  
+                </div>
+                <div class="row">
+                  <table class="table-bordered">
+                    <thead>
+                      <tr>
+                        <th>ITEMS</th>
+                        <th>VALUE</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      
+                      <tr>
+                        <th>FIXED ASSETS</th>
+                        <th></th>
+                      </tr>
+                      <tr>
+                        <td>Equipment</td>
+                        <td>
+                          <input type="number" name="financiaPoslVal4" [(ngModel)]="financiaPoslVal4" class="form-control" placeholder="Enter value">
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Furniture</td>
+                        <td>
+                          <input type="number" name="financiaPoslVal2" [(ngModel)]="financiaPoslVal2" class="form-control" placeholder="Enter value">
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Vehicle</td>
+                        <td>
+                          <input type="number" name="financiaPoslVal7" [(ngModel)]="financiaPoslVal7" class="form-control" placeholder="Enter value">
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Building</td>
+                        <td>
+                          <input type="number" name="financiaPoslVal9" [(ngModel)]="financiaPoslVal9" class="form-control" placeholder="Enter value">
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Other</td>
+                        <td>
+                          <input type="number" name="financiaPoslVal7" [(ngModel)]="financiaPoslVal7" class="form-control" placeholder="Enter value">
+                        </td>
+                      </tr>
+                      <tr>
+                        <th>CURRENT ASSETS</th>
+                        <th></th>
+                      </tr>
+                      <tr>
+                        <td>Cash</td>
+                        <td>
+                          <input type="number" name="financiaPoslVal2" [(ngModel)]="financiaPoslVal2" class="form-control" placeholder="Enter value">
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>FirstBank Bank’s available balance</td>
+                        <td>
+                          <input type="number" name="financiaPoslVal5" [(ngModel)]="financiaPoslVal5" class="form-control" placeholder="Enter value">
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Other Bank Account’s available balance</td>
+                        <td>
+                          <input type="number" [(ngModel)]="financiaPoslVal6" class="form-control" placeholder="Enter value">
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Other Bank account</td>
+                        <td>
+                          <input type="number" name="financiaPoslVal3" [(ngModel)]="financiaPoslVal3" class="form-control" placeholder="Enter value">
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Personal savings</td>
+                        <td>
+                          <input type="number" name="financiaPoslVal4" [(ngModel)]="financiaPoslVal4" class="form-control" placeholder="Enter value">
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Accounts Receivables in 30 days</td>
+                        <td>
+                          <input type="number" name="financiaPoslVal8" [(ngModel)]="financiaPoslVal8" class="form-control" placeholder="Enter value">
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Accounts Receivables in 60 days</td>
+                        <td>
+                          <input type="number" name="financiaPoslVal6" [(ngModel)]="financiaPoslVal6" class="form-control" placeholder="Enter value">
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Prepayments to suppliers</td>
+                        <td>
+                          <input type="number" name="financiaPoslVal2" [(ngModel)]="financiaPoslVal2" class="form-control" placeholder="Enter value">
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Raw materials (production)</td>
+                        <td>
+                          <input type="number" [(ngModel)]="financiaPoslVal" class="form-control" placeholder="Enter value">
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Goods in process (W.I.P)</td>
+                        <td>
+                          <input type="number" name="financiaPoslVal8" class="form-control" [(ngModel)]="financiaPoslVal8" placeholder="Enter value">
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Finished goods/stock trade</td>
+                        <td>
+                          <input type="number" name="financiaPoslVal3" [(ngModel)]="financiaPoslVal3" class="form-control" placeholder="Enter value">
+                        </td>
+                      </tr>
+                      <tr>
+                        <th>CURRENT LIABILITIES</th>
+                        <th></th>
+                      </tr>
+                      <tr>
+                        <td>Salaries due not yet paid</td>
+                        <td>
+                          <input type="number" name="financiaPoslVal7" [(ngModel)]="financiaPoslVal7" class="form-control" placeholder="Enter value">
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Payable</td>
+                        <td>
+                          <input type="number" name="financiaPoslVal5" [(ngModel)]="financiaPoslVal5" class="form-control" placeholder="Enter value">
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Taxes Payable</td>
+                        <td>
+                          <input type="number" name="financiaPoslVal9" [(ngModel)]="financiaPoslVal9" class="form-control" placeholder="Enter value">
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Savings Group</td>
+                        <td>
+                          <input type="number" name="financiaPoslVal" [(ngModel)]="financiaPoslVal" class="form-control" placeholder="Enter value">
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Payments due to supplier</td>
+                        <td>
+                          <input type="number" name="financiaPoslVal2" [(ngModel)]="financiaPoslVal2" class="form-control" placeholder="Enter value">
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Prepayments from customers</td>
+                        <td>
+                          <input type="number" name="financiaPoslVal6" [(ngModel)]="financiaPoslVal6" class="form-control" placeholder="Enter value">
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Short term loans (one year or less)</td>
+                        <td>
+                          <input type="number" name="financiaPoslVal7" [(ngModel)]="financiaPoslVal7" class="form-control" placeholder="Enter value">
+                        </td>
+                      </tr>
+                      
+                      <tr>
+                        <td>Goods in process (W.I.P)</td>
+                        <td>
+                          <input type="number" name="financiaPoslVal3" [(ngModel)]="financiaPoslVal3" class="form-control" placeholder="Enter value">
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Finished goods/stock trade</td>
+                        <td>
+                          <input type="number" name="financiaPoslVal5" [(ngModel)]="financiaPoslVal5" class="form-control" placeholder="Enter value">
+                        </td>
+                      </tr>
+                      <tr>
+                        <th>NON CURRENT LIABILITIES</th>
+                        <th></th>
+                      </tr>
+                      <tr>
+                        <td>Long term loans (one year or more)</td>
+                        <td>
+                          <input type="number" name="financiaPoslVal3" [(ngModel)]="financiaPoslVal3" class="form-control" placeholder="Enter value">
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Other Long Term Liabilities</td>
+                        <td>
+                          <input type="number" name="financiaPoslVal3" [(ngModel)]="financiaPoslVal2" class="form-control" placeholder="Enter value">
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Retained Earnings</td>
+                        <td>
+                          <input type="number" name="financiaPoslVal8" [(ngModel)]="financiaPoslVal8" class="form-control" placeholder="Enter value">
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                
+                <div class="form-group row">
+                  <div class="col-md-6 text-left">
+                    <button  type="button" (click)="previous()" style="margin: 15px 0px;" class="btn btn-danger"><i class="fas fa-arrow-left"></i>Back</button>
+                  </div>
+                  <div class="col-md-6 text-right">
+                    <button  type="button" (click)="next()" style="margin: 15px 0px;" class="btn btn-danger">Next<i class="fas fa-arrow-right"></i></button>
+                  </div>
+  
+                </div>
+                  </div>
+                </div>
+              </div>
+            
+              <div id="cashflow-part" class="content" role="tabpanel" aria-labelledby="cashflow-part-trigger">
+                <div style="background-color: white; width: 600px; position: relative; left: 500px;">
+                  <div style="margin: 50px 90px;">
+                <div class="row">
+                  <label style="margin-top: 30px; font-weight: bold; font-size: 25px;">Cashflow</label>  
+                </div>
+                <div class="row">
+                  <table class="table-bordered">
+                    <thead>
+                      <tr>
+                        <th>ITEMS </th>
+                        <th>VALUE</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                     <tr>
+                        <td>Sales in Last Month</td>
+                        <td>
+                          <input type="number" name="financiaCashVal6" [(ngModel)]="financiaCashVal6" class="form-control" placeholder="Enter value">
+                        </td>
+                      </tr>
+                     <tr>
+                        <td>Cash Sales</td>
+                        <td>
+                          <input type="number" name="financiaCashVal3" [(ngModel)]="financiaCashVal3" class="form-control" placeholder="Enter value">
+                        </td>
+                      </tr>
+                     <tr>
+                        <td>Income from Other source</td>
+                        <td>
+                          <input type="number" name="financiaCashVal8" [(ngModel)]="financiaCashVal8" class="form-control" placeholder="Enter value">
+                        </td>
+                      </tr>
+                     <tr>
+                        <td>Cash Received from past credit sales</td>
+                        <td>
+                          <input type="number" name="financiaCashVal4" [(ngModel)]="financiaCashVal4" class="form-control" placeholder="Enter value">
+                        </td>
+                      </tr>
+                     <tr>
+                        <th>OUTFLOW</th>
+                        <th></th>
+                      </tr>
+                     <tr>
+                        <td>Cost of goodssold</td>
+                        <td>
+                          <input type="number" name="financiaCashVal3" [(ngModel)]="financiaCashVal3" class="form-control" placeholder="Enter value">
+                        </td>
+                      </tr>
+                     <tr>
+                        <td>Purchase of other inventory</td>
+                        <td>
+                          <input type="number" name="financiaCashVal7" [(ngModel)]="financiaCashVal7" class="form-control" placeholder="Enter value">
+                        </td>
+                      </tr>
+                     <tr>
+                        <td>Purchase of Fixed Asset</td>
+                        <td>
+                          <input type="number" name="financiaCashVal9" [(ngModel)]="financiaCashVal9" class="form-control" placeholder="Enter value">
+                        </td>
+                      </tr>
+                     <tr>
+                        <td>Salary</td>
+                        <td>
+                          <input type="number" name="financiaCashVal3" [(ngModel)]="financiaCashVal3" class="form-control" placeholder="Enter value">
+                        </td>
+                      </tr>
+                     <tr>
+                        <td>Rent</td>
+                        <td>
+                          <input type="number" name="financiaCashVal5" [(ngModel)]="financiaCashVal5" class="form-control" placeholder="Enter value">
+                        </td>
+                      </tr>
+                     <tr>
+                        <td>Transportation (Fuel)</td>
+                        <td>
+                          <input type="number" name="financiaCashVal6" [(ngModel)]="financiaCashVal6" class="form-control" placeholder="Enter value">
+                        </td>
+                      </tr>
+                     <tr>
+                        <td>Maintenance</td>
+                        <td>
+                          <input type="number" name="financiaCashVal3" [(ngModel)]="financiaCashVal3" class="form-control" placeholder="Enter value">
+                        </td>
+                      </tr>
+                     <tr>
+                        <td>Repairs</td>
+                        <td>
+                          <input type="number" name="financiaCashVal" [(ngModel)]="financiaCashVal" class="form-control" placeholder="Enter value">
+                        </td>
+                      </tr>
+                     <tr>
+                        <td>Utilities</td>
+                        <td>
+                          <input type="number" name="financiaCashVal5" [(ngModel)]="financiaCashVal5" class="form-control" placeholder="Enter value">
+                        </td>
+                      </tr>
+                     <tr>
+                        <td>Communication Insurance</td>
+                        <td>
+                          <input type="number" name="financiaCashVal6" [(ngModel)]="financiaCashVal6" class="form-control" placeholder="Enter value">
+                        </td>
+                      </tr>
+                     <tr>
+                        <td>Taxes</td>
+                        <td>
+                          <input type="number" name="financiaCashVal9" [(ngModel)]="financiaCashVal9" class="form-control" placeholder="Enter value">
+                        </td>
+                      </tr>
+                     <tr>
+                        <td>Security</td>
+                        <td>
+                          <input type="number" name="financiaCashVal2" [(ngModel)]="financiaCashVal2" class="form-control" placeholder="Enter value">
+                        </td>
+                      </tr>
+                     <tr>
+                        <td>License</td>
+                        <td>
+                          <input type="number" name="financiaCashVal7" [(ngModel)]="financiaCashVal7" class="form-control" placeholder="Enter value">
+                        </td>
+                      </tr>
+                     <tr>
+                        <td>Freight (customs,cross border)</td>
+                        <td>
+                          <input type="number" name="financiaCashVal5" [(ngModel)]="financiaCashVal5" class="form-control" placeholder="Enter value">
+                        </td>
+                      </tr>
+                     <tr>
+                        <td>Purchase of Fixed Asset</td>
+                        <td>
+                          <input type="number" name="financiaCashVal8" name="financiaCashVal8" [(ngModel)]="financiaCashVal8" class="form-control" placeholder="Enter value">
+                        </td>
+                      </tr>
+                     <tr>
+                        <td>Fuel for generator</td>
+                        <td>
+                          <input type="number" name="financiaCashVal9" [(ngModel)]="financiaCashVal9" class="form-control" placeholder="Enter value">
+                        </td>
+                      </tr>
+                     <tr>
+                        <td>Other Expenses</td>
+                        <td>
+                          <input type="number" name="financiaCashVal2" [(ngModel)]="financiaCashVal2" class="form-control" placeholder="Enter value">
+                        </td>
+                      </tr>
+                     <tr>
+                        <td>Operating Expenses</td>
+                        <td>
+                          <input type="number" name="financiaCashVal3" [(ngModel)]="financiaCashVal3" class="form-control" placeholder="Enter value">
+                        </td>
+                      </tr>
+                     <tr>
+                        <td>interest Installment paid for other loans</td>
+                        <td>
+                          <input type="number" name="financiaCashVal7" [(ngModel)]="financiaCashVal7" class="form-control" placeholder="Enter value">
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="form-group row">
+                  <div class="col-md-6 text-left">
+                    <button  type="button" (click)="previous()" style="margin: 15px 0;" class="btn btn-danger"><i class="fas fa-arrow-left"></i>Back</button>
+                  </div>
+                  <div class="col-md-6 text-right">
+                    <button  type="submit" style="margin: 15px 0;" class="btn btn-danger">Finish<i class="fas fa-arrow-right"></i></button>
+                  </div>
+  
+                </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+              <!-- <div id="go-to-dashboard-part" class="content" role="tabpanel" aria-labelledby="go-to-dashboard-part-trigger">
+                <div style="background-color: white; width: 600px; height: 500px; position: relative; left: 500px;">
+                  <div style="margin: 90px 90px;">
+                    <i class="fas fa-check-circle text-success" style="margin: 8em 0em 0em 13em;"></i>
+                <div class="row" style="margin-top: 2em;">
+                  <label style="font-size: 25px; font-weight: bold; text-align: center; margin: 5px 0px 0px 95px;" >Sent For Review</label>
+                  <p>Your loan has been sent for review, you can go to your dashboard to <span style="margin-left: 10em;"> see the status of your loan.</span></p>
+                  <button style="margin-top: 2em;" class="btn btn-block btn-lg btn-danger"><i class="fal fa-tachometer-slowest"></i>Go to dashboard</button>
+                </div>
+              </div>
+                </div>
+            </div> -->
+            
+              <!-- content end -->
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- </form> -->
+
+
+
+      </div>
+    </div>
+    <!-- </div> -->
+<smelendingModal #smelendingModal></smelendingModal>
+
+  </div>

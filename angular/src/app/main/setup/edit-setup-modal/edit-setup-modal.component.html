@@ -1,0 +1,90 @@
+<div bsModal #modal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal" aria-hidden="true" [config]="{backdrop: 'static'}">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <form *ngIf="active" #form="ngForm" novalidate (ngSubmit)="save()">
+                <div class="modal-header" style="background-color: #e90c0c;">
+                    <h4 class="modal-title">
+                        <span class=" text-center text-white"><i class="fas fa-wrench"></i>&nbsp;&nbsp;{{l("Edit Training and Validation")}}</span>
+                    </h4>
+                    <button type="button" class="close" (click)="close()" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                       <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <label>{{l("Email")}}</label>
+                            <input #emailInput class="form-control" type="email" name="email" [(ngModel)]="setUp.email" required placeholder="Email">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6"> 
+                            <label>{{l("Min Age")}}</label>
+                            <select name="minAge" id="minAge" class="form-control" [(ngModel)]="setUp.minAge">
+                               <option selected>select minimum age</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6"> 
+                            <label>{{l("Max Age")}}</label>
+                            <select name="maxAge" id="maxAge" class="form-control" [(ngModel)]="setUp.maxAge">
+                               <option selected>select maximum age</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>{{l("Training")}}</label>
+                            <input class="form-control" type="number" name="training" [(ngModel)]="setUp.training" (keyup)="UpdateTest()" (click)="UpdateTest()" required placeholder="Training">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>{{l("Test")}}</label>
+                            <input class="form-control" type="number" name="test" [(ngModel)]="setUp.test" (keyup)="UpdateTraining()" (click)="UpdateTraining()" required placeholder="Test">
+                        </div>
+                    </div>
+                    <!-- <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>{{l("Training")}}</label>
+                            <input class="form-control" type="number" name="training" [(ngModel)]="setUp.training" (keyup)="UpdateTest()" (click)="UpdateTest()" required placeholder="Training">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>{{l("Test")}}</label>
+                            <input class="form-control" type="number" name="test" [(ngModel)]="setUp.test" (keyup)="UpdateTraining()" (click)="UpdateTraining()" required placeholder="Test">
+                        </div>
+                    </div> -->
+                    <!-- <div class="form-row">
+                        <div class="form-group col-md-6"> 
+                            <label>{{l("Method")}}</label>
+                            <select name="methodId" id="methodId" class="form-control" [(ngModel)]="setUp.methodId">
+                               <option *ngFor="let method of methods"  [value]="method.id">{{method.methodName}}</option>
+                            </select>
+                        </div>
+                    </div> -->
+                    <div class="form-row">
+                        <div class="form-group col-md-12"> 
+                            <label>{{l("Feature Selection")}}</label>
+                            <select name="methodId" id="methodId" class="form-control" [(ngModel)]="setUp.methodId">
+                              <option *ngFor="let method of methods"  [value]="method.id">{{method.methodName}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-12"> 
+                            <label>{{l("Splitting Method")}}</label>
+                            <select name="splittingMethodId" id="splittingMethodId" class="form-control" [(ngModel)]="setUp.splittingMethodId">
+                               <option *ngFor="let split of splittings"  [value]="split.id">{{split.methodName}}</option>
+                            </select>
+                        </div>
+                    </div>
+                 
+                </div>
+                <div class="modal-footer">
+                    <button [disabled]="saving" type="button" class="btn btn-secondary" (click)="close()">{{l("Cancel")}}</button>
+                    <button type="submit" class="btn btn-primary" [disabled]="!form.form.valid" [buttonBusy]="saving" [busyText]="l('SavingWithThreeDot')"><i class="fal fa-battery-bolt"></i> <span>{{l("Save")}}</span></button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

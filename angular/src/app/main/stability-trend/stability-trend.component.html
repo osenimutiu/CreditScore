@@ -1,0 +1,49 @@
+<div [@routerTransition]>
+  
+    <div class="content d-flex flex-column flex-column-fluid">
+        <sub-header [title]="'WITH BINNING' | localize">
+          <div role="actions">
+         <!-- <button (click)="download()" class="btn btn-danger"><i class="fas fa-file-pdf"></i> {{l("Export Chart")}}</button> -->
+         <button (click)="exportExcel()" class="btn btn-success"><i class="fas fa-file-excel"></i> {{l("Export Data")}}</button>
+           <button (click)="reload()" class="btn btn-outline-primary"><i class="fas fa-sync"></i> {{l("Refresh")}}</button>
+           
+      </div>
+              </sub-header> 
+      <div [class]="containerClass">
+          <div class="card card-custom gutter-b">
+              <div class="card-body h-100">
+                  <form class="form" autocomplete="off">
+                      <div>
+                          <div class="row align-items-center">
+                              <div class="col-xl-12">
+                                 <div class="col-xl-3">
+                                    <div class="form-group m-form__group align-items-center">
+                                        <div class="input-group">
+                                            <label for="">Select Attributes</label>
+                                            <select class="form-control" style="width: 400px;" [(ngModel)]="attrb" name='attrb' (change)="getPercentageBinCount()">
+                                                <option value="">Select Attributes</option>
+                                                <option *ngFor="let t of distList"  [value]="t" >{{t}}</option>
+                                            </select>
+                                        </div>
+                                        <br>
+                                    </div>
+                                  </div>
+                                  <div class="col-xl-9">
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </form>
+
+                  <div *ngIf="isActive" id ="viewPercCount" class="row" style="margin-left: 2px;">
+                    <h3 class="text-center" style="margin-left:5em;">{{stabilityTrendTitle}}</h3>
+                        <div class="chart-container" style="position: relative; height:30vh; width:40vw">    
+                            <canvas id="chart">{{ Linechart }}</canvas>    
+                       </div>
+                </div>  
+               
+              </div>
+          </div>
+      </div>
+    </div>
+  </div>

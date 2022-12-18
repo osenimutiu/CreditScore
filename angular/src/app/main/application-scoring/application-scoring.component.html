@@ -1,0 +1,467 @@
+<div class="container">
+    <h4><span class="text-center">
+        Credit Scoring
+    </span></h4>
+        <button (click)="reload()" class="form-group btn btn-outline-danger" >{{l("Refresh")}}</button>
+
+<div class="row">
+    <div class="col styled-table">
+          <div class="btgreen">
+            <h6><b>scoring</b></h6>
+          </div>
+          <br>   
+            <div [class]="containerClass">
+                <div class="card card-custom gutter-b">	
+                    <div class="card-body">
+                        <tabset>
+                            <tab class="p-5" heading="{{'Existing Customer' | localize}}">
+                               <form #form="ngForm" novalidate (ngSubmit)="computeSecondScore()" autocomplete="off">
+                                    <div class="form-group">
+                                        <input class="form-control" type="hidden" name="param11" [(ngModel)]="param11" [disabled]="true"/>
+                                     </div>
+                                    <div class="form-group">
+                                        <label>{{l("Applicant")}}</label>
+                                        <select name="custid" id="" class="form-control" [(ngModel)]="custid" aria-placeholder="Select Applicant">
+                                            
+                                            <option name="custid" *ngFor="let x of accountBalData" [value]="x.id">{{x.name}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>{{l("Loan Request")}}</label>
+                                        <input type="text" name="amount" class="form-control" format="number" sg-number-input fraction-size="2" placeholder="Enter loan request" [(ngModel)]="applicationScoring.amount" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>{{l("Tenor in Months")}}</label>
+                                        <input type="number" name="tenorMonth" class="form-control" placeholder="Enter loan tenor" [(ngModel)]="applicationScoring.tenorMonth" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>{{l("Product Type")}}</label>
+                                        <select name="param9" id="" (change)="onChangeProductType($event.target.value)" class="form-control" [(ngModel)]="param9" aria-placeholder="Select Product Type">
+                                   
+                                            <option name="productTypeId" *ngFor="let y of productTypes" [value]="y.id">{{y.productType}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-block btn-lg btn-danger" [disabled]="!form.form.valid" [buttonBusy]="saving" [busyText]="l('SavingWithThreeDot')"><i class="fal fa-battery-bolt"></i> <span>{{l("Generate Scores")}}</span></button>
+                                    </div>
+                                </form>
+                            </tab>
+                            <tab class="p-5" heading="{{'New Customer' | localize}}">
+                                <form #form="ngForm" novalidate (ngSubmit)="computeScore()">
+                                <div class="form-group">
+                                    <input class="form-control" type="hidden" name="param8" [(ngModel)]="param8" [disabled]="true"/>
+                                  </div>
+                                  
+                               
+                                   <div class="form-row">
+                                       <div class="form-group col-md-6">
+                                           <label>{{l("Applicant")}}</label>
+                                           <input #applicantInput class="form-control" type="text" name="param9" [(ngModel)]="param9" required maxlength="32" placeholder="Accountno - Name">
+                                       </div>
+                                       <div class="form-group col-md-6">
+                                           <label>{{l("Loan Request")}}</label>
+                                           <input class="form-control" type="text" name="amount" [(ngModel)]="applicationScoring.amount" required maxlength="32" placeholder="Enter loan request">
+                                       </div>
+                                   </div>
+                                   
+                                   <div class="form-row">
+                                       <div class="form-group col-md-6">
+                                           <label>{{l("Tenor(In Month)")}}</label>
+                                           <input class="form-control" type="number" name="tenorMonth" [(ngModel)]="applicationScoring.tenorMonth" required placeholder="Enter loan tenor">
+                                       </div>
+                                       <div class="form-group col-md-6"> 
+                                           <label>{{l("Product Type")}}</label>
+                                           <select name="param1" id="param1" (change)="onChangeProductType($event.target.value)" class="form-control" [(ngModel)]="param1">
+                                              <option name="param1" *ngFor="let productType of productTypes"  [value]="productType.id">{{productType.productType}}</option>
+                                           </select>
+                                       </div>
+                                   </div>
+                                   <div class="form-row">
+                                       <div class="form-group col-md-6">
+                                           <label>{{l("BVN")}}</label>
+                                           <input class="form-control" type="text" name="" maxlength="10"  required placeholder="Enter valid BVN">
+                                           <a href="" class="text-primary">Verify BVN</a>
+                                       </div>
+                                       <div class="form-group col-md-6">
+                                           <label>{{l("Age Range")}}</label>
+                                           <select name="param2" id="param2" class="form-control" [(ngModel)]="param2">
+                                               <option name="param2" *ngFor="let age of ages" [value]="age.id">{{age.ageGroup}}</option>
+                                           </select>
+                                       </div>
+                                   </div>
+                                   
+                                   <div class="form-row">
+                                       <div class="form-group col-md-6">
+                                           <label>{{l("Income Range")}}</label>
+                                           <select name="param3" id="param3" class="form-control" [(ngModel)]="param3">
+                                               <option name="param3" *ngFor="let income of incomes" [value]="income.id">{{income.incomeRange}}</option>
+                                           </select>
+                                       </div>
+                                       <div class="form-group col-md-6">
+                                           <label>{{l("Rent Range")}}</label>
+                                          <select name="param4" id="param4" class="form-control" [(ngModel)]="param4">
+                                               <option name="param4" *ngFor="let rent of rents" [value]="rent.id">{{rent.rentGroup}}</option>
+                                           </select>
+                                       </div>
+                                   </div>
+                                   
+                                   <div class="form-row">
+                                       <div class="form-group col-md-6">
+                                           <label>{{l("Rent to Income")}}</label>
+                                            <select name="param5" id="param5" class="form-control" [(ngModel)]="param5">
+                                               <option name="param5" *ngFor="let renttoIncome of renttoIncomes" [value]="renttoIncome.id">{{renttoIncome.rentToIncomeGroup}}</option>
+                                           </select>
+                                       </div>
+                                       <div class="form-group col-md-6">
+                                           <label>{{l("Return on assets")}}</label>
+                                            <select name="param6" id="param6" class="form-control" [(ngModel)]="param6">
+                                               <option name="param6" *ngFor="let returnonAsset of returnonAssets" [value]="returnonAsset.id">{{returnonAsset.returnonAssets}}</option>
+                                           </select>
+                                       </div>
+                                   </div>
+                                   <div class="form-row">
+                                       <div class="form-group col-md-12">
+                                           <label>{{l("Sector")}}</label>
+                                           <select name="param7" id="param7" class="form-control" [(ngModel)]="param7">
+                                               <option name="param7" *ngFor="let subSector of subSectors" [value]="subSector.id">{{subSector.sectorGroup}}</option>
+                                           </select>
+                                       </div>
+                                   </div>
+                                   <div class="form-row">
+                                    <div class="form-group col-md-12">
+                                        <label>{{l("Location")}}</label>
+                                        <select name="locationAttributeId" id="locationAttributeId" class="form-control" [(ngModel)]="applicationScoring.locationAttributeId">
+                                            <option name="locationAttributeId" *ngFor="let location of locations" [value]="location.id">{{location.locationGroup}}</option>
+                                        </select>
+                                    </div>
+                                   </div>
+                                   <div class="form-group">
+                                    <button type="submit" class="btn btn-block btn-lg btn-danger" [buttonBusy]="saving" [disabled]="!form.form.valid" [busyText]="l('SavingWithThreeDot')"><i class="fal fa-battery-bolt"></i> <span>{{l("Generate Scores")}}</span></button>
+                                </div>
+                            </form> 
+                            </tab>
+                        </tabset>
+                    </div>
+                </div>
+            </div>
+        
+    </div>
+   <div class="col" id="elem" >
+    <table class="styled-table" *ngFor="let z of rPOutputs">
+        <thead>
+            <tr>
+                <th colspan="2" class="text-center"><b>ScoreCard</b></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><b>Applicant</b></td>
+                <td>{{z.name}}</td>
+            </tr>
+            <tr>
+                <td><b>Debt to Income Ratio</b></td>
+                <td>{{z.debt_Income_Ratio}}</td>
+            </tr>
+            <!-- and so on... -->
+            <tr>
+                <td><b>Expected Loss</b></td>
+                <td>{{applicationScoring.amount *z.pd * 0.75 | currency }}</td>
+            </tr>
+            <tr>
+                <td><b>Risk Level</b></td>
+                <td>{{z.risk_Level}}</td>
+            </tr>
+            <tr>
+                <td><b>Score</b></td> 
+                <td>{{z.score}}</td>
+            </tr>
+            <tr>
+                <td><b>Outstanding Loan Bal.</b></td>
+                <td>{{z.interest_Rate}}</td>
+            </tr>
+            <tr>
+                <td><b>Bal. from other FIs</b></td>
+                <td>{{(0)| currency }}</td>
+            </tr>
+            <tr>
+                <td><b>Maximum Amount</b></td>
+                <td>{{z.good_Bad_Odd | currency}}</td>
+            </tr>
+            <tr>
+                <td><b>Available Amount</b></td>
+                <td>{{(z.good_Bad_Odd) - (z.interest_Rate) | currency}}</td>
+            </tr>
+            <tr>
+                <td><b>Recommendation</b></td>
+                <td>{{z.recommendation}}</td>
+            </tr>
+
+            
+            <tr>
+                <td></td>
+                <td><b>Print</b></td>
+
+            </tr>
+
+        </tbody>
+    </table>
+   </div>
+   <div class="col">
+    <div id="left">
+        <table class="styled-table" *ngFor="let z of rPOutputs">
+            <thead>
+                <tr>
+                    <th style="text-align:center"><b>Score</b></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><h2 class="text-center">{{z.score}}</h2></td>      
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div id="right">
+     <table class="styled-table" *ngFor="let z of rPOutputs">
+         <thead>
+             <tr>
+                 <th style="text-align:center"><b>Recommendation</b></th>
+             </tr>
+         </thead>
+         <tbody>
+            <tr>
+            <td [style.background-color]="getColor(z.recommendation)"><h2 class="text-center">{{z.recommendation}}</h2></td>
+            </tr>
+        </tbody>
+     </table>
+ 
+    </div>
+   </div>
+   
+
+
+    <createApplicationScoringModal #createApplicationScoringModal></createApplicationScoringModal>
+    
+</div>
+</div>
+
+<!-- <div class="container">
+    
+
+<div class="row">
+    <div class="col-md-7">
+       <button (click)="reload()" class="form-group btn btn-outline-success" style="margin: 10px 0px 0px 25px;">{{l("Refresh")}}
+
+        </button>
+        <div [@routerTransition]>
+            <div class="content d-flex flex-column flex-column-fluid">
+                <sub-header [title]="'Credit Scoring' | localize">
+                </sub-header>
+        
+                <div [class]="containerClass">
+                    <div class="card card-custom gutter-b">
+                        <div class="card-body">
+                            <tabset>
+                                <tab class="p-5" heading="{{'Existing Customer' | localize}}">
+                                   <form #form="ngForm" novalidate (ngSubmit)="computeSecondScore()" autocomplete="off">
+                                        <div class="form-group">
+                                            <input class="form-control" type="hidden" name="param11" [(ngModel)]="param11" [disabled]="true"/>
+                                         </div>
+                                        <div class="form-group">
+                                            <label>{{l("Applicant")}}</label>
+                                            <select name="custid" id="" class="form-control" [(ngModel)]="custid" aria-placeholder="Select Applicant">
+                                                
+                                                <option name="custid" *ngFor="let x of accountBalData" [value]="x.id">{{x.name}}</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>{{l("Loan Request")}}</label>
+                                            <input type="text" name="amount" class="form-control" format="number" sg-number-input fraction-size="2" placeholder="Enter loan request" [(ngModel)]="applicationScoring.amount" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>{{l("Tenor in Months")}}</label>
+                                            <input type="number" name="tenorMonth" class="form-control" placeholder="Enter loan tenor" [(ngModel)]="applicationScoring.tenorMonth" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>{{l("Product Type")}}</label>
+                                            <select name="param9" id="" (change)="onChangeProductType($event.target.value)" class="form-control" [(ngModel)]="param9" aria-placeholder="Select Product Type">
+                                       
+                                                <option name="productTypeId" *ngFor="let y of productTypes" [value]="y.id">{{y.productType}}</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <button type="submit" class="btn btn-block btn-lg btn-primary" [disabled]="!form.form.valid" [buttonBusy]="saving" [busyText]="l('SavingWithThreeDot')"><i class="fal fa-battery-bolt"></i> <span>{{l("Generate Scores")}}</span></button>
+                                        </div>
+                                    </form>
+                                </tab>
+                                <tab class="p-5" heading="{{'New Customer' | localize}}">
+                                    <form #form="ngForm" novalidate (ngSubmit)="computeScore()">
+                                    <div class="form-group">
+                                        <input class="form-control" type="hidden" name="param8" [(ngModel)]="param8" [disabled]="true"/>
+                                      </div>
+                                      
+                                   
+                                       <div class="form-row">
+                                           <div class="form-group col-md-6">
+                                               <label>{{l("Applicant")}}</label>
+                                               <input #applicantInput class="form-control" type="text" name="param9" [(ngModel)]="param9" required maxlength="32" placeholder="Accountno - Name">
+                                           </div>
+                                           <div class="form-group col-md-6">
+                                               <label>{{l("Loan Request")}}</label>
+                                               <input class="form-control" type="text" name="amount" [(ngModel)]="applicationScoring.amount" required maxlength="32" placeholder="Enter loan request">
+                                           </div>
+                                       </div>
+                                       
+                                       <div class="form-row">
+                                           <div class="form-group col-md-6">
+                                               <label>{{l("Tenor(In Month)")}}</label>
+                                               <input class="form-control" type="number" name="tenorMonth" [(ngModel)]="applicationScoring.tenorMonth" required placeholder="Enter loan tenor">
+                                           </div>
+                                           <div class="form-group col-md-6"> 
+                                               <label>{{l("Product Type")}}</label>
+                                               <select name="param1" id="param1" (change)="onChangeProductType($event.target.value)" class="form-control" [(ngModel)]="param1">
+                                                  <option name="param1" *ngFor="let productType of productTypes"  [value]="productType.id">{{productType.productType}}</option>
+                                               </select>
+                                           </div>
+                                       </div>
+                                       <div class="form-row">
+                                           <div class="form-group col-md-6">
+                                               <label>{{l("BVN")}}</label>
+                                               <input class="form-control" type="text" name="" maxlength="10"  required placeholder="Enter valid BVN">
+                                               <a href="" class="text-primary">Verify BVN</a>
+                                           </div>
+                                           <div class="form-group col-md-6">
+                                               <label>{{l("Age Range")}}</label>
+                                               <select name="param2" id="param2" class="form-control" [(ngModel)]="param2">
+                                                   <option name="param2" *ngFor="let age of ages" [value]="age.id">{{age.ageGroup}}</option>
+                                               </select>
+                                           </div>
+                                       </div>
+                                       
+                                       <div class="form-row">
+                                           <div class="form-group col-md-6">
+                                               <label>{{l("Income Range")}}</label>
+                                               <select name="param3" id="param3" class="form-control" [(ngModel)]="param3">
+                                                   <option name="param3" *ngFor="let income of incomes" [value]="income.id">{{income.incomeRange}}</option>
+                                               </select>
+                                           </div>
+                                           <div class="form-group col-md-6">
+                                               <label>{{l("Rent Range")}}</label>
+                                              <select name="param4" id="param4" class="form-control" [(ngModel)]="param4">
+                                                   <option name="param4" *ngFor="let rent of rents" [value]="rent.id">{{rent.rentGroup}}</option>
+                                               </select>
+                                           </div>
+                                       </div>
+                                       
+                                       <div class="form-row">
+                                           <div class="form-group col-md-6">
+                                               <label>{{l("Rent to Income")}}</label>
+                                                <select name="param5" id="param5" class="form-control" [(ngModel)]="param5">
+                                                   <option name="param5" *ngFor="let renttoIncome of renttoIncomes" [value]="renttoIncome.id">{{renttoIncome.rentToIncomeGroup}}</option>
+                                               </select>
+                                           </div>
+                                           <div class="form-group col-md-6">
+                                               <label>{{l("Return on assets")}}</label>
+                                                <select name="param6" id="param6" class="form-control" [(ngModel)]="param6">
+                                                   <option name="param6" *ngFor="let returnonAsset of returnonAssets" [value]="returnonAsset.id">{{returnonAsset.returnonAssets}}</option>
+                                               </select>
+                                           </div>
+                                       </div>
+                                       <div class="form-row">
+                                           <div class="form-group col-md-6">
+                                               <label>{{l("Sector")}}</label>
+                                               <select name="param7" id="param7" class="form-control" [(ngModel)]="param7">
+                                                   <option name="param7" *ngFor="let subSector of subSectors" [value]="subSector.id">{{subSector.sectorGroup}}</option>
+                                               </select>
+                                           </div>
+                                           <div class="form-group col-md-6">
+                                               <label>{{l("Location")}}</label>
+                                               <select name="locationAttributeId" id="locationAttributeId" class="form-control" [(ngModel)]="applicationScoring.locationAttributeId">
+                                                   <option name="locationAttributeId" *ngFor="let location of locations" [value]="location.id">{{location.locationGroup}}</option>
+                                               </select>
+                                           </div>
+                                       </div>
+                                       <div class="form-group">
+                                        <button type="submit" class="btn btn-block btn-lg btn-primary" [buttonBusy]="saving" [disabled]="!form.form.valid" [busyText]="l('SavingWithThreeDot')"><i class="fal fa-battery-bolt"></i> <span>{{l("Generate Scores")}}</span></button>
+                                    </div>
+                                </form> 
+                                </tab>
+                            </tabset>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+
+    </div>
+   <div class="col-md-5" style="margin-top: 50px;">
+    <table class="styled-table" *ngFor="let z of rPOutputs">
+        <thead>
+            <tr>
+                <th colspan="2" class="text-center">ScoreCard</th>
+                <th>Score</th>
+                <th>Recommendation</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><b>Applicant</b></td>
+                <td>{{z.name}}</td>
+                <td><h2 class="text-center">{{z.score}}</h2></td>
+                <td [style.background-color]="getColor(z.recommendation)"><h2 class="text-center">{{z.recommendation}}</h2></td>
+      
+            </tr>
+            <tr>
+                <td><b>Debt to Income Ratio</b></td>
+                <td>{{z.debt_Income_Ratio}}</td>
+            </tr>
+
+            <tr>
+                <td><b>Expected Loss</b></td>
+                <td>{{applicationScoring.amount * z.pd * 0.75 * selectedType | currency }}</td>
+                
+            </tr>
+            <tr>
+                <td><b>Risk Level</b></td>
+                <td>{{z.risk_Level}}</td>
+            </tr>
+            <tr>
+                <td><b>Score</b></td> 
+                <td>{{z.score}}</td>
+            </tr>
+            <tr>
+                <td><b>Outstanding Loan Bal.</b></td>
+                <td>{{z.interest_Rate}}</td>
+            </tr>
+            <tr>
+                <td><b>Bal. from other FIs</b></td>
+                <td>{{(0)| currency }}</td>
+            </tr>
+            <tr>
+                <td><b>Maximum Amount</b></td>
+                <td>{{z.good_Bad_Odd | currency}}</td>
+            </tr>
+            <tr>
+                <td><b>Available Amount</b></td>
+                <td>{{(z.good_Bad_Odd) - (z.interest_Rate) | currency}}</td>
+            </tr>
+            <tr>
+                <td><b>Recommendation</b></td>
+                <td>{{z.recommendation}}</td>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td><b>Print</b></td>
+
+            </tr>
+
+        </tbody>
+    </table>
+   </div>
+
+    <createApplicationScoringModal #createApplicationScoringModal></createApplicationScoringModal>
+    
+</div>
+</div> -->

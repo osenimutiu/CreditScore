@@ -1,0 +1,60 @@
+﻿<div bsModal #createOrEditModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="createOrEditModal" aria-hidden="true" [config]="{backdrop: 'static'}">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <form *ngIf="active" #uLoanRequestForm="ngForm" novalidate (ngSubmit)="save()" autocomplete="off">
+                <div class="modal-header">
+                    <h4 class="modal-title">
+                        <span *ngIf="uLoanRequest.id">{{l("EditULoanRequest")}}</span>
+                        <span *ngIf="!uLoanRequest.id">{{l("CreateNewULoanRequest")}}</span>
+                    </h4>
+                    <button type="button" class="close" (click)="close()" aria-label="Close" [disabled]="saving">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                 
+
+
+								<div class="form-group">
+									<label for="ULoanRequest_LoanType">{{l("LoanType")}}</label>
+                                    <select   type="text" #ULoanRequest_LoanType="ngModel" id="ULoanRequest_LoanType" class="form-control" [(ngModel)]="uLoanRequest.loanType" name="LoanType"   minlength="0"  maxlength="25" >
+										<option  value="Working Capital">Working Capital</option>
+										<option  value="Asset Finance">Asset Finance</option>
+										<option  value="Temporary Overdraft">Temporary Overdraft</option>
+									  </select>
+								    <validation-messages [formCtrl]="ULoanRequest_LoanType"></validation-messages>
+								</div>
+					
+								<div class="form-group">
+									<label for="ULoanRequest_Amount">{{l("Amount")}}</label>
+									<input type="number" #ULoanRequest_Amount="ngModel" id="ULoanRequest_Amount" class="form-control" [(ngModel)]="uLoanRequest.amount" name="Amount"   />
+									<validation-messages [formCtrl]="ULoanRequest_Amount"></validation-messages>
+								</div>
+					
+								<div class="form-group">
+									<label for="ULoanRequest_Tenor">{{l("Tenor(Months)")}}</label>
+									<input type="number" #ULoanRequest_Tenor="ngModel" id="ULoanRequest_Tenor" class="form-control" [(ngModel)]="uLoanRequest.tenor" name="Tenor"  min="0"  max="10" />
+									<validation-messages [formCtrl]="ULoanRequest_Tenor"></validation-messages>
+								</div>
+					
+								<div class="form-group">
+									<label for="ULoanRequest_Status">{{l("Status")}}</label>
+								    <select  type="text" #ULoanRequest_Status="ngModel" id="ULoanRequest_Status" class="form-control" [(ngModel)]="uLoanRequest.status" name="Status"   minlength="0"  maxlength="25">
+										<option value="Approved">Approve</option>
+										<option value="Review">Review</option>
+										<option value="Rejected">Reject</option>
+									  </select>
+                                    <validation-messages [formCtrl]="ULoanRequest_Status"></validation-messages>
+								</div>
+					
+
+                </div>
+                <div class="modal-footer">
+                    <button [disabled]="saving" type="button" class="btn btn-default" (click)="close()">{{l("Cancel")}}</button>
+                    <button type="submit" class="btn btn-primary blue" [disabled]="!uLoanRequestForm.form.valid" [buttonBusy]="saving" [busyText]="l('SavingWithThreeDot')"><i class="fa fa-save"></i> <span>{{l("Save")}}</span></button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>

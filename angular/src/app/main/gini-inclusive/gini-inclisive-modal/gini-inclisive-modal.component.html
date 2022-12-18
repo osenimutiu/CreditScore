@@ -1,0 +1,43 @@
+<div bsModal #modal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="viewRequestModal" aria-hidden="true" [config]="{backdrop: 'static'}">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-danger">
+                <h4 class="modal-title">
+                    <span>{{l("Gini Inclusive")}}</span>
+                </h4>
+                <button type="button" class="close" (click)="close()" aria-label="Close">
+                    <span aria-hidden="false">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-6 mb-3">
+                        <h6>{{l("AUC")}} :</h6>
+                        {{ auc | number : '.0-4' }}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("AUL")}} :</h6>
+                        {{ aul }}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("AREA")}} :</h6>
+                        {{ area | number : '.0-4' }}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("Gini Coefficient")}} :</h6>
+                        {{ giniCoef | number : '.0-4'}}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("Concavity")}} :</h6>
+                        {{ concavity | number : '.0-4' }}
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button [disabled]="saving" type="button" class="btn btn-outline-danger" (click)="close()">{{l("Close")}}</button>
+            </div>
+        </div>
+    </div>
+</div>
+

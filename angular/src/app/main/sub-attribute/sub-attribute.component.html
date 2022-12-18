@@ -1,0 +1,98 @@
+
+<div [@routerTransition]>
+  
+    <div class="content d-flex flex-column flex-column-fluid">
+     <sub-header [title]="'Retail' | localize">
+          <div role="actions">
+          <button (click)="addsubattributeModal.show()" class="btn btn-outline-success" *ngIf="permission.isGranted('Pages.DemoRetail.Tenant.CreateSubRetailAttrItem')"><i class="fas fa-plus-square"></i> Create</button>
+          <button (click)="reload()" class="btn btn-outline-primary"><i class="fas fa-sync"></i> Refresh</button>
+      </div>
+              </sub-header> 
+      
+      <!-- <div [class]="containerClass"> -->
+      <div [class]="">
+          <div class="card card-custom gutter-b">
+            
+              <div class="card-body">
+                  <form class="form" autocomplete="off">
+                      <div>
+                          <div class="row align-items-center">
+                              <div class="col-xl-12">
+                                 <div class="col-xl-3">
+                                    <div class="form-group m-form__group align-items-center">
+                                        <div class="input-group">
+                                        </div>
+                                        <br>
+                                    </div>
+                                  </div>
+                              </div>
+                          </div>
+                           
+                      </div>
+                  </form>
+                  <table class="table fl-table table-borderless">
+                    <thead class="table-dark">
+                        <tr>
+                            <th style="width: 150px; background-color: #e90c0c; color: white;">#</th>
+                            <th style="width: 150px; background-color: #e90c0c; color: white;">Attribute</th>
+                            <th style="width: 150px; background-color: #e90c0c; color: white;">SubAttribute </th>
+                            <th style="width: 150px; background-color: #e90c0c; color: white;">Value</th>
+                            <th style="width: 150px; background-color: #e90c0c; color: white;">Status</th>
+                            <!-- <th style="width: 150px; background-color: #e90c0c; color: white;" *ngIf="permission.isGranted('Pages.DemoRetail.Tenant.ApproveAttr')">Action</th> -->
+                            <th style="width: 150px; background-color: #e90c0c; color: white;">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let ret of subRetailDemoList | paginate: { itemsPerPage: 10, currentPage: p }; let i = index;">
+                            <td>{{i + 1}}</td>
+                            <td>{{ret.attribute}}</td>
+                            <td>{{ret.subAttribute}}</td>
+                            <td>{{ret.value}}</td>
+                            <td>{{ret.status}}</td>
+                            <!-- <td>
+                                <button class="btn btn-primary" (click)="editsubattributeModal.show(ret.id)" *ngIf="permission.isGranted('Pages.DemoRetail.Tenant.GetSubRetailAttrItemEdit')">Edit
+                                </button>
+                                <button class="btn btn-success" *ngIf="permission.isGranted('Pages.DemoRetail.Tenant.ApproveAttr')">Approve
+                                </button>
+                                <button class="btn btn-danger" *ngIf="permission.isGranted('Pages.DemoRetail.Tenant.DeclineAttr')">Decline
+                                </button>
+                            </td> -->
+                            <!-- <td>
+                                <button class="btn btn-primary" (click)="editsubattributeModal.show(ret.id)" *ngIf="permission.isGranted('Pages.DemoRetail.Tenant.GetSubRetailAttrItemEdit')">Edit
+                                </button>
+                                <button class="btn btn-success" (click)="approveDetail(ret.id)" *ngIf="permission.isGranted('Pages.DemoRetail.Tenant.ApproveAttr')">Approve
+                                </button>
+                                <button class="btn btn-danger" (click)="declineDetail(ret.id)" *ngIf="permission.isGranted('Pages.DemoRetail.Tenant.DeclineAttr')">Decline
+                                </button>
+                            </td> -->
+                            <td>
+                                <button class="btn btn-primary" title="Edit" (click)="editsubattributeModal.show(ret.id)" *ngIf="permission.isGranted('Pages.DemoRetail.Tenant.GetSubRetailAttrItemEdit')"><i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn btn-success" title="Approve" (click)="approveModal.show(ret)" *ngIf="permission.isGranted('Pages.DemoRetail.Tenant.ApproveAttr')" [disabled]="ret.status != 'Pending'"><i class="fas fa-thumbs-up"></i>
+                                </button>
+                                <button class="btn btn-danger" title="Decline" (click)="declineModal.show(ret)" *ngIf="permission.isGranted('Pages.DemoRetail.Tenant.DeclineAttr')" [disabled]="ret.status != 'Pending'"><i class="fas fa-window-close"></i>
+                                </button>
+                                <button class="btn btn-secondary" title="Reverse" (click)="reverse(ret.id)" *ngIf="permission.isGranted('Pages.DemoRetail.Tenant.DeclineAttr')" [disabled]="ret.status == 'Pending'"><i class="fas fa-history"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table> 
+                <div class="row">
+                    <div class="col-md-2">
+                        <!-- <input type="text" class="form-control" value="{{totalamount | number : '.0-0'}}" disabled="true" style="width: 150px;"> -->
+                       </div>
+                    <div class="col-md-10"> 
+                        <pagination-controls (pageChange)="p = $event" class="pull-right"></pagination-controls>
+                    </div>
+                </div>
+               
+              </div>
+          </div>
+      </div>
+    </div>
+    <addsubattributeModal #addsubattributeModal (modalSave)="getSubDemoRetail()"></addsubattributeModal>
+    <approveModal #approveModal (modalSave)="getSubDemoRetail()"></approveModal>
+    <editsubattributeModal #editsubattributeModal (modalSave)="getSubDemoRetail()"></editsubattributeModal>
+    <declineModal #declineModal (modalSave)="getSubDemoRetail()"></declineModal>
+  </div>

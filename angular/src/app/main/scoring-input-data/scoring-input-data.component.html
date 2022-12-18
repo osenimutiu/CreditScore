@@ -1,0 +1,463 @@
+<div [@routerTransition]>
+    <div class="kt-subheader kt-grid__item">
+        <div [class]="containerClass">
+            <div class="kt-subheader__main">
+                <h3 class="kt-subheader__title">
+                    <!-- <span>{{l("")}}</span> -->
+                </h3>
+                <span class="kt-subheader_separator kt-subheader_separator--v"></span>
+                <span class="kt-subheader__desc">
+                    <!-- {{l("ApplicationScoringHeaderInfo")}} -->
+                </span>
+            </div>
+            <div class="kt-subheader__toolbar">
+                <div class="kt-subheader__wrapper">
+
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <input type="file" class="form-control" #uploadItemSI multiple="false" placeholder="Upload file" accept=".xlsx">
+
+            </div>
+            <div class="col-md-8">
+                <button type="button" class="btn btn-primary form-group" [buttonBusy]="saving"
+                [busyText]="l('SavingWithThreeDot')" (click)="UploadInputData()">
+                 {{"Upload" | localize}}
+                  </button>
+
+                  <button class="form-group btn btn-success">
+                    {{l("Extract" | localize)}}
+                </button>
+                <button class="form-group btn btn-danger"(click)="runDistStat()" >
+                    {{l("Cleanse" | localize)}}
+                </button>
+                <button (click)="reload()" class="form-group btn btn-outline-primary">Refresh
+            </button>
+
+            </div>
+        </div>
+    </div>
+
+    <div [class]="containerClass + ' kt-grid_item kt-grid_item--fluid'">
+        <div class="kt-portlet kt-portlet--mobile">
+            <div class="kt-portlet__body">
+                <form class="kt-form" autocomplete="off">
+                    <div>
+                        <div class="row align-items-center">
+                            <div class="col-xl-12">
+                                <div class="form-group m-form__group align-items-center">
+
+                                    <div class="input-group">
+                                        <input [(ngModel)]="uniqueIDFilter" name="uniqueIDFilter" autoFocus
+                                            class="form-control m-input" placeholder="Enter UniqueID to search"
+                                            type="text">
+                                            <span class="input-group-btn">
+                                            <button (click)="getInputData()" class="btn btn-primary"
+                                                type="submit"><i class="flaticon-search-1"></i></button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" [hidden]="!advancedFiltersAreShown">
+                            <div class="col-md-12">
+                                <div class="kt-separator kt-separator--border-dashed"></div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="uniqueIDFilter">{{l("UniqueID")}}</label>
+                                    <input type="text" class="form-control" id="uniqueIDFilter" name="uniqueIDFilter"
+                                        [(ngModel)]="uniqueIDFilter">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="ageFilter">{{l("Age")}}</label>
+                                    <input type="text" class="form-control" id="ageFilter" name="ageFilter"
+                                        [(ngModel)]="ageFilter">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="returnonAssetsFilter">{{l("ReturnonAssets")}}</label>
+                                    <input type="text" class="form-control" id="returnonAssetsFilter" name="returnonAssetsFilter"
+                                        [(ngModel)]="returnonAssetsFilter">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="locationFilter">{{l("Location")}}</label>
+                                    <input type="text" class="form-control" id="locationFilter" name="locationFilter"
+                                        [(ngModel)]="locationFilter">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="residentstatusFilter">{{l("Residentstatus")}}</label>
+                                    <input type="text" class="form-control" id="residentstatusFilter" name="residentstatusFilter"
+                                        [(ngModel)]="residentstatusFilter">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="timeatJobFilter">{{l("TimeatJob")}}</label>
+                                    <input type="text" class="form-control" id="timeatJobFilter" name="timeatJobFilter"
+                                        [(ngModel)]="timeatJobFilter">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="timeatresidenceFilter">{{l("TimeatResidence")}}</label>
+                                    <input type="text" class="form-control" id="timeatresidenceFilter" name="timeatresidenceFilter"
+                                        [(ngModel)]="timeatresidenceFilter">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="productFilter">{{l("Product")}}</label>
+                                    <input type="text" class="form-control" id="productFilter" name="productFilter"
+                                        [(ngModel)]="productFilter">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="sectorFilter">{{l("Sector")}}</label>
+                                    <input type="text" class="form-control" id="sectorFilter" name="sectorFilter"
+                                        [(ngModel)]="sectorFilter">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="subsectorFilter">{{l("SubSector")}}</label>
+                                    <input type="text" class="form-control" id="subsectorFilter" name="subsectorFilter"
+                                        [(ngModel)]="subsectorFilter">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="currentAccountStatusFilter">{{l("CurrentStatus")}}</label>
+                                    <input type="text" class="form-control" id="currentAccountStatusFilter" name="currentAccountStatusFilter"
+                                        [(ngModel)]="currentAccountStatusFilter">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="totalassetsFilter">{{l("TotalAssets")}}</label>
+                                    <input type="text" class="form-control" id="totalassetsFilter" name="totalassetsFilter"
+                                        [(ngModel)]="totalassetsFilter">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="rentFilter">{{l("Rent")}}</label>
+                                    <input type="text" class="form-control" id="rentFilter" name="rentFilter"
+                                        [(ngModel)]="rentFilter">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="renttoIncomeFilter">{{l("RenttoIncome")}}</label>
+                                    <input type="text" class="form-control" id="renttoIncomeFilter" name="renttoIncomeFilter"
+                                        [(ngModel)]="renttoIncomeFilter">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="timeatBankFilter">{{l("TimeatBank")}}</label>
+                                    <input type="text" class="form-control" id="timeatBankFilter" name="timeatBankFilter"
+                                        [(ngModel)]="timeatBankFilter">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="numberofproductsFilter">{{l("NumberofProduct")}}</label>
+                                    <input type="text" class="form-control" id="numberofproductsFilter" name="numberofproductsFilter"
+                                        [(ngModel)]="numberofproductsFilter">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="paymentperformanceFilter">{{l("Paymentperformance")}}</label>
+                                    <input type="text" class="form-control" id="paymentperformanceFilter" name="paymentperformanceFilter"
+                                        [(ngModel)]="paymentperformanceFilter">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="previousclaimsFilter">{{l("Previuosclaim")}}</label>
+                                    <input type="text" class="form-control" id="previousclaimsFilter" name="previousclaimsFilter"
+                                        [(ngModel)]="previousclaimsFilter">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="goodBadFilter">{{l("GoodBad")}}</label>
+                                    <input type="text" class="form-control" id="goodBadFilter" name="goodBadFilter"
+                                        [(ngModel)]="goodBadFilter">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="dateopenedFilter">{{l("Dateopened")}}</label>
+                                    <input type="text" class="form-control" id="dateopenedFilter" name="dateopenedFilter"
+                                        [(ngModel)]="dateopenedFilter">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="incomeFilter">{{l("Income")}}</label>
+                                    <input type="text" class="form-control" id="incomeFilter" name="incomeFilter"
+                                        [(ngModel)]="incomeFilter">
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- <div class="row mb-2">
+                            <div class="col-sm-12">
+                                <span class="clickable-item text-muted" *ngIf="!advancedFiltersAreShown"
+                                    (click)="advancedFiltersAreShown=!advancedFiltersAreShown"><i
+                                        class="fa fa-angle-down"></i> {{l("ShowAdvancedFilters")}}</span>
+                                <span class="clickable-item text-muted" *ngIf="advancedFiltersAreShown"
+                                    (click)="advancedFiltersAreShown=!advancedFiltersAreShown"><i
+                                        class="fa fa-angle-up"></i> {{l("HideAdvancedFilters")}}</span>
+                            </div>
+                        </div> -->
+                    </div>
+                </form>
+
+                <div class="row align-items-center">
+                    <!--<Primeng-Datatable-Start>-->
+                    <div class="primeng-datatable-container col-12" [busyIf]="primengTableHelper.isLoading">
+                        <p-table #dataTable (onLazyLoad)="getInputData($event)"
+                            [value]="primengTableHelper.records"
+                            rows="{{primengTableHelper.defaultRecordsCountPerPage}}" [paginator]="false" [lazy]="true"
+                            [scrollable]="true" ScrollWidth="100%" [responsive]="primengTableHelper.isResponsive"
+                            [resizableColumns]="primengTableHelper.resizableColumns">
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <!-- <th style="width: 130px">
+                                        {{l('Actions')}}
+                                    </th> -->
+                                    <th style="width: 150px; background-color: #e90c0c; color: white;" pSortableColumn="unique_ID">
+                                        {{l('UNIQUE-ID')}}
+                                        <p-sortIcon field="unique_ID"></p-sortIcon>
+                                    </th>
+                                    <th style="width: 160px; background-color: #e90c0c; color: white;" pSortableColumn="trainingSample">
+                                        {{l('TRAINING-SAMPLE')}}
+                                        <p-sortIcon field="trainingSample"></p-sortIcon>
+                                    </th>
+                                    <th style="width: 150px; background-color: #e90c0c; color: white;" pSortableColumn="age">
+                                        {{l('AGE')}}
+                                        <p-sortIcon field="age"></p-sortIcon>
+                                    </th>
+                                    <th style="width: 160px; background-color: #e90c0c; color: white;" pSortableColumn="date_opened">
+                                        {{l('DATE-OPENED')}}
+                                        <p-sortIcon field="date_opened"></p-sortIcon>
+                                    </th>
+                                    <th style="width: 150px; background-color: #e90c0c; color: white;" pSortableColumn="income">
+                                        {{l('INCOME')}}
+                                        <p-sortIcon field="income"></p-sortIcon>
+                                    </th>
+                                    <th style="width: 150px; background-color: #e90c0c; color: white;" pSortableColumn="location">
+                                        {{l('LOCATION')}}
+                                        <p-sortIcon field="location"></p-sortIcon>
+                                    </th>
+                                    <th style="width: 160px; background-color: #e90c0c; color: white;" pSortableColumn="resident_status">
+                                        {{l('RESIDENT-STATUS')}}
+                                        <p-sortIcon field="resident_status"></p-sortIcon>
+                                    </th>
+                                    <th style="width: 160px; background-color: #e90c0c; color: white;" pSortableColumn="time_at_Job">
+                                        {{l('TIME-AT-JOB')}}
+                                        <p-sortIcon field="time_at_Job"></p-sortIcon>
+                                    </th>
+                                    <th style="width: 170px; background-color: #e90c0c; color: white;" pSortableColumn="time_at_residence">
+                                        {{l('TIME-AT-RESIDENCE')}}
+                                        <p-sortIcon field="time_at_residence"></p-sortIcon>
+                                    </th>
+                                    <th style="width: 150px; background-color: #e90c0c; color: white;" pSortableColumn="product">
+                                        {{l('PRODUCT')}}
+                                        <p-sortIcon field="product"></p-sortIcon>
+                                    </th>
+                                    <th style="width: 170px; background-color: #e90c0c; color: white;" pSortableColumn="current_Account_Status">
+                                        {{l('CURRENT-ACCOUNT-STATUS')}}
+                                        <p-sortIcon field="current_Account_Status"></p-sortIcon>
+                                    </th>
+                                    <th style="width: 160px; background-color: #e90c0c; color: white;" pSortableColumn="total_assets">
+                                        {{l('TOTAL-ASSETS')}}
+                                        <p-sortIcon field="total_assets"></p-sortIcon>
+                                    </th>
+                                    <th style="width: 150px; background-color: #e90c0c; color: white;" pSortableColumn="rent">
+                                        {{l('RENT')}}
+                                        <p-sortIcon field="rent"></p-sortIcon>
+                                    </th>
+                                    <th style="width: 160px; background-color: #e90c0c; color: white;" pSortableColumn="rent_to_Income">
+                                        {{l('RENT-TO-INCOME')}}
+                                        <p-sortIcon field="rent_to_Income"></p-sortIcon>
+                                    </th>
+                                    <th style="width: 170px; background-color: #e90c0c; color: white;" pSortableColumn="return_on_Assets">
+                                        {{l('RETURN-ON-ASSETS')}}
+                                        <p-sortIcon field="return_on_Assets"></p-sortIcon>
+                                    </th>
+                                    <th style="width: 160px; background-color: #e90c0c; color: white;" pSortableColumn="time_at_Bank">
+                                        {{l('TIME-AT-BANK')}}
+                                        <p-sortIcon field="time_at_Bank"></p-sortIcon>
+                                    </th>
+                                    <th style="width: 170px; background-color: #e90c0c; color: white;" pSortableColumn="number_of_products">
+                                        {{l('NUMBER-OF-PRODUCTS')}}
+                                        <p-sortIcon field="number_of_products"></p-sortIcon>
+                                    </th>
+                                    <th style="width: 170px; background-color: #e90c0c; color: white;" pSortableColumn="payment_performance">
+                                        {{l('PAYMENT-PERFORMANCE')}}
+                                        <p-sortIcon field="payment_performance"></p-sortIcon>
+                                    </th>
+
+                                    <th style="width: 160px; background-color: #e90c0c; color: white;" pSortableColumn="previous_claims">
+                                        {{l('PREVIOUS-CLAIMS')}}
+                                        <p-sortIcon field="previous_claims"></p-sortIcon>
+                                    </th>
+                                    <th style="width: 150px; background-color: #e90c0c; color: white;" pSortableColumn="good_Bad">
+                                        {{l('GOOD-BAD')}}
+                                        <p-sortIcon field="good_Bad"></p-sortIcon>
+                                    </th>
+
+                                    </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-record="$implicit">
+                                <tr>
+                                    <!-- <td style="width: 130px">
+                                        <div class="btn-group dropdown" dropdown container="body">
+                                            <button class="dropdown-toggle btn btn-sm btn-danger" dropdownToggle>
+                                                <i class="fa fa-cog"></i><span class="caret"></span> {{l("Actions")}}
+                                            </button>
+                                            <ul class="dropdown-menu" *dropdownMenu>
+
+                                                <li>
+                                                    <a class="dropdown-item" href="javascript:;">{{l('Edit')}}</a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item" href="javascript:;"
+                                                        *ngIf="permission.isGranted('Pages.Tenant.IfrsLoan.DeleteScoringInputData')"
+                                                        (click)="deleteScoringInputData(record)">{{l('Delete')}}</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </td> -->
+
+                                    <td style="width:150px">
+                                        <span class="ui-column-title"> {{l('UniqueID')}}</span>
+                                        {{record.unique_ID}}
+                                    </td>
+                                    <td style="width:160px">
+                                        <span class="ui-column-title"> {{l('TrainingSample')}}</span>
+                                        {{record.trainingSample}}
+                                    </td>
+                                    <td style="width:150px">
+                                        <span class="ui-column-title"> {{l('Dateopened')}}</span>
+                                        {{record.age }}
+                                    </td>
+                                    <td style="width:160px">
+                                        <span class="ui-column-title"> {{l('Age')}}</span>
+                                        {{record.date_opened | date }}
+                                    </td>
+                                    <td style="width:150px">
+                                        <span class="ui-column-title"> {{l('Income')}}</span>
+                                        {{record.income}}
+                                    </td>
+                                    <td style="width:150px">
+                                        <span class="ui-column-title"> {{l('Location')}}</span>
+                                        {{record.location}}
+                                    </td>
+                                    <td style="width:160px">
+                                        <span class="ui-column-title"> {{l('Residentstatus')}}</span>
+                                        {{record.resident_status}}
+                                    </td>
+                                    <td style="width:160px">
+                                        <span class="ui-column-title"> {{l('TimeatJob')}}</span>
+                                        {{record.time_at_Job}}
+                                    </td>
+                                    <td style="width:160px">
+                                        <span class="ui-column-title"> {{l('Timeatresidence')}}</span>
+                                        {{record.time_at_residence}}
+                                    </td>
+                                    <td style="width:170px">
+                                        <span class="ui-column-title"> {{l('Product')}}</span>
+                                        {{record.product}}
+                                    </td>
+
+                                    <td style="width:170px">
+                                        <span class="ui-column-title"> {{l('ReturnonAssets')}}</span>
+                                        {{record.current_Account_Status}}
+                                    </td>
+
+                                    <td style="width:160px">
+                                        <span class="ui-column-title"> {{l('CurrentAccountStatus')}}</span>
+                                        {{record.total_assets}}
+                                    </td>
+
+                                        <td style="width:150px">
+                                            <span class="ui-column-title"> {{l('Rent')}}</span>
+                                            {{record.rent}}
+                                        </td>
+
+                                        <td style="width:160px">
+                                        <span class="ui-column-title"> {{l('RenttoIncome')}}</span>
+                                        {{record.rent_to_Income}}
+                                        </td>
+                                        <td style="width:170px">
+                                        <span class="ui-column-title"> {{l('ReturnonAssets')}}</span>
+                                        {{record.return_on_Assets}}
+                                        </td>
+                                        <td style="width:160px">
+                                            <span class="ui-column-title"> {{l('TimeatBank')}}</span>
+                                            {{record.time_at_Bank}}
+                                        </td>
+                                        <td style="width:170px">
+                                        <span class="ui-column-title"> {{l('Numberofproducts')}}</span>
+                                        {{record.number_of_products}}
+                                        </td>
+                                        <td style="width:170px">
+                                            <span class="ui-column-title"> {{l('PaymentPerformance')}}</span>
+                                            {{record.payment_performance}}
+                                        </td>
+                                        <td style="width:160px">
+                                            <span class="ui-column-title"> {{l('Previousclaims')}}</span>
+                                            {{record.previous_claims}}
+                                            </td>
+                                            <td style="width:150px">
+                                                <span class="ui-column-title"> {{l('GoodBad')}}</span>
+                                                {{record.good_Bad}}
+                                            </td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                        <div class="primeng-no-data" *ngIf="primengTableHelper.totalRecordsCount == 0">
+                            {{l('NoData')}}
+                        </div>
+                        <div class="primeng-paging-container">
+                            <p-paginator [rows]="primengTableHelper.defaultRecordsCountPerPage" #paginator
+                                (onPageChange)="getInputData($event)"
+                                [totalRecords]="primengTableHelper.totalRecordsCount"
+                                [rowsPerPageOptions]="primengTableHelper.predefinedRecordsCountPerPage">
+                            </p-paginator>
+                            <span class="total-records-count">
+                                {{l('TotalRecordsCount', primengTableHelper.totalRecordsCount)}}
+                            </span>
+                        </div>
+                    </div>
+                    <!--<Primeng-Datatable-End>-->
+                </div>
+
+
+            </div>
+        </div>
+        <scoringInputDataEditModal #scoringInputDataEditModal (modalSave)="getInputData()"></scoringInputDataEditModal>
+    <fileUploadModal #fileUploadModal (modalSave)="getInputData()"></fileUploadModal>
+    <scoringOutputModal #scoringOutputModal (modalSave)="getInputData()"></scoringOutputModal>
+    <changeProfilePictureModal #changeProfilePictureModal (modalSave)="getInputData()"></changeProfilePictureModal>
+     </div>
+
+
+</div>

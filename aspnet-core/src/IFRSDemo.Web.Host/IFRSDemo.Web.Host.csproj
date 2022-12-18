@@ -1,0 +1,59 @@
+<Project Sdk="Microsoft.NET.Sdk.Web" ToolsVersion="Current">
+  <Import Project="..\..\common.props">
+  </Import>
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
+    <PreserveCompilationContext>true</PreserveCompilationContext>
+    <AssemblyName>IFRSDemo.Web.Host</AssemblyName>
+    <OutputType>Exe</OutputType>
+    <PackageId>IFRSDemo.Web.Host</PackageId>
+    <UserSecretsId>MyCompanyName-IFRSDemo-894FDFC1-6482-4A56-926A-3C46C9FE0329</UserSecretsId>
+    <RootNamespace>IFRSDemo.Web</RootNamespace>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
+    <FileUpgradeFlags>40</FileUpgradeFlags>
+    <UpgradeBackupLocation>D:\PageIntegration\aspnet-core\Backup\src\IFRSDemo.Web.Host\</UpgradeBackupLocation>
+    <OldToolsVersion>2.0</OldToolsVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="App_Data\**" />
+    <Content Remove="App_Data\**" />
+    <EmbeddedResource Remove="App_Data\**" />
+    <None Remove="App_Data\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Remove="wwwroot\swagger\ui\index.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="wwwroot\Plugins\.gitkeep" />
+    <None Update="Dockerfile">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="log4net.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </None>
+    <None Update="wwwroot\**\*">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\IFRSDemo.Web.Core\IFRSDemo.Web.Core.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Abp.Castle.Log4Net" Version="5.14.0" />
+    <PackageReference Include="AspNetCore.HealthChecks.UI" Version="3.1.1" />
+    <PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="3.1.1" />
+    <PackageReference Include="AspNetCore.HealthChecks.UI.InMemory.Storage" Version="3.1.1" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.8" />
+    <PackageReference Include="Z.EntityFramework.Extensions.EFCore" Version="3.1.15" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="wwwroot\swagger\ui\index.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="wwwroot\Plugins\" />
+  </ItemGroup>
+</Project>

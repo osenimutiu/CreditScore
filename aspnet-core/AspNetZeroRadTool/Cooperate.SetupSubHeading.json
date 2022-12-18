@@ -1,0 +1,59 @@
+{
+  "IsRegenerate": false,
+  "MenuPosition": "main",
+  "RelativeNamespace": "Cooperate",
+  "EntityName": "SetupSubHeading",
+  "EntityNamePlural": "SetupSubHeadings",
+  "TableName": "SetupSubHeadings",
+  "PrimaryKeyType": "int",
+  "BaseClass": "Entity",
+  "EntityHistory": false,
+  "AutoMigration": true,
+  "UpdateDatabase": false,
+  "CreateUserInterface": true,
+  "CreateViewOnly": true,
+  "CreateExcelExport": true,
+  "IsNonModalCRUDPage": true,
+  "IsMasterDetailPage": false,
+  "PagePermission": {
+    "Host": true,
+    "Tenant": true
+  },
+  "Properties": [
+    {
+      "Name": "SubHeading",
+      "Type": "string",
+      "MaxLength": -1,
+      "MinLength": -1,
+      "Range": {
+        "IsRangeSet": false,
+        "MinimumValue": 0.0,
+        "MaximumValue": 0.0
+      },
+      "Required": false,
+      "Nullable": false,
+      "Regex": "",
+      "UserInterface": {
+        "AdvancedFilter": true,
+        "List": true,
+        "CreateOrUpdate": true
+      }
+    }
+  ],
+  "NavigationProperties": [
+    {
+      "Namespace": "IFRSDemo.Cooperate",
+      "ForeignEntityName": "SectionSetup",
+      "IdType": "int",
+      "IsNullable": false,
+      "PropertyName": "SectionSetupId",
+      "DisplayPropertyName": "Section",
+      "DuplicationNumber": 0,
+      "RelationType": "single",
+      "ViewType": "Dropdown"
+    }
+  ],
+  "NavigationPropertyOneToManyTables": [],
+  "EnumDefinitions": [],
+  "DbContext": null
+}

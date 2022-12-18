@@ -1,0 +1,48 @@
+
+<div appBsModal #fileUploadModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" [config]="{backdrop: 'static'}">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <h5 class="modal-title">
+                    <span class="text-center">{{"FileUpload" | localize}}</span>
+                </h5>
+                <button type="button" class="close" [attr.aria-label]="l('Close')" (click)="close()">
+                     <i aria-hidden="true" class="ki ki-close"></i>
+                </button>
+            </div> 
+            <div class="modal-body">
+                <div class="card card-custom gutter-b">
+                    <div class="card-header align-items-center border-0">
+                        <h3 class="card-title align-items-start flex-column">
+                            <span class="font-weight-bolder text-dark">
+                            
+                            </span>
+                        </h3>
+                    </div>
+                    <div class="card-body">
+                        <p-fileUpload multiple="multiple"
+                                      id="DefaultFileUploadFileInput"
+                                      name="DefaultFileUploadFileInput[]"
+                                      [url]="uploadUrl"
+                                      accept=""
+                                      maxFileSize="1000000"
+                                      (onUpload)="onUpload($event)"
+                                      (onBeforeSend)="onBeforeSend($event)">
+                 
+                            <ng-template pTemplate="content">
+                                <ul *ngIf="uploadedFiles.length">
+                                    <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
+                                </ul>
+                            </ng-template>
+                        </p-fileUpload>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light-primary font-weight-bold" (click)="close()" [disabled]="saving">{{"Cancel" | localize}}</button>
+                <button type="submit" class="btn btn-primary font-weight-bold" ><i class="fad fa-wind-turbine"></i><span>{{"Generate Scores" | localize}}</span></button>
+            </div> 
+        </div>
+    </div>
+</div>

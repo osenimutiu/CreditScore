@@ -1,0 +1,69 @@
+
+<div [@routerTransition]>
+  
+    <div class="content d-flex flex-column flex-column-fluid">
+     <sub-header [title]="'Severity' | localize">
+          <div role="actions">
+          <!-- <button (click)="cutoffScoreModal.show()" class="btn btn-outline-success"><i class="fas fa-plus-square"></i> Set CutOff</button> -->
+          <button (click)="reload()" class="btn btn-outline-primary"><i class="fas fa-sync"></i> Refresh</button>
+      </div>
+              </sub-header> 
+      
+      <!-- <div [class]="containerClass"> -->
+      <div [class]="">
+          <div class="card card-custom gutter-b">
+            
+              <div class="card-body">
+                  <form class="form" autocomplete="off">
+                      <div>
+                          <div class="row align-items-center">
+                              <div class="col-xl-12">
+                                 <div class="col-xl-3">
+                                    <div class="form-group m-form__group align-items-center">
+                                        <div class="input-group">
+                                        </div>
+                                        <br>
+                                    </div>
+                                  </div>
+                              </div>
+                          </div>
+                           
+                      </div>
+                  </form>
+                  <!-- <table class="table fl-table table-borderless"> -->
+                  <table class="table table-striped">
+                    <thead class="">
+                        <tr>
+                            <th style="width: 150px; background-color: #e90c0c; color: white;">#</th>
+                            <th style="width: 150px; background-color: #e90c0c; color: white;">CategoryCode</th>
+                            <th style="width: 150px; background-color: #e90c0c; color: white;">Category</th>
+                            <th style="width: 150px; background-color: #e90c0c; color: white;">Description </th>
+                            <th style="width: 150px; background-color: #e90c0c; color: white;">Severity</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let z of severityList | paginate: { itemsPerPage: 10, currentPage: p }; let i = index;">
+                            <td>{{i + 1}}</td>
+                            <td>{{z.category}}</td>
+                            <td>{{z.name}}</td>
+                            <td>{{z.description}}</td>
+                            <td>{{z.severity}}</td>
+                            <!-- <td *ngIf="ret.score >= totalCutOff">{{isEligible}}</td> -->
+                            
+                        </tr>
+                    </tbody>
+                </table> 
+                <div class="row">
+                    <div class="col-md-2">
+                        <!-- <input type="text" class="form-control" value="{{totalCutOff | number : '.0-0'}}" disabled="true" style="width: 150px;"> -->
+                       </div>
+                    <div class="col-md-10"> 
+                        <pagination-controls (pageChange)="p = $event" class="pull-right"></pagination-controls>
+                    </div>
+                </div>
+               
+              </div>
+          </div>
+      </div>
+    </div>
+     </div>

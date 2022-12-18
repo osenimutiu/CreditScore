@@ -1,0 +1,305 @@
+<style>
+ 
+    /* Table Styles */
+    
+    .table-wrapper{
+     margin: 10px 70px 70px;
+     box-shadow: 0px 35px 50px rgba( 0, 0, 0, 0.2 );
+    }
+    
+    .fl-table td, .fl-table th {
+     padding: 8px;
+    }
+    
+    .fl-table thead th:nth-child(odd) {
+     color: #ffffff;
+     background: #324960;
+    }
+    
+    .fl-table tr:nth-child(even) {
+     background: #F8F8F8;
+    }
+    
+    /* Responsive */
+    
+    @media (max-width: 700px) {
+     .fl-table {
+         display: block;
+         width: 70%;
+     }
+     .table-wrapper:before{
+         content: "Scroll horizontally >";
+         display: block;
+         text-align: right;
+         font-size: 11px;
+         color: white;
+         padding: 0 0 10px;
+     }
+     .fl-table thead, .fl-table tbody, .fl-table thead th {
+         display: block;
+     }
+     .fl-table thead th:last-child{
+         border-bottom: none;
+     }
+     .fl-table thead {
+         float: left;
+     }
+     .fl-table tbody {
+         width: auto;
+         position: relative;
+         overflow-x: auto;
+     }
+     .fl-table td, .fl-table th {
+         padding: 20px .625em .625em .625em;
+         height: 60px;
+         vertical-align: middle;
+         box-sizing: border-box;
+         overflow-x: hidden;
+         overflow-y: auto;
+         width: 80px;
+         font-size: 13px;
+         text-overflow: ellipsis;
+     }
+     .fl-table thead th {
+         text-align: left;
+         border-bottom: 1px solid #f7f7f9;
+     }
+     .fl-table tbody tr {
+         display: table-cell;
+     }
+     .fl-table tbody tr:nth-child(odd) {
+         background: none;
+     }
+     .fl-table tr:nth-child(even) {
+         background: transparent;
+     }
+     .fl-table tr td:nth-child(odd) {
+         background: #F8F8F8;
+         border-right: 1px solid #E6E4E4;
+     }
+     .fl-table tr td:nth-child(even) {
+         border-right: 1px solid #E6E4E4;
+     }
+     .fl-table tbody td {
+         display: block;
+         text-align: center;
+     }
+    }
+    </style>
+<div [@routerTransition]>
+
+    <div class="content d-flex flex-column flex-column-fluid">
+        <sub-header [title]="'Digital Lending' | localize" >
+            <div role="actions">
+                <button (click)="reload()" class="btn btn-outline-primary"><i class="fas fa-sync"></i> {{l("Refresh")}}</button>
+            </div>
+        </sub-header>
+
+        <div [class]="containerClass">
+            <div class="card card-custom gutter-b" >
+                 <div class="row" *ngFor="let rec of recommendations" [style.background-color]="getColorDecision(rec.recommendation)" style="color: white; height: 60px; padding-top: 10px; font-size: 20px; font-weight: bold;">
+                        <div class="col-md-4">
+                            <span><b>Recommendation:&nbsp;  </b><b><i class="fa" [style.background-color]="getColorDecision(rec.recommendation)" [ngClass]="{'fa-check-circle': Approved, 'fa-times-circle': Rejected}"></i> {{rec.recommendation}}</b></span>
+                        </div>
+                        <div class="col-md-3"><span><b>Amount: </b> {{rec.amount | currency : '₦'}}</span></div>
+                        <div class="col-md-2"><span><b>Score: </b> {{rec.score}}</span></div>
+                        <div class="col-md-3"><span><b>Rating: </b> {{rec.rating}}</span></div>
+                 </div> 
+                 <br>
+                 <br>
+                 <br>
+                 <br>
+                 <p style="color: #0a4ec4; font-size: 25px; font-weight: bold; padding-left: 25px;">Individual Application</p>
+                 <div class="row"> 
+                     <div class="col-md-6">
+                         <table class="table fl-table">
+                             <tr>
+                                 <th>Unique Id:</th>
+                                 <td>
+                                     {{ind.uniqueId}}
+                                 </td>
+                             </tr>
+                             <tr>
+                                 <th>Source of Incone:</th>
+                                 <td>
+                                     {{ind.srcIncome}}
+                                 </td>
+                             </tr>
+                             <tr>
+                                 <th>Date of Birth:</th>
+                                 <td>
+                                    {{dob}}
+                                 </td>
+                             </tr>
+                             <tr>
+                                <th>Application:</th>
+                                <td>
+                                    {{ind.application}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Requested Amount:</th>
+                                <td>
+                                    {{ind.requestedAmount | currency : '#'}}
+                                </td>
+                            </tr>
+                         </table>
+                     </div>
+                     <div class="col-md-6">
+                        <table class="table fl-table">
+                        <tr>
+                            <th>Loan Purpose:</th>
+                            <td>
+                                {{ind.loanPurpose}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Annual Inflow:</th>
+                            <td>
+                                {{annualInflow | currency : '#'}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Application Date:</th>
+                            <td>
+                                {{myDate}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Duration(months):</th>
+                            <td>
+                                {{ind.duration}}
+                            </td>
+                        </tr>
+                       
+                        <tr>
+                            <td>
+                                <button style="position:relative; left: 350px;" type="button" class="btn btn-primary">Show more Details</button>
+                               </td>
+                        </tr>
+                        </table>
+                     </div>
+                 </div> 
+                 <br>
+                 <br>
+                 <br>
+
+<div class="pricing-box-container">
+	<div class="pricing-box text-center">
+		<h5 style="margin-top: 10px;">Risk Assessement</h5>
+		<p class="price"><sup>₦</sup>50<sub>/m</sub></p>
+		<ul class="features-list" *ngFor="let rk of riskAss">
+			<li style="position: relative; right: 20px;"><i class="fa" [style.color]="getColorRed(red)" [ngClass]="{'fa-times-circle': red}"></i>&nbsp;&nbsp; <strong>{{red}}</strong>&nbsp;Red warning Signals</li>
+			<li style="position: relative; right: 18px;"><i class="fa" [style.color]="getColorYellow(yellow)" [ngClass]="{'fa-exclamation-circle': yellow}"></i>&nbsp;<strong>{{yellow}}</strong>&nbsp;Yellow warning Signals</li>
+			<li><i class="fa" [style.color]="getColorQuality(qualitative)" [ngClass]="{'fa-check-circle': qualitative}"></i>&nbsp;<strong>{{qualitative}}</strong>&nbsp;Qualitative warning Signals</li>
+			<li style="position: relative; right: 18px;"><i class="fa" [style.color]="getColorPerformance(performance)" [ngClass]="{'fa-check-circle': performance}"></i>&nbsp;<strong>{{performance}}</strong>&nbsp; Performance Model</li>
+		</ul>
+		<button class="btn-primary">Get Started</button>
+	</div>
+
+	<div class="pricing-box pricing-box-bg-image text-center">
+		<h5 style="margin-top: 10px;">Bank Account</h5>
+		<p class="price"><sup>₦</sup>50<sub>/m</sub></p>
+		<ul class="features-list" *ngFor="let bk of bAccs">
+			<li><strong>Average Monthly Inflow</strong> : {{bk.avgMonInflow | currency: '₦'}}</li>
+			<li style="position: relative; right: 45px;"><strong>Inflow Growth Rate(%)</strong> : {{bk.inflowGrowthRate}}</li>
+			<li style="position: relative; right: 20px;"><strong>Yearly Repayments</strong> : {{bk.yearlyRepayments | currency: '₦'}}</li>
+			<li style="position: relative; right: 20px;"><strong>Credit Line Amount</strong> : {{bk.creditLineAmount | currency: '₦'}}</li>
+		</ul>
+		<button class="btn-primary">Get Started</button>
+	</div>
+
+	<div class="pricing-box text-center">
+		<h5 style="margin-top: 10px;">Credit Line Condition</h5>
+		<p class="price"><sup>₦</sup>50<sub>/m</sub></p>
+		<ul class="features-list" *ngFor="let cr of crdLines">
+			<li style="position: relative; right: 33px;"><strong>Loan Duration(month)</strong> : {{cr.loanDuration}}</li>
+			<li style="position: relative; right: 16px;"><strong>Commitment Period(month)</strong> : {{cr.commitmentPeriod}}</li>
+			<li style="position: relative; right: 7px;"><strong>Repayment Frequency(month)</strong> : {{cr.repaymentFrequency}}</li>
+			<li style="position: relative; right: 75px;"><strong>Scoring</strong> : {{cr.scoring}}</li>
+		</ul>
+		<button class="btn-primary">Get Started</button>
+	</div>
+
+    <div class="pricing-box pricing-box-bg-image text-center">
+		<h5 style="margin-top: 10px;">Credit Line Condition Con't</h5>
+		<p class="price"><sup>₦</sup>50<sub>/m</sub></p>
+		<ul class="features-list" *ngFor="let cr of crdLines">
+			<li style="position: relative; right: 30px;"><strong>CL Amount</strong> : {{cr.clAmount | currency: '₦'}}</li>
+			<li style="position: relative; right: 52px;"><strong>InterestRate(%)</strong> : {{cr.interestRate}}</li>
+			<li style="position: relative; right: 63px;"><strong>Fee</strong> : {{cr.fee | currency: '₦'}}</li>
+			<li style="position: relative; right: 50px;"><strong>OverrideTerms</strong> : {{cr.overrideTerms}}</li>
+		</ul>
+		<button class="btn-primary">Get Started</button>
+	</div>
+</div>
+
+<!-- <footer>
+	<p>
+		Created with <i class="fa fa-heart"></i> by 
+		<a target="_blank" href="https://florin-pop.com">Florin Pop</a>
+		- Read about how I created it
+		<a target="_blank" href="https://www.florin-pop.com/blog/2019/02/how-to-create-pricing-plans/">in this article</a><br />
+		Other projects on
+		<a target="_blank" href="https://github.com/florinpop17/work-journal/">Github</a>
+	</p>
+</footer> -->
+                 <!-- <div class="row">
+                     <div class="col-md-4">
+                        <div *ngFor="let rk of riskAss">
+                            <div class="">
+                                <p style="font-size: 18px;">
+                                    <i class="fa" [style.color]="getColorRed(red)" [ngClass]="{'fa-times-circle': red}"></i>&nbsp; <span>{{red}}</span> <br>
+                                    <span style="font-weight: bold;">Red warning Signals</span>
+                                </p>
+                                <p style="font-size: 18px; ">
+                                    <i class="fa" [style.color]="getColorYellow(yellow)" [ngClass]="{'fa-exclamation-circle': yellow}"></i>&nbsp; <span>{{yellow}}</span> <br>
+                                    <span style="font-weight: bold;">Yellow warning Signals</span>
+                                </p>
+                                <p style="font-size: 18px; ">
+                                    <i class="fa" [style.color]="getColorQuality(qualitative)" [ngClass]="{'fa-check': qualitative}"></i>&nbsp; <span>{{qualitative}}</span> <br>
+                                    <span style="font-weight: bold;">Qualitative warning Signals</span>
+                                </p>
+                            </div>
+                            <div class="">
+                                <p style="font-size: 18px;">
+                                    <i class="fa" [style.color]="getColorPerformance(performance)" [ngClass]="{'fa-check-circle': performance}"></i>&nbsp; <span>{{performance}}</span> <br>
+                                    <span style="font-weight: bold;">Performance Model</span>
+                                </p>
+                            </div>
+                        </div>
+                     </div>
+                     <div class="col-md-4">
+                        <div *ngFor="let bk of bAccs">
+                            <div class="">
+                                <ul style="font-size: 18px; list-style: circle;">
+                                    <li><span style="font-weight: bold;">Average Monthly Inflow</span>: {{bk.avgMonInflow | currency: '₦'}}</li>
+                                    <li><span style="font-weight: bold;">Inflow Growth Rate(%)</span>: {{bk.inflowGrowthRate}}</li>
+                                    <li><span style="font-weight: bold;">Yearly Repayments</span>: {{bk.yearlyRepayments | currency: '₦'}}</li>
+                                    <li><span style="font-weight: bold;">Credit Line Amount</span>: {{bk.creditLineAmount | currency: '₦'}}</li>
+                                </ul>
+                            </div>
+                          </div>
+                     </div>  
+                     <div class="col-md-4">
+                        <div *ngFor="let cr of crdLines">
+                            <div class="">
+                                <ul style="font-size: 18px; list-style: circle;">
+                                    <li><span style="font-weight: bold;">Loan Duration(month)</span>: {{cr.loanDuration}}</li>
+                                    <li><span style="font-weight: bold;">Commitment Period(month)</span>: {{cr.commitmentPeriod}}</li>
+                                    <li><span style="font-weight: bold;">Repayment Frequency(month)</span>: {{cr.repaymentFrequency}}</li>
+                                    <li><span style="font-weight: bold;">Scoring</span>: {{cr.scoring}}</li>
+                                    <li><span style="font-weight: bold;">CL Amount</span>: {{cr.clAmount | currency: '₦'}}</li>
+                                    <li><span style="font-weight: bold;">InterestRate(%)</span>: {{cr.interestRate}}</li>
+                                    <li><span style="font-weight: bold;">Fee</span>: {{cr.fee | currency: '₦'}}</li>
+                                    <li><span style="font-weight: bold;">OverrideTerms</span>: {{cr.overrideTerms}}</li>
+                                </ul>
+                            </div>
+                     </div>  
+                 </div>
+            </div> -->
+        </div>
+
+    </div>
+    
+</div>

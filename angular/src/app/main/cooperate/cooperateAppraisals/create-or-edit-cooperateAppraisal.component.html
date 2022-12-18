@@ -1,0 +1,68 @@
+﻿<div [@routerTransition]>
+  
+  <div class="content d-flex flex-column flex-column-fluid">
+  <sub-header [title]="('CooperateAppraisals' | localize) +' '+ ('Details' | localize)" [breadcrumbs]="breadcrumbs">
+            </sub-header>
+            
+    
+    <div [class]="containerClass">
+        <div class="card card-custom gutter-b">
+            <div class="card-body">              
+                
+					<div class="form-group m-form__group">
+                        <label for="SetupQualitativeQualitative">{{l("SetupQualitative")}}</label>
+                        <div class="input-group">
+                            <input class="form-control" id="SetupQualitativeQualitative" name="setupQualitativeQualitative" [(ngModel)]="setupQualitativeQualitative" type="text" disabled>     
+                            <div class="input-group-append">
+                                <button class="btn btn-primary blue" (click)="openSelectSetupQualitativeModal()" type="button"><i class="fa fa-search"></i> {{l("Pick")}}</button>
+                            </div> <div class="input-group-prepend">
+                                <button class="btn btn-danger btn-icon" type="button" (click)="setSetupQualitativeIdNull()"><i class="fa fa-times"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <input class="form-control" name="cooperateAppraisal.setupQualitativeId" [(ngModel)]="cooperateAppraisal.setupQualitativeId" type="text" required hidden>
+		 
+                
+								<div class="form-group">
+									<label for="CooperateAppraisal_CompanyName">{{l("CompanyName")}}</label>
+									<input type="text" #CooperateAppraisal_CompanyName="ngModel" id="CooperateAppraisal_CompanyName" class="form-control" [(ngModel)]="cooperateAppraisal.companyName" name="CompanyName"    />
+								    <validation-messages [formCtrl]="CooperateAppraisal_CompanyName"></validation-messages>
+								</div>
+					
+								<div class="form-group">
+									<label for="CooperateAppraisal_RCNumber">{{l("RCNumber")}}</label>
+									<input type="text" #CooperateAppraisal_RCNumber="ngModel" id="CooperateAppraisal_RCNumber" class="form-control" [(ngModel)]="cooperateAppraisal.rcNumber" name="RCNumber"    />
+								    <validation-messages [formCtrl]="CooperateAppraisal_RCNumber"></validation-messages>
+								</div>
+					
+								<div class="form-group">
+									<label for="CooperateAppraisal_AccountNumber">{{l("AccountNumber")}}</label>
+									<input type="text" #CooperateAppraisal_AccountNumber="ngModel" id="CooperateAppraisal_AccountNumber" class="form-control" [(ngModel)]="cooperateAppraisal.accountNumber" name="AccountNumber"    />
+								    <validation-messages [formCtrl]="CooperateAppraisal_AccountNumber"></validation-messages>
+								</div>
+					
+								<div class="form-group">
+									<label for="CooperateAppraisal_Score">{{l("Score")}}</label>
+									<input type="number" #CooperateAppraisal_Score="ngModel" id="CooperateAppraisal_Score" class="form-control" [(ngModel)]="cooperateAppraisal.score" name="Score"  />
+								    <validation-messages [formCtrl]="CooperateAppraisal_Score"></validation-messages>
+								</div>
+					
+            </div>
+              <div class="card-footer">
+				<div class="col-lg-12">
+					<button (click)="save()" class="btn btn-primary blue float-right"
+                        [buttonBusy]="saving" [busyText]="l('SavingWithThreeDot')"><i class="fa fa-save"></i> 
+                        <span>{{l("Save")}}</span>
+                    </button>
+                    <button *ngIf="!this.cooperateAppraisal.id" (click)="saveAndNew()" class="btn btn-primary blue float-right"
+                        [buttonBusy]="saving" [busyText]="l('SavingWithThreeDot')"><i class="fa fa-save"></i> 
+                        <span>{{l("SaveAndNew")}}</span>
+                    </button>
+				</div>
+		    </div>
+        </div>
+    </div>
+  </div>
+  <cooperateAppraisalSetupQualitativeLookupTableModal #cooperateAppraisalSetupQualitativeLookupTableModal (modalSave)="getNewSetupQualitativeId()"></cooperateAppraisalSetupQualitativeLookupTableModal>
+		 
+</div>

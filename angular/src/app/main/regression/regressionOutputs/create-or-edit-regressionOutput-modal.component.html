@@ -1,0 +1,58 @@
+﻿<div bsModal #createOrEditModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="createOrEditModal" aria-hidden="true" [config]="{backdrop: 'static'}">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <form *ngIf="active" #regressionOutputForm="ngForm" novalidate (ngSubmit)="save()" autocomplete="off">
+                <div class="modal-header">
+                    <h4 class="modal-title">
+                        <span *ngIf="regressionOutput.id">{{l("EditRegressionOutput")}}</span>
+                        <span *ngIf="!regressionOutput.id">{{l("CreateNewRegressionOutput")}}</span>
+                    </h4>
+                    <button type="button" class="close" (click)="close()" aria-label="Close" [disabled]="saving">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                 
+
+
+								<div class="form-group">
+									<label for="RegressionOutput_ParamName">{{l("ParamName")}} *</label>
+									<input type="text" #RegressionOutput_ParamName="ngModel" id="RegressionOutput_ParamName" class="form-control" [(ngModel)]="regressionOutput.paramName" name="ParamName"     required/>
+								    <validation-messages [formCtrl]="RegressionOutput_ParamName"></validation-messages>
+								</div>
+					
+								<div class="form-group">
+									<label for="RegressionOutput_Coeff_Estimate">{{l("Coeff_Estimate")}}</label>
+									<input type="number" #RegressionOutput_Coeff_Estimate="ngModel" id="RegressionOutput_Coeff_Estimate" class="form-control" [(ngModel)]="regressionOutput.coeff_Estimate" name="Coeff_Estimate"   />
+									<validation-messages [formCtrl]="RegressionOutput_Coeff_Estimate"></validation-messages>
+								</div>
+					
+								<div class="form-group">
+									<label for="RegressionOutput_Std_Error">{{l("Std_Error")}}</label>
+									<input type="number" #RegressionOutput_Std_Error="ngModel" id="RegressionOutput_Std_Error" class="form-control" [(ngModel)]="regressionOutput.std_Error" name="Std_Error"   />
+									<validation-messages [formCtrl]="RegressionOutput_Std_Error"></validation-messages>
+								</div>
+					
+								<div class="form-group">
+									<label for="RegressionOutput_t_value">{{l("t_value")}}</label>
+									<input type="number" #RegressionOutput_t_value="ngModel" id="RegressionOutput_t_value" class="form-control" [(ngModel)]="regressionOutput.t_value" name="t_value"   />
+									<validation-messages [formCtrl]="RegressionOutput_t_value"></validation-messages>
+								</div>
+					
+								<div class="form-group">
+									<label for="RegressionOutput_p_value">{{l("p_value")}}</label>
+									<input type="number" #RegressionOutput_p_value="ngModel" id="RegressionOutput_p_value" class="form-control" [(ngModel)]="regressionOutput.p_value" name="p_value"   />
+									<validation-messages [formCtrl]="RegressionOutput_p_value"></validation-messages>
+								</div>
+					
+
+                </div>
+                <div class="modal-footer">
+                    <button [disabled]="saving" type="button" class="btn btn-default" (click)="close()">{{l("Cancel")}}</button>
+                    <button type="submit" class="btn btn-primary blue" [disabled]="!regressionOutputForm.form.valid" [buttonBusy]="saving" [busyText]="l('SavingWithThreeDot')"><i class="fa fa-save"></i> <span>{{l("Save")}}</span></button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>

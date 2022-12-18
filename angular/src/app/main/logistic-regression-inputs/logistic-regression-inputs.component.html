@@ -1,0 +1,60 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-8" style="background: white;">
+            <p style="padding-top: 20px;">Training and Testing:</p>
+            
+            <select #myInput [(ngModel)]="training_Test" class="form-control" (ngModelChange)='onTraining_TestSelected($event)'>
+              <option value="">All</option>
+              <option value="1">True</option>
+              <option value="0">False</option>
+              <span>{{modifiedText}}</span>
+            </select>
+            <br>
+            <br>
+            <br>
+            
+              
+        <table class="table table-borderless">
+            <thead class="table-dark">
+                <tr>
+                    <th>Location</th>
+                    <th>Rent bin</th>
+                    <th>Rent to Income bin</th>
+                    <th>Return on Assets bin</th>
+                    <th>Total assets bin</th>
+                    <th>Good Bad</th>
+                    <th>Training Test</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let reg of regressions | paginate: { itemsPerPage: 5, currentPage: p }">
+                    <td>{{reg.location}}</td>
+                    <td>{{reg.rent_bin}}</td>
+                    <td>{{reg.rent_to_Income_bin}}</td>
+                    <td>{{reg.return_on_Assets_bin}}</td>
+                    <td>{{reg.total_assets_bin}}</td>
+                    <td>{{reg.good_Bad}}</td>
+                    <td>{{reg.training_Test}}</td>
+                    
+                </tr>
+            </tbody>
+        </table>
+        <pagination-controls (pageChange)="p = $event" class="pull-right"></pagination-controls>
+        <!-- <div>80 Count : {{progressCount}}</div><div>20 Count : {{completedCount}}</div> -->
+        <br>
+        <p>
+            <b> For 80 : 20 Count:</b> <br>
+            <b>Total rows: {{ getRowsValue(null) }}</b> <br>
+            80: {{ getRowsValue(80) }} <br>
+            20 : {{ getRowsValue(20) }}
+         </p>
+
+        <p>
+            <b>For Good_Bad Count:</b> <br>
+            <b>Total rows: {{ getRowsValueForGood_Bad(null) }}</b> <br>
+            True: {{ getRowsValueForGood_Bad(true) }} <br>
+            False : {{ getRowsValueForGood_Bad(false) }}
+         </p>
+    </div>
+    </div>
+</div>

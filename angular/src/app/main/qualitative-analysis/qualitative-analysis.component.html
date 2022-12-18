@@ -1,0 +1,242 @@
+<style>
+ 
+    /* Table Styles */
+    
+    .table-wrapper{
+     margin: 10px 70px 70px;
+     box-shadow: 0px 35px 50px rgba( 0, 0, 0, 0.2 );
+    }
+    
+    .fl-table td, .fl-table th {
+     text-align: center;
+     padding: 8px;
+    }
+    
+    .fl-table thead th:nth-child(odd) {
+     color: #ffffff;
+     background: #324960;
+    }
+    
+    .fl-table tr:nth-child(even) {
+     background: #F8F8F8;
+    }
+    
+    /* Responsive */
+    
+    @media (max-width: 767px) {
+     .fl-table {
+         display: block;
+         width: 100%;
+     }
+     .table-wrapper:before{
+         content: "Scroll horizontally >";
+         display: block;
+         text-align: right;
+         font-size: 11px;
+         color: white;
+         padding: 0 0 10px;
+     }
+     .fl-table thead, .fl-table tbody, .fl-table thead th {
+         display: block;
+     }
+     .fl-table thead th:last-child{
+         border-bottom: none;
+     }
+     .fl-table thead {
+         float: left;
+     }
+     .fl-table tbody {
+         width: auto;
+         position: relative;
+         overflow-x: auto;
+     }
+     .fl-table td, .fl-table th {
+         padding: 20px .625em .625em .625em;
+         height: 60px;
+         vertical-align: middle;
+         box-sizing: border-box;
+         overflow-x: hidden;
+         overflow-y: auto;
+         width: 120px;
+         font-size: 13px;
+         text-overflow: ellipsis;
+     }
+     .fl-table thead th {
+         text-align: left;
+         border-bottom: 1px solid #f7f7f9;
+     }
+     .fl-table tbody tr {
+         display: table-cell;
+     }
+     .fl-table tbody tr:nth-child(odd) {
+         background: none;
+     }
+     .fl-table tr:nth-child(even) {
+         background: transparent;
+     }
+     .fl-table tr td:nth-child(odd) {
+         background: #F8F8F8;
+         border-right: 1px solid #E6E4E4;
+     }
+     .fl-table tr td:nth-child(even) {
+         border-right: 1px solid #E6E4E4;
+     }
+     .fl-table tbody td {
+         display: block;
+         text-align: center;
+     }
+    }
+    </style>
+<div [@routerTransition]>
+  
+    <div class="content d-flex flex-column flex-column-fluid">
+     <sub-header [title]="'QUALITATIVE ANALYSIS' | localize">
+          <div role="actions">
+           <button (click)="eligibilityStatus()" class="btn btn-secondary" *ngIf="permission.isGranted('Pages.QualitativeAnalysis.Tenant.PostQualitativeAnalysis')"><i class="fas fa-check"></i> {{l("Status")}}</button>
+           <button (click)="cutoffModal.show()" class="btn btn-outline-primary" *ngIf="permission.isGranted('Pages.QualitativeAnalysis.Tenant.PostQualitativeAnalysis')"><i class="fas fa-cog"></i> {{l("Set Cutoff")}}</button>
+           <button (click)="analyModal.show()" class="btn btn-outline-success" *ngIf="permission.isGranted('Pages.QualitativeAnalysis.Tenant.PostQualitativeAnalysis')"><i class="fas fa-plus-square"></i> {{l("Create")}}</button>
+           <button (click)="reload()" class="btn btn-outline-primary"><i class="fas fa-sync"></i> {{l("Refresh")}}</button>
+      </div>
+              </sub-header> 
+      
+      <div [class]="containerClass">
+          <div class="card card-custom gutter-b">
+              <div class="card-body">
+                  <form class="form" autocomplete="off">
+                      <div>
+                          <div class="row align-items-center">
+                              <div class="col-xl-12">
+                                 <div class="col-xl-3">
+                                    <div class="form-group m-form__group align-items-center">
+                                        <div class="input-group">
+                                          
+                                        </div>
+                                        <br>
+                                    </div>
+                                  </div>
+                                  <div class="col-xl-9">
+                                    <div class="card card-custom gutter-b" style="position: relative; left: 500px;">
+                                          </div>
+                                  </div>
+                              </div>
+                          </div>
+                           
+                      </div>
+                  </form>
+                  <div class="row">
+                      <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-10">
+                            <table class="table fl-table table-borderless" *ngIf='!eligibilityCheck'>
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th style=" background-color: #e90c0c; color: white;">#</th>
+                                        <th style=" background-color: #e90c0c; color: white;">ATTRIBUTES</th>
+                                        <th style=" background-color: #e90c0c; color: white;">WEIGHT</th>
+                                        <th style=" background-color: #e90c0c; color: white;">PERCENTAGE</th>
+                                        <th style=" background-color: #e90c0c; color: white;">MAXSCORE</th>
+                                        <th style=" background-color: #e90c0c; color: white;">VALUE</th>
+                                        <th style=" background-color: #e90c0c; color: white;">ATTRIBUTE SCORE</th>
+                                        <th style=" background-color: #e90c0c; color: white;">WEIGHTED ATTRIBUTE</th>
+                                        <th style=" background-color: #e90c0c; color: white;">ACTION</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let score of qualitatives | paginate: { itemsPerPage: 10, currentPage: p }; let i = index;">
+                                        <td>{{i + 1}}</td>
+                                        <td>{{score.attribute}}</td>
+                                        <td>{{score.weight}}</td>
+                                        <td>{{score.percentage}}</td>
+                                        <td>{{score.maxScore}}</td>
+                                        <td>{{score.value}}</td>
+                                        <td>{{score.attributeScore}}</td>
+                                        <td>{{score.weightedAttribute}}</td>
+                                        <td>
+                                            <button class="btn btn-primary" (click)="delete(score)"><i class="fas fa-trash-alt"></i></button>
+                                        </td>
+                                    </tr> 
+                                </tbody>
+                                <tfoot  class="table-dark">
+                                    <tr>
+                                        <th style=" background-color: #e90c0c; color: white;"></th>
+                                        <th style=" background-color: #e90c0c; color: white;">Sum</th>
+                                        <th style=" background-color: #e90c0c; color: white;">{{overallWeight}}</th>
+                                        <th style=" background-color: #e90c0c; color: white;"></th>
+                                        <th style=" background-color: #e90c0c; color: white;">{{totalMaxScore}}</th>
+                                        <th style=" background-color: #e90c0c; color: white;"></th>
+                                        <th style=" background-color: #e90c0c; color: white;">{{totalAttributeScore }}</th>
+                                        <th style=" background-color: #e90c0c; color: white;">{{totalWeighted | number : '.0-0'}}</th>
+                                        <th style=" background-color: #e90c0c; color: white;"></th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <!-- Total Score:
+                                    <input type="text" class="form-control" value="{{totalWeighted | number : '.0-0'}}" disabled="true" style="width: 150px;"> -->
+                                   </div>
+                                <div class="col-md-10"> 
+                                    <pagination-controls (pageChange)="p = $event" class="pull-right"></pagination-controls>
+                                </div>
+                            </div>
+                          
+                          <!-- </div> -->
+                          <br>
+                          <br>
+                          <br>
+    
+                          <!-- <div class="card" style="width: 30rem; margin-left: 12em;">
+                              <div class="card-header" style="background: #0b0fe6;">
+                                  <span style="font-weight: bold; color: white; position: relative; left: 100px; font-size: 25px;">Report</span>
+                                  <ul class="list-group list-group-flush">
+                                      <li class="list-group-item" style="font-weight: bold;">Cutt-Off:&nbsp; <span
+                                              style="color: #128a38;">{{totalCutOff}}</span> </li>
+                                      <li class="list-group-item" style="font-weight: bold;">Total Score:&nbsp; {{totalWeighted | number :
+                                          '.0-0'}}</li>
+                                      <li class="list-group-item" style="font-weight: bold;"> Decision: &nbsp;
+                                          <span [style.color]="getColorDecision(decision)">{{decision}}</span>
+                                      </li>
+                                  </ul>
+                              </div>
+                          </div> -->
+                          </div>
+                          <div class="col-md-2" style="position: relative;" >
+                            <div class="card" style="width: 18rem; border: 2px solid #e90c0c;" *ngIf='eligibilityCheck'>
+                                <div class="card-header" style="background-color: #e90c0c; color: white; font-weight: bold;">
+                                  Report
+                                </div>
+                                <ul class="list-group list-group-flush" style="font-weight: bold;">
+                                  <li class="list-group-item">Cutt-Off: &nbsp;{{totalCutOff}}</li>
+                                  <li class="list-group-item">Total Score:&nbsp; {{totalWeighted | number : '.0-0'}}</li>
+                                  <li class="list-group-item">Decision: &nbsp;
+                                    <span [style.color]="getColorDecision(decision)">{{decision}}</span></li>
+                                    <li>
+                                        
+                                    </li>
+                                </ul>
+                                <button class="btn btn-secondary" (click)="cancelEligibility()">Close</button>
+                              </div>
+                          </div>
+                      </div>
+                      </div>
+                      <div class="col-md-6" style="padding: 10px;" *ngIf='!eligibilityCheck'>
+                        <h3 class="text-center">{{chartTile}}</h3>
+                        <div class="row">
+                          <div id ="viewPercCount"  style="margin-left: 2px;">
+                                  <div class="chart-container" style="position: relative; height:40vh; width:40vw">    
+                                      <canvas id="chart">{{ barchart }}</canvas>    
+                                 </div>
+                          </div>  
+                        </div>
+                      </div>  
+                  </div>
+                      
+                      
+              
+          </div>
+      </div>
+    </div>
+    <analyModal #analyModal (modalSave)="getAnalysis()"></analyModal>
+    <cutoffModal #cutoffModal (modalSave)="getCuOff()"></cutoffModal>
+  </div>
+

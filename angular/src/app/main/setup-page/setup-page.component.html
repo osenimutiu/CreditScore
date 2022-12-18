@@ -1,0 +1,138 @@
+
+
+        <div [@routerTransition]>
+  
+          <div class="content d-flex flex-column flex-column-fluid">
+           <sub-header [title]="'Setup' | localize">
+                <div role="actions">
+                <button (click)="reload()" class="btn btn-outline-danger"><i class="fas fa-sync"></i> Refresh</button>
+            </div>
+                    </sub-header> 
+
+
+
+        <!-- <div [class]="containerClass + ' kt-grid__item kt-grid__item--fluid '">
+            <div class="kt-portlet">
+                <div class="kt-portlet__body">
+
+                    <div class="kt-form">
+                        <div [class]="containerClass + ' kt-grid__item kt-grid__item--fluid'">
+                            <div class="kt-portlet kt-portlet--mobile">
+                                <div class="kt-portlet__body">
+                                    <form #pForm="ngForm" novalidate (ngSubmit)="save()">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="small mb-1" for="creditScoreWeight">{{ "Credit Score Weight" | localize}}</label>
+                                                    <input type="number"  name="creditScoreWeight" required class="form-control rounded" [(ngModel)]="setUp.creditScoreWeight" (click)="updateQualAnalysis()" (input)="updateQualAnalysis()">
+                                                
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="small mb-1" for="qualitativeAnalysisWeight">{{"Qualitative Analysis Weight" | localize}}</label>
+                                                    <input type="number"  name="qualitativeAnalysisWeight" required class="form-control rounded" [(ngModel)]="setUp.qualitativeAnalysisWeight" (click)="updatecreditScoreWeight()" (input)="updatecreditScoreWeight()">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <button type="submit" class="btn btn-primary rounded" [disabled]="!pForm.form.valid" [buttonBusy]="saving" [busyText]="l('SavingWithThreeDot')"><i
+                                                    class="fa fa-save"></i>
+                                                <span>{{"Save" | localize}}</span></button>
+                                            </div>
+                                            <div class="col-md-6">
+
+                                            </div>
+                                        </div>
+
+                                    </form>
+
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div> -->
+        <div class="login-root">
+            <div class="box-root flex-flex flex-direction--column" style="min-height: 100vh;flex-grow: 1;">
+              <div class="loginbackground box-background--white padding-top--64">
+                <div class="loginbackground-gridContainer">
+                  <div class="box-root flex-flex" style="grid-area: top / start / 8 / end;">
+                    <div class="box-root" style="background-image: linear-gradient(white 0%, rgb(247, 250, 252) 33%); flex-grow: 1;">
+                    </div>
+                  </div>
+                  <div class="box-root flex-flex" style="grid-area: 4 / 2 / auto / 5;">
+                    <div class="box-root box-divider--light-all-2 animationLeftRight tans3s" style="flex-grow: 1;"></div>
+                  </div>
+                  <div class="box-root flex-flex" style="grid-area: 6 / start / auto / 2;">
+                    <div class="box-root box-background--blue800" style="flex-grow: 1;"></div>
+                  </div>
+                  <div class="box-root flex-flex" style="grid-area: 7 / start / auto / 4;">
+                    <div class="box-root box-background--blue animationLeftRight" style="flex-grow: 1;"></div>
+                  </div>
+                  <div class="box-root flex-flex" style="grid-area: 8 / 4 / auto / 6;">
+                    <div class="box-root box-background--gray100 animationLeftRight tans3s" style="flex-grow: 1;"></div>
+                  </div>
+                  <div class="box-root flex-flex" style="grid-area: 2 / 15 / auto / end;">
+                    <div class="box-root box-background--cyan200 animationRightLeft tans4s" style="flex-grow: 1;"></div>
+                  </div>
+                  <div class="box-root flex-flex" style="grid-area: 3 / 14 / auto / end;">
+                    <div class="box-root box-background--blue animationRightLeft" style="flex-grow: 1;"></div>
+                  </div>
+                  <div class="box-root flex-flex" style="grid-area: 4 / 17 / auto / 20;">
+                    <div class="box-root box-background--gray100 animationRightLeft tans4s" style="flex-grow: 1;"></div>
+                  </div>
+                  <div class="box-root flex-flex" style="grid-area: 5 / 14 / auto / 17;">
+                    <div class="box-root box-divider--light-all-2 animationRightLeft tans3s" style="flex-grow: 1;"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="box-root padding-top--24 flex-flex flex-direction--column" style="flex-grow: 1; z-index: 9;">
+                <div class="box-root padding-top--48 padding-bottom--24 flex-flex flex-justifyContent--center">
+                  <!-- <h1><a href="http://blog.stackfindover.com/" rel="dofollow">Setup</a></h1> -->
+                </div>
+                <div class="formbg-outer">
+                  <div class="formbg">
+                    <div class="formbg-inner padding-horizontal--48">
+                      <form id="stripe-login" #pForm="ngForm" novalidate (ngSubmit)="save()">
+                        <div class="field padding-bottom--24">
+                          <label for="creditScoreWeight">Credit Score Weight</label>
+                          <input type="number" name="creditScoreWeight" [(ngModel)]="setUp.creditScoreWeight" (click)="updateQualAnalysis()" (input)="updateQualAnalysis()" required>
+                        </div>
+                        <div class="field padding-bottom--24">
+                          <div class="grid--50-50">
+                            <label for="qualitativeAnalysisWeight">Qualitative Analysis Weight</label>
+                            <div class="reset-pass">
+                            </div>
+                          </div>
+                          <input type="number" name="qualitativeAnalysisWeight" [(ngModel)]="setUp.qualitativeAnalysisWeight" (click)="updatecreditScoreWeight()" (input)="updatecreditScoreWeight()" required>
+                        </div>
+                        <div class="field field-checkbox padding-bottom--24 flex-flex align-center">
+                          <label for="checkbox">
+                          </label>
+                        </div>
+                        <div class="field padding-bottom--24">
+                          <input type="submit" name="submit" value="Finish" [disabled]="!pForm.form.valid" [buttonBusy]="saving" [busyText]="l('SavingWithThreeDot')">
+                        </div>
+                        <div class="field">
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                  <div class="footer-link padding-top--24">
+                    <div class="listing padding-top--24 padding-bottom--24 flex-flex center-center">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+    </div>
+
+</div>

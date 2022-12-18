@@ -1,0 +1,185 @@
+<style>
+ 
+    /* Table Styles */
+    
+    .table-wrapper{
+     margin: 10px 70px 70px;
+     box-shadow: 0px 35px 50px rgba( 0, 0, 0, 0.2 );
+    }
+    
+    .fl-table td, .fl-table th {
+     padding: 8px;
+    }
+    
+    .fl-table thead th:nth-child(odd) {
+     color: #ffffff;
+     background: #324960;
+    }
+    
+    .fl-table tr:nth-child(even) {
+     background: #F8F8F8;
+    }
+    
+    /* Responsive */
+    
+    @media (max-width: 767px) {
+     .fl-table {
+         display: block;
+         width: 100%;
+     }
+     .table-wrapper:before{
+         content: "Scroll horizontally >";
+         display: block;
+         text-align: right;
+         font-size: 11px;
+         color: white;
+         padding: 0 0 10px;
+     }
+     .fl-table thead, .fl-table tbody, .fl-table thead th {
+         display: block;
+     }
+     .fl-table thead th:last-child{
+         border-bottom: none;
+     }
+     .fl-table thead {
+         float: left;
+     }
+     .fl-table tbody {
+         width: auto;
+         position: relative;
+         overflow-x: auto;
+     }
+     .fl-table td, .fl-table th {
+         padding: 20px .625em .625em .625em;
+         height: 60px;
+         vertical-align: middle;
+         box-sizing: border-box;
+         overflow-x: hidden;
+         overflow-y: auto;
+         font-size: 13px;
+         text-overflow: ellipsis;
+     }
+     .fl-table thead th {
+         text-align: left;
+         border-bottom: 1px solid #f7f7f9;
+     }
+     .fl-table tbody tr {
+         display: table-cell;
+     }
+     .fl-table tbody tr:nth-child(odd) {
+         background: none;
+     }
+     .fl-table tr:nth-child(even) {
+         background: transparent;
+     }
+     .fl-table tr td:nth-child(odd) {
+         background: #F8F8F8;
+         border-right: 1px solid #E6E4E4;
+     }
+     .fl-table tr td:nth-child(even) {
+         border-right: 1px solid #E6E4E4;
+     }
+     .fl-table tbody td {
+         display: block;
+         text-align: center;
+     }
+    }
+    </style>
+<div [@routerTransition]>
+    <div class="content d-flex flex-column flex-column-fluid">
+     <sub-header [title]="'SCALING OUTPUT' | localize">
+          <div role="actions">
+           <button (click)="reload()" class="btn btn-outline-primary"><i class="fas fa-sync"></i> {{l("Refresh")}}</button>
+      </div>
+              </sub-header> 
+      <div [class]="containerClass">
+          <div class="card card-custom gutter-b">
+            
+              <div class="card-body">
+                  <form class="form" autocomplete="off">
+                      <div>
+                          <div class="row align-items-center">
+                              <div class="col-xl-12">
+                                  <!-- <span class="alert-success">{{significantResponse}}</span> <span class="alert-danger">{{inSignificantResponse}}</span> -->
+                                  <div class="col-xl-3">
+                                    <div class="form-group m-form__group align-items-center">
+                                        <div class="input-group">
+                                          <select #myInput [(ngModel)]="characteristicBin" name="characteristicBin" class="form-control" (ngModelChange)='onCharacteristicBinSelected($event)' style="width: 100px;">
+                                              <option value="undefined">All</option>
+                                              <option *ngFor="let y of listDistinct" [value]=y>{{y}}</option>
+                                            </select>
+                                        </div>
+                                        <br>
+                                        <!-- <span class="alert-success">{{modifiedText}}</span> -->
+                                    </div>
+                                  </div>
+                                  <!-- <div class="col-xl-5"></div> -->
+
+                                  <div class="">
+                                    <div *ngIf="isActive" class="card card-custom gutter-b">
+                                        <!-- <div class="card" style="width: 30rem; border-radius: 20px; box-shadow: 4px 4px 2px 2px #888888;"> -->
+                                        <div class="card">
+                                            <div class="card-header" >
+                                               <span style="font-weight: bold; color: black; position: left ; left: 100px; font-size: 25px;">SCORECARD</span> 
+                                                <ul class="list-group list-group-flush">
+                                                    <li class="" style="font-size: 15px; list-style: none;">Selected Item:&nbsp;  <span style="color: #128a38;font-weight: bolder;">{{modifiedText}}</span> </li>
+                                                    <li class="" style="font-size: 15px; list-style: none;">ScoreCard Points:&nbsp;<span  style="font-weight: bold;">{{totalamount | number : '.0-0'}}</span> </li>
+                                                    <li class="" style="font-size: 15px; list-style: none;"> Output: &nbsp;
+                                                        <span style="color: #128a38;font-weight: bold;">{{significantResponse}}</span> 
+                                                        <span style="color: red; font-weight: bold">{{inSignificantResponse}}</span>
+                                                    </li>
+                                                  </ul>
+                                            </div>
+                                            
+                                          </div>
+                                          </div>
+                                  </div>
+                                  
+                                  <!-- <div class="form-group m-form__group align-items-center">
+                                      <div class="input-group">
+                                        <select #myInput [(ngModel)]="characteristicBin" name="characteristicBin" class="form-control" (ngModelChange)='onCharacteristicBinSelected($event)' style="width: 100px;">
+                                            <option value="undefined">All</option>
+                                            <option *ngFor="let y of listDistinct" [value]=y>{{y}}</option>
+                                          </select>
+                                      </div>
+                                      <br>
+                                      <span class="alert-success">{{modifiedText}}</span>
+                                  </div> -->
+                              </div>
+                          </div>
+                           
+                      </div>
+                  </form>
+  
+                  <table class="table fl-table table-borderless">
+                    <thead class="table-dark">
+                        <tr>
+                            <th style="width: 150px; background-color: #e90c0c; color: white;">#</th>
+                            <th style="width: 150px; background-color: #e90c0c; color: white;">CHARACTERISTICS</th>
+                            <th style="width: 150px; background-color: #e90c0c; color: white;">CHARACTERISTIC BIN</th>
+                            <th style="width: 150px; background-color: #e90c0c; color: white;">SCORECARD POINTS</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let score of listScoreCard | paginate: { itemsPerPage: 10, currentPage: p }; let i = index;">
+                            <td>{{i + 1}}</td>
+                            <td>{{score.characteristic}}</td>
+                            <td>{{score.characteristicBin}}</td>
+                            <td>{{score.scoreCardPoints}}</td>
+                        </tr> 
+                    </tbody>
+                </table> 
+                <div class="row">
+                    <div class="col-md-2">
+                        <input type="text" class="form-control" value="{{getTotal(listScoreCard) | number : '.0-0'}}" disabled="true" style="width: 150px;">
+                       </div>
+                    <div class="col-md-10"> 
+                        <pagination-controls (pageChange)="p = $event" class="pull-right"></pagination-controls>
+                    </div>
+                </div>
+               
+              </div>
+          </div>
+      </div>
+    </div>
+  </div>

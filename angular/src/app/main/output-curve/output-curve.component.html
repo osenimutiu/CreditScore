@@ -1,0 +1,180 @@
+<style>
+ 
+/* Table Styles */
+
+.table-wrapper{
+ margin: 10px 70px 70px;
+ box-shadow: 0px 35px 50px rgba( 0, 0, 0, 0.2 );
+}
+
+.fl-table td, .fl-table th {
+ text-align: center;
+ padding: 8px;
+}
+
+.fl-table thead th:nth-child(odd) {
+ color: #ffffff;
+ background: #324960;
+}
+
+.fl-table tr:nth-child(even) {
+ background: #F8F8F8;
+}
+
+/* Responsive */
+
+@media (max-width: 767px) {
+ .fl-table {
+     display: block;
+     width: 100%;
+ }
+ .table-wrapper:before{
+     content: "Scroll horizontally >";
+     display: block;
+     text-align: right;
+     font-size: 11px;
+     color: white;
+     padding: 0 0 10px;
+ }
+ .fl-table thead, .fl-table tbody, .fl-table thead th {
+     display: block;
+ }
+ .fl-table thead th:last-child{
+     border-bottom: none;
+ }
+ .fl-table thead {
+     float: left;
+ }
+ .fl-table tbody {
+     width: auto;
+     position: relative;
+     overflow-x: auto;
+ }
+ .fl-table td, .fl-table th {
+     padding: 20px .625em .625em .625em;
+     height: 60px;
+     vertical-align: middle;
+     box-sizing: border-box;
+     overflow-x: hidden;
+     overflow-y: auto;
+     width: 120px;
+     font-size: 13px;
+     text-overflow: ellipsis;
+ }
+ .fl-table thead th {
+     text-align: left;
+     border-bottom: 1px solid #f7f7f9;
+ }
+ .fl-table tbody tr {
+     display: table-cell;
+ }
+ .fl-table tbody tr:nth-child(odd) {
+     background: none;
+ }
+ .fl-table tr:nth-child(even) {
+     background: transparent;
+ }
+ .fl-table tr td:nth-child(odd) {
+     background: #F8F8F8;
+     border-right: 1px solid #E6E4E4;
+ }
+ .fl-table tr td:nth-child(even) {
+     border-right: 1px solid #E6E4E4;
+ }
+ .fl-table tbody td {
+     display: block;
+     text-align: center;
+ }
+}
+</style>
+
+<div [@routerTransition]>
+
+    <div class="content d-flex flex-column flex-column-fluid">
+        <sub-header [title]="'Data Visualisation' | localize">
+            <div role="actions">
+                <button (click)="reload()" class="btn btn-outline-primary"><i class="fas fa-sync"></i>
+                    {{l("Refresh")}}</button>
+            </div>
+        </sub-header>
+        <div [class]="containerClass">
+            <div class="card card-custom gutter-b">
+                <div class="card-body">
+                    <tabset>
+                        <tab class="p-5" heading="{{'Product' | localize}}">
+                            <div class="row align-items-center">
+                                <select #myInput [(ngModel)]="product" class="form-control"
+                                            (ngModelChange)='onProductSelected($event)' style="width: 400px;">
+                                            <option value="All">All</option>
+                                            <option *ngFor="let x of listDistinctProduct" value="{{x}}">{{x}}</option>
+                                        </select>
+                                        <br>
+                                        <br>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <span style="color: red; font-size: 20px;">{{modifiedText}}</span>
+                                        <p style="font-size: 20px; font-weight: bold; margin-top: 14px;">{{productTitleRaw}}</p>
+                                        <br>
+                                        <div class="6" *ngIf="isActive">
+                                            <div class="chart-container"
+                                                style="position: relative; height:30vh; width:35vw">
+                                                <canvas id="goodProductraw">{{ barchart }}</canvas>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <br>
+                                        <br>
+                                        <br>
+                                        <br>
+                                        <p *ngIf="isActive">
+                                            <b style="color: #000;">Total: {{ getRowsValueForGood_BadProductRaw(null)
+                                                }}</b> <br>
+                                            <span style="color: green;">Good: {{ getRowsValueForGood_BadProductRaw(true) }}
+                                            </span><br>
+                                            <span style="color: red;">Bad : {{ getRowsValueForGood_BadProductRaw(false)
+                                                }}</span>
+                                        </p>
+
+                                    </div>
+                                    <div class="col-md-2"></div>
+                                    <div class="col-md-4">
+                                        <br>
+                                        <br>
+                                        <br>
+                                        <p style="font-size: 20px; font-weight: bold;">{{productTitle}}</p>
+                                        <div class="6" *ngIf="isActive">
+
+                                            <div class="chart-container"
+                                                style="position: relative; height:30vh; width:35vw">
+                                                <canvas id="goodProduct">{{ barchart }}</canvas>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <br>
+                                        <br>
+                                        <br>
+                                        <br>
+                                        <p *ngIf="isActive">
+                                            <b style="color: #000;">Total: {{ getRowsValueForGood_BadProduct(null)
+                                                }}</b> <br>
+                                            <span style="color: green;">Good: {{ getRowsValueForGood_BadProduct(true) }}
+                                            </span><br>
+                                            <span style="color: red;">Bad : {{ getRowsValueForGood_BadProduct(false)
+                                                }}</span>
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+
+                                </div>
+                            </div>
+                        </tab>
+                       
+                    </tabset>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

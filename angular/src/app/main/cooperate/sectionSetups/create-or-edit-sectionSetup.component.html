@@ -1,0 +1,51 @@
+﻿<div [@routerTransition]>
+  
+  <div class="content d-flex flex-column flex-column-fluid">
+  <sub-header [title]="('SectionSetups' | localize) +' '+ ('Details' | localize)" [breadcrumbs]="breadcrumbs">
+            </sub-header>
+            
+    
+    <div [class]="containerClass">
+        <div class="card card-custom gutter-b">
+            <div class="card-body">              
+                
+                
+								<div class="form-group">
+									<label for="SectionSetup_Section">{{l("Section")}}</label>
+									<input type="text" #SectionSetup_Section="ngModel" id="SectionSetup_Section" class="form-control" [(ngModel)]="sectionSetup.section" name="Section"    />
+								    <validation-messages [formCtrl]="SectionSetup_Section"></validation-messages>
+								</div>
+					
+								<div class="form-group">
+									<label for="SectionSetup_Position">{{l("Position")}}</label>
+									<input type="number" #SectionSetup_Position="ngModel" id="SectionSetup_Position" class="form-control" [(ngModel)]="sectionSetup.position" name="Position"  />
+								    <validation-messages [formCtrl]="SectionSetup_Position"></validation-messages>
+								</div>
+					
+								<br/><div class="m-checkbox-list">
+									<label for="SectionSetup_Active" class="kt-checkbox">
+										<input #SectionSetup_Active="ngModel" id="SectionSetup_Active" type="checkbox" name="Active" [(ngModel)]="sectionSetup.active"> 
+										{{l("Active")}}
+										<span></span>
+									</label>
+									<validation-messages [formCtrl]="SectionSetup_Active"></validation-messages>
+								</div>
+					
+            </div>
+              <div class="card-footer">
+				<div class="col-lg-12">
+					<button (click)="save()" class="btn btn-danger blue float-right"
+                        [buttonBusy]="saving" [busyText]="l('SavingWithThreeDot')"><i class="fa fa-save"></i> 
+                        <span>{{l("Save")}}</span>
+                    </button>
+                    <button *ngIf="!this.sectionSetup.id" (click)="saveAndNew()" class="btn btn-danger blue float-right"
+                        [buttonBusy]="saving" [busyText]="l('SavingWithThreeDot')"><i class="fa fa-save"></i> 
+                        <span>{{l("SaveAndNew")}}</span>
+                    </button>
+				</div>
+		    </div>
+        </div>
+    </div>
+  </div>
+  
+</div>

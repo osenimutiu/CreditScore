@@ -1,0 +1,90 @@
+<div [@routerTransition]>
+
+    <div class="content d-flex flex-column flex-column-fluid">
+        <sub-header [title]="'Data Visualisation' | localize">
+            <div role="actions">
+                <button (click)="reload()" class="btn btn-outline-danger"><i class="fas fa-sync"></i>
+                    {{l("Refresh")}}</button>
+            </div>
+        </sub-header>
+        <div [class]="containerClass">
+            <div class="card card-custom gutter-b">
+                <div class="card-body">
+                    <tabset>
+                        <tab class="p-5" heading="{{'Resident Status' | localize}}">
+                            <div class="row align-items-center">
+                                <select #myInput [(ngModel)]="resident_status" class="form-control"
+                                            (ngModelChange)='onresident_statusSelected($event)' style="width: 400px;">
+                                            <option value="All">All</option>
+                                            <option *ngFor="let x of listDistinctresident_status" value="{{x}}">{{x}}</option>
+                                        </select>
+                                        <br>
+                                        <br>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <span style="color: red; font-size: 20px;">{{modifiedText}}</span>
+                                        <p style="font-size: 20px; font-weight: bold; margin-top: 14px;">{{resident_statusTitleRaw}}</p>
+                                        <br>
+                                        <div class="6" *ngIf="isActive">
+                                            <div class="chart-container"
+                                                style="position: relative; height:30vh; width:35vw">
+                                                <canvas id="goodresident_statusraw">{{ barchart }}</canvas>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <br>
+                                        <br>
+                                        <br>
+                                        <br>
+                                        <p *ngIf="isActive">
+                                            <b style="color: #000;">Total: {{ getRowsValueForGood_Badresident_statusRaw(null)
+                                                }}</b> <br>
+                                            <span style="color: green;">Good: {{ getRowsValueForGood_Badresident_statusRaw(true) }}
+                                            </span><br>
+                                            <span style="color: red;">Bad : {{ getRowsValueForGood_Badresident_statusRaw(false)
+                                                }}</span>
+                                        </p>
+
+                                    </div>
+                                    <div class="col-md-2"></div>
+                                    <div class="col-md-4">
+                                        <br>
+                                        <br>
+                                        <br>
+                                        <p style="font-size: 20px; font-weight: bold;">{{resident_statusTitle}}</p>
+                                        <div class="6" *ngIf="isActive">
+
+                                            <div class="chart-container"
+                                                style="position: relative; height:30vh; width:35vw">
+                                                <canvas id="goodresident_status">{{ barchart }}</canvas>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <br>
+                                        <br>
+                                        <br>
+                                        <br>
+                                        <p *ngIf="isActive">
+                                            <b style="color: #000;">Total: {{ getRowsValueForGood_Badresident_status(null)
+                                                }}</b> <br>
+                                            <span style="color: green;">Good: {{ getRowsValueForGood_Badresident_status(true) }}
+                                            </span><br>
+                                            <span style="color: red;">Bad : {{ getRowsValueForGood_Badresident_status(false)
+                                                }}</span>
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+
+                                </div>
+                            </div>
+                        </tab>
+                       
+                    </tabset>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

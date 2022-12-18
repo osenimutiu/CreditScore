@@ -1,0 +1,67 @@
+﻿<div [@routerTransition]>
+  
+  <div class="content d-flex flex-column flex-column-fluid">
+  <sub-header [title]="('SetupQualitatives' | localize) +' '+ ('Details' | localize)" [breadcrumbs]="breadcrumbs">
+            </sub-header>
+            
+    
+    <div [class]="containerClass">
+        <div class="card card-custom gutter-b">
+            <div class="card-body">              
+                
+					<div class="form-group m-form__group">
+						<label for="SectionSetupSection">{{l("SectionSetup")}}</label>
+						<select name="setupQualitative.sectionSetupId" [(ngModel)]="setupQualitative.sectionSetupId" class="form-control" required>
+							<option value="">{{l("SelectASectionSetup")}}</option>
+							<option *ngFor="let item of allSectionSetups" value="{{item.id}}">{{item.displayName}}</option>
+						</select>
+					</div>
+					 
+					<div class="form-group m-form__group">
+						<label for="SetupSubHeadingSubHeading">{{l("SetupSubHeading")}}</label>
+						<select name="setupQualitative.setupSubHeadingId" [(ngModel)]="setupQualitative.setupSubHeadingId" class="form-control" required>
+							<option value="">{{l("SelectASetupSubHeading")}}</option>
+							<option *ngFor="let item of allSetupSubHeadings" value="{{item.id}}">{{item.displayName}}</option>
+						</select>
+					</div>
+					 
+                
+								<div class="form-group">
+									<label for="SetupQualitative_Qualitative">{{l("Qualitative")}}</label>
+									<textarea type="text" #SetupQualitative_Qualitative="ngModel" id="SetupQualitative_Qualitative" class="form-control" [(ngModel)]="setupQualitative.qualitative" name="Qualitative"    ></textarea>
+								    <validation-messages [formCtrl]="SetupQualitative_Qualitative"></validation-messages>
+								</div>
+					
+								<div class="form-group">
+									<label for="SetupQualitative_Value">{{l("Value")}}</label>
+									<input type="number" #SetupQualitative_Value="ngModel" id="SetupQualitative_Value" class="form-control" [(ngModel)]="setupQualitative.value" name="Value"  />
+								    <validation-messages [formCtrl]="SetupQualitative_Value"></validation-messages>
+								</div>
+					
+								<br/><div class="m-checkbox-list">
+									<label for="SetupQualitative_Status" class="kt-checkbox">
+										<input #SetupQualitative_Status="ngModel" id="SetupQualitative_Status" type="checkbox" name="Status" [(ngModel)]="setupQualitative.status"> 
+										{{l("Status")}}
+										<span></span>
+									</label>
+									<validation-messages [formCtrl]="SetupQualitative_Status"></validation-messages>
+								</div>
+					
+            </div>
+              <div class="card-footer">
+				<div class="col-lg-12">
+					<button (click)="save()" class="btn btn-danger blue float-right"
+                        [buttonBusy]="saving" [busyText]="l('SavingWithThreeDot')"><i class="fa fa-save"></i> 
+                        <span>{{l("Save")}}</span>
+                    </button>
+                    <button *ngIf="!this.setupQualitative.id" (click)="saveAndNew()" class="btn btn-danger blue float-right"
+                        [buttonBusy]="saving" [busyText]="l('SavingWithThreeDot')"><i class="fa fa-save"></i> 
+                        <span>{{l("SaveAndNew")}}</span>
+                    </button>
+				</div>
+		    </div>
+        </div>
+    </div>
+  </div>
+  
+</div>

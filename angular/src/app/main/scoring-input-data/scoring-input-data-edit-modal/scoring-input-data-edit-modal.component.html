@@ -1,0 +1,159 @@
+<div bsModal #modal="bs-modal" (onShown)="onShown()" class="modal fade" tabindex="-1" role="dialog"
+    aria-labelledby="modal" aria-hidden="true" [config]="{backdrop: 'static'}">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <form *ngIf="active" #scoringInputDataForm="ngForm" novalidate (ngSubmit)="save()">
+                <div class="modal-header bg-primary">
+                    <h4 class="modal-title">
+                        <span class=" text-center">{{l("Edit ScoringInputData")}}</span>
+                    </h4>
+                    <button type="button" class="close" (click)="close()" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>{{l("UniqueID")}}</label>
+                            <input #uniqueIDInput class="form-control" type="text" name="uniqueID"
+                                [(ngModel)]="scoringInputData.uniqueID" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>{{l("Age")}}</label>
+                            <input class="form-control" type="text" name="age" [(ngModel)]="scoringInputData.age"
+                                required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>{{l("Income")}}</label>
+                            <input class="form-control" type="text" name="income" [(ngModel)]="scoringInputData.income"
+                                required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>{{l("Return on Assets")}}</label>
+                            <input class="form-control" type="text" name="returnonAssets"
+                                [(ngModel)]="scoringInputData.returnonAssets" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>{{l("Location")}}</label>
+                            <input class="form-control" type="text" name="location"
+                                [(ngModel)]="scoringInputData.location" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>{{l("Resident Status")}}</label>
+                            <input class="form-control" type="text" name="residentstatus"
+                                [(ngModel)]="scoringInputData.residentstatus" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>{{l("Time at Job")}}</label>
+                            <input class="form-control" type="text" name="timeatJob"
+                                [(ngModel)]="scoringInputData.timeatJob" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>{{l("Time at Residence")}}</label>
+                            <input class="form-control" type="text" name="timeatresidence"
+                                [(ngModel)]="scoringInputData.timeatresidence" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>{{l("Product")}}</label>
+                            <input class="form-control" type="text" name="product"
+                                [(ngModel)]="scoringInputData.product" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>{{l("Sector")}}</label>
+                            <input class="form-control" type="text" name="sector" [(ngModel)]="scoringInputData.sector"
+                                required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>{{l("Sub Sector")}}</label>
+                            <input class="form-control" type="text" name="subsector"
+                                [(ngModel)]="scoringInputData.subsector" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>{{l("Current Account Status")}}</label>
+                            <input class="form-control" type="text" name="currentAccountStatus"
+                                [(ngModel)]="scoringInputData.currentAccountStatus" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>{{l("Total Assets")}}</label>
+                            <input class="form-control" type="text" name="totalassets"
+                                [(ngModel)]="scoringInputData.totalassets" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>{{l("Rent")}}</label>
+                            <input class="form-control" type="text" name="rent" [(ngModel)]="scoringInputData.rent"
+                                required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>{{l("Rent to Income")}}</label>
+                            <input class="form-control" type="text" name="renttoIncome"
+                                [(ngModel)]="scoringInputData.renttoIncome" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>{{l("Time at Bank")}}</label>
+                            <input class="form-control" type="text" name="timeatBank"
+                                [(ngModel)]="scoringInputData.timeatBank" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>{{l("Number of Products")}}</label>
+                            <input class="form-control" type="text" name="numberofproducts"
+                                [(ngModel)]="scoringInputData.numberofproducts" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>{{l("Payment Performance")}}</label>
+                            <input class="form-control" type="text" name="paymentperformance"
+                                [(ngModel)]="scoringInputData.paymentperformance" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>{{l("Previous Claims")}}</label>
+                            <input class="form-control" type="text" name="previousclaims"
+                                [(ngModel)]="scoringInputData.previousclaims" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>{{l("Good Bad")}}</label>
+                            <input class="form-control" type="text" name="goodBad"
+                                [(ngModel)]="scoringInputData.goodBad" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>{{l("Date Opened")}}</label>
+                            <input class="form-control" type="date" name="dateopened"
+                                [(ngModel)]="scoringInputData.dateopened" required>
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+                <div class="modal-footer">
+                    <button [disabled]="saving" type="button" class="btn btn-secondary"
+                        (click)="close()">{{l("Cancel")}}</button>
+                    <button type="submit" class="btn btn-primary" [disabled]="!scoringInputDataForm.form.valid"
+                        [buttonBusy]="saving" [busyText]="l('SavingWithThreeDot')"><i class="fa fa-save"></i>
+                        <span>{{l("Edit")}}</span></button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

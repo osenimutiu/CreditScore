@@ -1,0 +1,52 @@
+<div bsModal #modal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal" aria-hidden="true" [config]="{backdrop: 'static'}">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <form *ngIf="active" #form="ngForm" novalidate>
+                <div class="modal-header">
+                    <h4 class="modal-title">
+                        <span class=" text-center text-black">&nbsp;&nbsp;{{l("Eligibility")}}</span>
+                    </h4>
+                    <button type="button" class="close" (click)="close()" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                       <div class="form-row">
+                        <div class="form-group col-md-12">  
+                            <label><b>{{l("FullName")}}</b></label>
+                            <select name="nameId" class="form-control" [(ngModel)]="retail.nameId" [disabled]="true">
+                                <option *ngFor="let x of custList" value="{{x.id}}">{{x.firstName}} - {{x.lastName}}</option>
+                              </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-12"> 
+                            <label><b>{{l("Score")}}</b></label>
+                            <input class="form-control" name="score" [(ngModel)]="retail.score" required [disabled]="true">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-12"> 
+                            <!-- <label><b>{{l("CutOff")}}</b></label> -->
+                            <input class="form-control" name="totalCutOff" [(ngModel)]="totalCutOff" type="hidden" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-12"> 
+                            <label><b>{{l("Decision")}}</b></label>
+                            <input style="color: white; font-weight: bold;" class="form-control" name="decision" [(ngModel)]="decision" [disabled]="true" required [style.background-color]="getColor(decision)">
+                        </div>
+                    </div>
+                    
+                   
+                </div>
+               <div class="modal-footer">
+                    <button [disabled]="saving" type="button" class="btn btn-secondary" (click)="close()">{{l("Cancel")}}</button>
+                 </div>
+            </form>
+        </div>
+       
+    </div>
+</div>
+
+

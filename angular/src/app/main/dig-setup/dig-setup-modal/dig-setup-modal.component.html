@@ -1,0 +1,271 @@
+<div bsModal #modal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal" aria-hidden="true" [config]="{backdrop: 'static'}">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <form *ngIf="active" #form="ngForm" novalidate (ngSubmit)="save()">
+                <div class="modal-header" style="background-color: #e90c0c;">
+                    <h4 class="modal-title">
+                        <span class=" text-center text-white"><i class="fas fa-wrench"></i>&nbsp;&nbsp;{{l("SetUP")}}</span>
+                    </h4>
+                    <button type="button" class="close" (click)="close()" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <b>Bank account data source</b>
+                    <br>
+                    <br>
+                       <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>{{l("Event of bad debt /collections payment")}}</label>
+                            <input #eventBadCollPaymentInput class="form-control" type="number" name="eventBadCollPayment" [(ngModel)]="setUp.eventBadCollPayment" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>{{l("Fraud event")}}</label>
+                            <input class="form-control" type="number" name="fraudEvent" [(ngModel)]="setUp.fraudEvent" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6"> 
+                            <label>{{l("Frequent adverse payments")}}</label>
+                            <input class="form-control" type="number" name="freqAdvPayments" [(ngModel)]="setUp.freqAdvPayments" required>
+                        </div>
+                        <div class="form-group col-md-6"> 
+                            <!-- <label>{{l("Not enough bank account data for scoring less than 90 days")}}</label> -->
+                            <label>{{l("Not enough bank account data")}}</label>
+                            <input class="form-control" type="number" name="notEnoughBankAccforScoring" [(ngModel)]="setUp.notEnoughBankAccforScoring" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6"> 
+                            <label>{{l("Major new lending obligations identified")}}</label>
+                            <input class="form-control" type="number" name="majorNewLendingObligationsIdentified" [(ngModel)]="setUp.majorNewLendingObligationsIdentified" required>
+                        </div>
+                        <div class="form-group col-md-6"> 
+                            <label>{{l("Not enough inflows to grant s credit line")}}</label>
+                            <input class="form-control" type="number" name="notEnoughInflowsGrantCreditLine" [(ngModel)]="setUp.notEnoughInflowsGrantCreditLine" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>{{l("High prediction model default probability")}}</label>
+                            <input class="form-control" type="number" name="highPredModelDefProb" [(ngModel)]="setUp.highPredModelDefProb" required>
+                        </div>
+                    </div>
+                    <b>Credit line estimation data source</b>
+                    <br>
+                    <br>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>{{l("Not enough space for a credit line")}}</label>
+                            <input class="form-control" type="number" name="notEnoughSpaceCreditLine" [(ngModel)]="setUp.notEnoughSpaceCreditLine" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <!-- <label>{{l("Affordable credit line amount too low compared to the requested amount")}}</label> -->
+                            <label>{{l("Low Affordable credit line amount")}}</label>
+                            <input class="form-control" type="number" name="affordableCreditLineAmount" [(ngModel)]="setUp.affordableCreditLineAmount" required>
+                        </div>
+                    </div>
+                   
+                    <div class="form-row">
+                        <div class="form-group col-md-6"> 
+                            <label>{{l("Insufficient bank account buffer")}}</label>
+                            <input class="form-control" name="insufficientBankAccountBuffer" [(ngModel)]="setUp.insufficientBankAccountBuffer" required>
+                        </div>
+                        <div class="form-group col-md-6"> 
+                            <label>{{l("Insufficient level of inflows versus the stated revenues")}}</label>
+                            <input class="form-control" name="insufficientLevelInflowVersusStatedRev" [(ngModel)]="setUp.insufficientLevelInflowVersusStatedRev" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6"> 
+                            <label>{{l("Not enough overdraft buffer available")}}</label>
+                            <input class="form-control" name="notEnoughOverdraftBufferAvailable" [(ngModel)]="setUp.notEnoughOverdraftBufferAvailable" required>
+                        </div>
+                        <div class="form-group col-md-6"> 
+                            <label>{{l("Significant reduction in the bank account inflows")}}</label>
+                            <input class="form-control" name="significantReductionBankAccInflows" [(ngModel)]="setUp.significantReductionBankAccInflows" required>
+                        </div>
+                    </div>
+                    <b>Financials data source</b>
+                    <br>
+                    <br>
+                    <div class="form-row">
+                        <div class="form-group col-md-6"> 
+                            <label>{{l("High leverage")}}</label>
+                            <input class="form-control" name="highLeverage" [(ngModel)]="setUp.highLeverage" required>
+                        </div>
+                        <div class="form-group col-md-6"> 
+                            <label>{{l("Negative or insufficient Debt Service Coverage Ratio")}}</label>
+                            <input class="form-control" name="negativeInsufficientDebtServiceCovRatio" [(ngModel)]="setUp.negativeInsufficientDebtServiceCovRatio" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6"> 
+                            <label>{{l("Insufficient Profit Margin")}}</label>
+                            <input class="form-control" name="insufficientProfitMargin" [(ngModel)]="setUp.insufficientProfitMargin" required>
+                        </div>
+                    </div>
+                    <b>Fraud checks data source</b> 
+                    <br>
+                    <br>
+                    <div class="form-row">
+                        <div class="form-group col-md-6"> 
+                            <label>{{l("Email address identified as automatically generated")}}</label>
+                            <select name="emailAddIdentAutGen" class="form-control" [(ngModel)]="setUp.emailAddIdentAutGen">
+                                <option value="true">True</option>
+                                <option value="false">False</option>
+                             </select>
+                        </div>
+                        <div class="form-group col-md-6"> 
+                            <label>{{l("Email address is from a disposable email service")}}</label>
+                            <select name="emailAddDisEmailServ" class="form-control" [(ngModel)]="setUp.emailAddDisEmailServ">
+                                <option value="true">True</option>
+                                <option value="false">False</option>
+                             </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6"> 
+                            <label>{{l("The email address bounces")}}</label>
+                            <select name="emailAddBounces" class="form-control" [(ngModel)]="setUp.emailAddBounces" required>
+                                <option value="true">True</option>
+                                <option value="false">False</option>
+                             </select>
+                        </div>
+                        <div class="form-group col-md-6"> 
+                            <label>{{l("No mix records found for domain of the email address")}}</label>
+                            <select name="noMixRecordFoundDomainEmailAdd" class="form-control" [(ngModel)]="setUp.noMixRecordFoundDomainEmailAdd" required>
+                                <option value="true">True</option>
+                                <option value="false">False</option>
+                             </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6"> 
+                            <label>{{l("Connection to the SMTP server fails")}}</label>
+                            <select name="connSMTP" class="form-control" [(ngModel)]="setUp.connSMTP" required>
+                                <option value="true">True</option>
+                                <option value="false">False</option>
+                             </select>
+                        </div>
+                    </div>
+                   <b>Non - Financial Risk</b> 
+                   <br>
+                   <br>
+                    <div class="form-row">
+                        <div class="form-group col-md-6"> 
+                            <label>{{l("Company years in business less than 1.5")}}</label>
+                            <input class="form-control" name="compYearBusiness" [(ngModel)]="setUp.compYearBusiness" required>
+                         </div>
+                        <div class="form-group col-md-6"> 
+                            <label>{{l("Share capital")}}</label>
+                            <input class="form-control" name="shareCapital" [(ngModel)]="setUp.shareCapital" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6"> 
+                            <label>{{l("Unable to verify user payment accounts")}}</label>
+                            <input class="form-control" name="unableVerifyUserPayAcc" [(ngModel)]="setUp.unableVerifyUserPayAcc" required>
+                         </div>
+                        <div class="form-group col-md-6"> 
+                            <label>{{l("Court actions")}}</label>
+                            <input class="form-control" name="courtActions" [(ngModel)]="setUp.courtActions" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6"> 
+                            <label>{{l("Court writs")}}</label>
+                            <input class="form-control" name="courtWrits" [(ngModel)]="setUp.courtWrits" required>
+                         </div>
+                        <div class="form-group col-md-6"> 
+                            <label>{{l("Credit enquries")}}</label>
+                            <input class="form-control" name="courtActions" [(ngModel)]="setUp.creditEnquries" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6"> 
+                            <label>{{l("Default status")}}</label>
+                            <input class="form-control" name="defaultStatus" [(ngModel)]="setUp.defaultStatus" required>
+                         </div>
+                        <div class="form-group col-md-6"> 
+                            <label>{{l("External administration")}}</label>
+                            <input class="form-control" name="externalAdmin" [(ngModel)]="setUp.externalAdmin" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6"> 
+                            <label>{{l("Payment defaults")}}</label>
+                            <input class="form-control" name="paymentDefaults" [(ngModel)]="setUp.paymentDefaults" required>
+                         </div>
+                        <div class="form-group col-md-6"> 
+                            <label>{{l("Petition occurrence")}}</label>
+                            <input class="form-control" name="petOccurrence" [(ngModel)]="setUp.petOccurrence" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6"> 
+                            <label>{{l("Current Directorships")}}</label>
+                            <input class="form-control" name="currDirectorships" [(ngModel)]="setUp.currDirectorships" required>
+                         </div>
+                        <div class="form-group col-md-6"> 
+                            <label>{{l("Director Age")}}</label>
+                            <input class="form-control" name="direcAge" [(ngModel)]="setUp.direcAge" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6"> 
+                            <label>{{l("Bankruptcy")}}</label>
+                            <input class="form-control" name="bankruptcy" [(ngModel)]="setUp.bankruptcy" required>
+                         </div>
+                        <div class="form-group col-md-6"> 
+                            <label>{{l("Commercial Defaults")}}</label>
+                            <input class="form-control" name="commercialDefaults" [(ngModel)]="setUp.commercialDefaults" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6"> 
+                            <label>{{l("Consumer Defaults")}}</label>
+                            <input class="form-control" name="consumerDefaults" [(ngModel)]="setUp.consumerDefaults" required>
+                         </div>
+                        <div class="form-group col-md-6"> 
+                            <label>{{l("Court Actions")}}</label>
+                            <input class="form-control" name="courtActionsForCreditBureau" [(ngModel)]="setUp.courtActionsForCreditBureau" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6"> 
+                            <label>{{l("Disqualified directorships")}}</label>
+                            <input class="form-control" name="disqDirectorship" [(ngModel)]="setUp.disqDirectorship" required>
+                         </div>
+                        <div class="form-group col-md-6"> 
+                            <label>{{l("Probability of future adverse events")}}</label>
+                            <input class="form-control" name="probFutureAdverseEvent" [(ngModel)]="setUp.probFutureAdverseEvent" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6"> 
+                            <label>{{l("Probability of future serious events")}}</label>
+                            <input class="form-control" name="probFutureSeriousEvent" [(ngModel)]="setUp.probFutureSeriousEvent" required>
+                         </div>
+                        <div class="form-group col-md-6"> 
+                            <label>{{l("Low credit bureau score")}}</label>
+                            <input class="form-control" name="lowCreditBureauScore" [(ngModel)]="setUp.lowCreditBureauScore" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6"> 
+                            <label>{{l("Previous Directorships")}}</label>
+                            <input class="form-control" name="previouDirectorships" [(ngModel)]="setUp.previouDirectorships" required>
+                         </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button [disabled]="saving" type="button" class="btn btn-secondary" (click)="close()">{{l("Cancel")}}</button>
+                    <button type="submit" class="btn btn-primary" [disabled]="!form.form.valid" [buttonBusy]="saving" [busyText]="l('SavingWithThreeDot')"><i class="fal fa-battery-bolt"></i> <span>{{l("Save")}}</span></button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,73 @@
+<div class="container">
+    <tabset class="tab-container tabbable-line">
+        <tab heading="{{'Eligibility Form' | localize}}">
+            <div style="width: 500px; border: 2px solid red; margin-top: 5em;">
+                <div style="width: 400px; margin: 50px 0px 0px 30px;">
+                    <div class="form-group" style="margin-top: 10px;">
+                        <label>Business Registered in Nigeria</label>
+                        <select name="" id="" class="form-control">
+                            <option value=""></option>
+                            <option *ngFor="let b of busRegs" [value]="b.id">{{b.option}}</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Annual Turn Over in Naira</label>
+                        <input id="busRegNig" class="form-control" type="number" name="anuulTurnOver" required
+                            maxlength="15">
+                    </div>
+                    <div class="form-group">
+                        <label>Operation for 18 months or more</label>
+                        <select name="" id="" class="form-control">
+                            <option value=""></option>
+                            <option *ngFor="let o of opElibilities" [value]="o.id">{{o.option}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Have a Nigeria Bank Account</label>
+                        <select name="" id="" class="form-control">
+                            <option value=""></option>
+                            <option *ngFor="let h of haveBankAccounts" [value]="h.id">{{h.option}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Have a NIN/BVN</label>
+                        <select name="" id="" class="form-control">
+                            <option value=""></option>
+                            <option *ngFor="let n of haveNINs" [value]="n.id">{{n.option}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>You are authorizred to account for this business</label>
+                        <select name="" id="" class="form-control">
+                            <option value=""></option>
+                            <option *ngFor="let a of accountAuthorize" [value]="a.id">{{a.option}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <button type="button" class="btn btn-outline-danger">Submit</button>
+                    </div>
+                    <div class="row">
+                        <!-- <h3>Maximum Amount Eligible to: ₦50,000,000</h3> -->
+                    </div>
+                </div>
+            </div>
+        </tab>
+        <tab heading="{{'Elibility Status' | localize}}">
+            <div class="form-group">
+                <!-- <div class="form-group" *ngFor="let t of haveNINs">
+                    <input type="text" class="form-control" value="{{t.option}}"> 
+                </div> -->
+                <input type="text" class="form-control" [(ngModel)]="userName"> 
+               <!-- <div [(ngModel)]="userName">
+                    <p *ngFor="let j of haveNINs">
+                        {{j.option}}
+                    </p>
+               </div> -->
+            </div>
+           <button type="button" [disabled]="userName!= '0123456789'">Proceed</button>
+            <!-- <permission-tree #permissionTree></permission-tree> -->
+        </tab>
+    </tabset>
+
+</div>

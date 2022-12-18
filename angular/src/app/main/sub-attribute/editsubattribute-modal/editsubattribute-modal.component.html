@@ -1,0 +1,48 @@
+<div bsModal #modal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal" aria-hidden="true" [config]="{backdrop: 'static'}">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <form *ngIf="active" #form="ngForm" novalidate (ngSubmit)="save()">
+                <div class="modal-header" style="background-color: #e90c0c;">
+                    <h4 class="modal-title">
+                        <span class=" text-center text-white"><i class="fas fa-wrench"></i>&nbsp;&nbsp;{{l("SubAttribute")}}</span>
+                    </h4>
+                    <button type="button" class="close" (click)="close()" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                       <div class="form-row">
+                        <div class="form-group col-md-12">  
+                            <label>{{l("Attribute")}}</label>
+                            <select name="attributeId" id="attributeId" class="form-control" [(ngModel)]="retail.attributeId">
+                                <option *ngFor="let c of distList" value="{{c}}">{{c}}</option>
+                             </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-12"> 
+                            <label>{{l("SubAttribute")}}</label>
+                            <!-- <select name="subAttribute" id="subAttribute" class="form-control" [(ngModel)]="retail.subAttribute">
+                                <option *ngFor="let t of valueList" value="{{t.attribute}}">{{t.attribute}}</option>
+                             </select> -->
+                             <input class="form-control" name="subAttribute" [(ngModel)]="retail.subAttribute" required>
+                        </div>
+                        
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-12"> 
+                            <label>{{l("Value")}}</label>
+                            <input class="form-control" type="number" name="value" [(ngModel)]="retail.value" required placeholder="Value">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button [disabled]="saving" type="button" class="btn btn-secondary" (click)="close()">{{l("Cancel")}}</button>
+                    <button type="submit" class="btn btn-primary" [disabled]="!form.valid" [buttonBusy]="saving" [busyText]="l('SavingWithThreeDot')"><i class="fal fa-battery-bolt"></i> <span>{{l("Save")}}</span></button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+

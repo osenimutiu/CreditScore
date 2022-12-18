@@ -1,0 +1,54 @@
+
+<div bsModal #modal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal" aria-hidden="true" [config]="{backdrop: 'static'}">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <form *ngIf="active" #form="ngForm" novalidate (ngSubmit)="save()">
+                <div class="modal-header" style="background-color: #e90c0c;">
+                    <h4 class="modal-title">
+                        <span class=" text-center text-white"><i class="fas fa-wrench"></i>&nbsp;&nbsp;{{l("Edit")}}</span>
+                    </h4>
+                    <button type="button" class="close" (click)="close()" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-row">
+                        <div class="form-group col-md-6"> 
+                            <label>{{l("Rating")}}</label>
+                            <select name="rating" id="rating" class="form-control" [(ngModel)]="qarating.rating">
+                                <option *ngFor="let r of prevDup"  [value]="r.rating">{{r.rating}}</option>
+                            </select>
+                           <!-- <input name="rating" id="rating" class="form-control" [(ngModel)]="qarating.rating" readonly="readonly"/>  -->
+                        </div>
+                    </div>
+                       <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>{{l("Description")}}</label>
+                            <input class="form-control" name="ratingDescription" [(ngModel)]="qarating.ratingDescription" required placeholder="Rating Description">
+                        </div>
+                    </div>
+                       <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>{{l("Score")}}</label>
+                            <input class="form-control" type="number" name="score" [(ngModel)]="qarating.score" required placeholder="Score">
+                        </div>
+                    </div>
+                       <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>{{l("Range")}}</label>
+                            <input class="form-control" type="number" name="range" [(ngModel)]="qarating.range" required placeholder="Range">
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="modal-footer">
+                    <button [disabled]="saving" type="button" class="btn btn-secondary" (click)="close()">{{l("Cancel")}}</button>
+                    <button type="submit" class="btn btn-primary" [disabled]="!form.form.valid" [buttonBusy]="saving" [busyText]="l('SavingWithThreeDot')"><i class="fal fa-battery-bolt"></i> <span>{{l("Save")}}</span></button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+

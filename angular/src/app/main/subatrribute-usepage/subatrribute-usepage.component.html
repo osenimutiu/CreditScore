@@ -1,0 +1,421 @@
+<div [@routerTransition] style="width: 1200px; ">
+  <div class="content d-flex flex-column flex-column-fluid">  
+  <sub-header [title]="'Retail' | localize">
+    <div role="actions">
+      <button (click)="subattrModal.show()" class="btn btn-outline-success"><i class="fas fa-plus-square"></i> {{l("Add New")}}</button> 
+    <button (click)="reload()" class="btn btn-outline-danger"><i class="fas fa-sync"></i> {{l("Refresh")}}</button>
+</div>
+        </sub-header> 
+  </div>
+  <div [class]="containerClass + ' kt-grid_item kt-grid_item--fluid'">
+    <div class="kt-portlet kt-portlet--mobile">
+      <div class="kt-portlet__body">
+
+        <div class="bs-stepper">
+          <div class="bs-stepper-header" role="tablist">
+            <div class="step" data-target="#eligibility-part">
+              <button type="button" class="step-trigger" role="tab" aria-controls="eligibility-part" id="eligibility-part-trigger">
+                <!-- <span class="bs-stepper-circle">1</span>
+                <span class="bs-stepper-label"></span> -->
+              </button>
+            </div>
+            <div class="line"></div>
+            <div class="step" data-target="#loan-request-part">
+              <button type="button" class="step-trigger" role="tab" aria-controls="loan-request-part"
+                id="loan-request-part-trigger">
+                <!-- <span class="bs-stepper-circle">2</span>
+                <span class="bs-stepper-label"></span> -->
+              </button>
+            </div>
+            <div class="line"></div>
+            <div class="step" data-target="#third-part">
+              <button type="button" class="step-trigger" role="tab" aria-controls="third-part"
+                id="third-part-trigger">
+                <!-- <span class="bs-stepper-circle">3</span>
+                <span class="bs-stepper-label"></span> -->
+              </button>
+            </div>
+            <div class="line"></div>
+            <div class="step" data-target="#fourth-part">
+              <button type="button" class="step-trigger" role="tab" aria-controls="fourth-part"
+                id="fourth-part-trigger">
+                <!-- <span class="bs-stepper-circle">4</span>
+                <span class="bs-stepper-label"></span> -->
+              </button>
+            </div>
+            <div class="line"></div>
+            <div class="step" data-target="#fifth-part">
+              <button type="button" class="step-trigger" role="tab" aria-controls="fifth-part"
+                id="fifth-part-trigger">
+                <!-- <span class="bs-stepper-circle">5</span>
+                <span class="bs-stepper-label"></span> -->
+              </button>
+            </div>
+            
+          </div>
+          <div class="bs-stepper-content">
+            <form #form="ngForm" (ngSubmit)="save()">
+              <div id="eligibility-part" class="content" role="tabpanel" aria-labelledby="eligibility-part-trigger">
+                <div style="width: 1700px; background-color: white; position: relative; left: 0px;">
+                  <div style="margin: 0 45px;">
+
+                    <label for="" style="margin-top: 20px;"></label>
+                    <div>
+                      <div class="form-row">
+                       
+                        <div class="form-group col-md-12">
+                          <label for="" style="font-weight: bold;">Customer Name</label>
+                          <select (change)="getUser($event.target)" name="nameId" class="form-control" [(ngModel)]="retail.nameId">
+                            <option *ngFor="let x of custList" value="{{x.id}}">{{x.firstName}} - {{x.lastName}}</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- <h2>TARGET MARKET</h2> -->
+                <div class="form-row" style="margin-top: 20px;">
+                  <fieldset id="group1" class="form-group col-md-6">
+                  <b>Gender</b>:
+                  <br>
+                  <ul class="list-group">
+                      <li class="list-group-item" *ngFor="let item of genderList">
+                          <input type="radio" [(ngModel)]="genderSelected" name="group1" [value]="item.value"
+                              (change)="onGenderChange(item)"  />
+                          {{item.subAttribute}}
+                      </li>
+                  </ul>
+                  </fieldset>
+                    <fieldset id="group2" class="form-group col-md-6">
+                        <b>Age</b>:
+                        <br>
+                        <ul class="list-group">
+                          <li class="list-group-item" *ngFor="let item of ageList">
+                              <input type="radio" [(ngModel)]="ageSelected" name="group2" [value]="item.value"
+                                  (change)="onAgeChange(item)"  />
+                              {{item.subAttribute}}
+                          </li>
+                      </ul>
+                    </fieldset>
+                </div>
+                <div class="form-row">
+                    <fieldset id="group3" class="form-group col-md-6">
+                      <b>Has been saving for (years)</b>: 
+                        <br>
+                        <ul class="list-group">
+                          <li class="list-group-item" *ngFor="let it of savingList">
+                              <input type="radio" [(ngModel)]="savingSelected" name="group3" [value]="it.value"
+                                  (change)="onSavingChange($event.target)"  />
+                              {{it.subAttribute}}
+                          </li>
+                      </ul>
+                    </fieldset>
+                    <fieldset id="group4" class="form-group col-md-6">
+                      <b>Deposits per month</b>:
+                      <br>
+                        <ul class="list-group">
+                          <li class="list-group-item" *ngFor="let item of depositList">
+                              <input type="radio" [(ngModel)]="depositSelected" name="group4" [value]="item.value"
+                                  (change)="onDepositChange($event.target)"  />
+                              {{item.subAttribute}}
+                          </li>
+                      </ul>
+                    </fieldset>
+                </div>
+                    
+                  <div class="form-row">
+                    <div class="form-group col-md-6 text-left">
+                       </div>
+                    <div class="form-group col-md-6 text-right">
+                      <button type="button" (click)="next()" style="margin-bottom: 15px;" class="btn btn-danger">Proceed<i class="fas fa-arrow-right"></i></button>
+                    </div>
+                  </div>
+                
+              </div>
+              </div>
+     
+              </div>
+
+              <div id="loan-request-part" class="content" role="tabpanel" aria-labelledby="loan-request-part-trigger">
+                <div style="width: 1700px; background-color: white; position: relative; left: 0px;">
+                  <div style="margin: 0px 45px;">
+                      <label for="" style="margin-top: 20px;"></label>
+                      <div class="form-row">
+                        <fieldset id="group5" class="form-group col-md-6">
+                        <b>Withdrawals per month</b>: 
+                        <br>
+                        <ul class="list-group">
+                          <li class="list-group-item" *ngFor="let it of withdrawalList">
+                              <input type="radio" [(ngModel)]="withdrawalSelected" name="group5" [value]="it.value"
+                                  (change)="onWithdrawalChange($event.target)"  />
+                              {{it.subAttribute}}
+                          </li>
+                      </ul>
+                        </fieldset>
+                          <fieldset id="group6" class="form-group col-md-6">
+                            <b>Net change - savings balance (past 6 months)</b>:
+                              <br>
+                              <ul class="list-group">
+                                <li class="list-group-item" *ngFor="let item of netChangeList">
+                                    <input type="radio" [(ngModel)]="netChangeSelected" name="group6" [value]="item.value"
+                                        (change)="onNetChange(item)"  />
+                                    {{item.subAttribute}}
+                                </li>
+                            </ul>
+                          </fieldset>
+                      </div>
+    
+                      <div class="form-row">
+                        <fieldset id="group7" class="form-group col-md-6">
+                         <b>Current savings balance</b>:
+                        <br>
+                        <ul class="list-group">
+                            <li class="list-group-item" *ngFor="let item of currentSavingList">
+                                <input type="radio" [(ngModel)]="currentSavingSelected" name="group7" [value]="item.value"
+                                    (change)="onCurrentSavingChange(item)"  />
+                                {{item.subAttribute}}
+                            </li>
+                        </ul>
+                        </fieldset>
+                        <fieldset id="group8" class="form-group col-md-6">
+                          <b>Number of credit-bureau queries</b>:
+                          <br>
+                            <ul class="list-group">
+                              <li class="list-group-item" *ngFor="let item of numberCreditsList">
+                                  <input type="radio" [(ngModel)]="numberCreditsSelected" name="group8" [value]="item.value"
+                                      (change)="onNumberCreditChange($event.target)"  />
+                                  {{item.subAttribute}}
+                              </li>
+                          </ul>
+                        </fieldset>
+                    </div>
+                    
+                    <div class="form-group row">
+                      <div class="col-md-6 text-left">
+                        <button type="button" (click)="previous()" style="margin-bottom: 15px;" class="btn btn-danger"><i class="fas fa-arrow-left"></i>Back</button>
+                     </div>
+                      <!-- <div class="col-md-6 text-right">
+                        <div class="form-group col-md-6 text-right">
+                          <button type="button" (click)="next()" style="margin-bottom: 15px;" class="btn btn-danger">Next<i class="fas fa-arrow-right"></i></button>
+                        </div>
+                      </div> -->
+                      <div class="col-md-6 text-right">
+                        <button type="button" (click)="next()" style="margin-bottom: 15px;" class="btn btn-danger">Next<i class="fas fa-arrow-right"></i></button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- third-part -->
+              <div id="third-part" class="content" role="tabpanel" aria-labelledby="third-part-trigger">
+                <div style="width: 1700px; background-color: white; position: relative; left: 0px;">
+                  <div style="margin: 0px 45px;">
+                    <label for="" style="margin-top: 20px;"></label>
+                    <div class="form-row">
+                      <fieldset id="group9" class="form-group col-md-6">
+                      <b>Max days in arrears</b>: 
+                      <br>
+                      <ul class="list-group">
+                        <li class="list-group-item" *ngFor="let it of maxDaysList">
+                            <input type="radio" [(ngModel)]="maxDaysSelected" name="group9" [value]="it.value"
+                                (change)="onMaxDaysChange($event.target)"  />
+                            {{it.subAttribute}}
+                        </li>
+                    </ul>
+                      </fieldset>
+                        <fieldset id="group10" class="form-group col-md-6">
+                          <b>Client for (months)</b>:
+                            <br>
+                            <ul class="list-group">
+                              <li class="list-group-item" *ngFor="let item of clientList">
+                                  <input type="radio" [(ngModel)]="clientSelected" name="group10" [value]="item.value"
+                                      (change)="onClientMonthChange(item)"  />
+                                  {{item.subAttribute}}
+                              </li>
+                          </ul>
+                        </fieldset>
+                    </div>
+  
+                    <div class="form-row">
+                      <fieldset id="group11" class="form-group col-md-6">
+                       <b>Transactions per month (average)</b>:
+                      <br>
+                      <ul class="list-group">
+                          <li class="list-group-item" *ngFor="let item of transactionList">
+                              <input type="radio" [(ngModel)]="transactionSelected" name="group11" [value]="item.value"
+                                  (change)="onTransactionChange(item)"  />
+                              {{item.subAttribute}}
+                          </li>
+                      </ul>
+                      </fieldset>
+                      <fieldset id="group12" class="form-group col-md-6">
+                        <b>Subjective perception</b>:
+                        <br>
+                          <ul class="list-group">
+                            <li class="list-group-item" *ngFor="let item of subjectiveList">
+                                <input type="radio" [(ngModel)]="subjectiveSelected" name="group12" [value]="item.value"
+                                    (change)="onSubjectiveChange($event.target)"  />
+                                {{item.subAttribute}}
+                            </li>
+                        </ul>
+                      </fieldset>
+                  </div>
+  
+                  <div class="form-group row">
+                    <div class="col-md-6 text-left">
+                      <button type="button" (click)="previous()" style="margin-bottom: 15px;" class="btn btn-danger"><i class="fas fa-arrow-left"></i>Back</button>
+                   </div>
+                    <div class="col-md-6 text-right">
+                      <button type="button" (click)="next()" style="margin-bottom: 15px;" class="btn btn-danger">Next<i class="fas fa-arrow-right"></i></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+              <!-- third-part end -->
+             
+            <!-- fourth-part -->
+            <div id="fourth-part" class="content" role="tabpanel" aria-labelledby="fourth-part-trigger">
+              <div style="width: 1700px; background-color: white; position: relative; left: 0px;">
+                <div style="margin: 0px 45px;">
+                  <label for="" style="margin-top: 20px;"></label>
+                  <div class="form-row">
+                    <fieldset id="group13" class="form-group col-md-6">
+                    <b>Express loans taken</b>: 
+                    <br>
+                    <ul class="list-group">
+                      <li class="list-group-item" *ngFor="let it of expressLoanList">
+                          <input type="radio" [(ngModel)]="expressLoanSelected" name="group13" [value]="it.value"
+                              (change)="onExpressChange($event.target)"  />
+                          {{it.subAttribute}}
+                      </li>
+                  </ul>
+                    </fieldset>
+                      <fieldset id="group14" class="form-group col-md-6">
+                        <b>Days in arrears previous Express loan</b>:
+                          <br>
+                          <ul class="list-group">
+                            <li class="list-group-item" *ngFor="let item of daysArrearsList">
+                                <input type="radio" [(ngModel)]="daysArrearsSelected" name="group14" [value]="item.value"
+                                    (change)="onDaysArrearsChange(item)"  />
+                                {{item.subAttribute}}
+                            </li>
+                        </ul>
+                      </fieldset>
+                  </div>
+
+                  <div class="form-row">
+                    <fieldset id="group15" class="form-group col-md-6">
+                     <b>Days in arrears next-to-last Express loan</b>:
+                    <br>
+                    <ul class="list-group">
+                        <li class="list-group-item" *ngFor="let item of daysArrearsNeList">
+                            <input type="radio" [(ngModel)]="daysArrearsNeSelected" name="group15" [value]="item.value"
+                                (change)="onDaysArrearsNeChange(item)"  />
+                            {{item.subAttribute}}
+                        </li>
+                    </ul>
+                    </fieldset>
+                    <fieldset id="group16" class="form-group col-md-6">
+                      <b>Days in arrears second-to-last Express loan</b>:
+                      <br>
+                        <ul class="list-group">
+                          <li class="list-group-item" *ngFor="let item of daysArrearsSeList">
+                              <input type="radio" [(ngModel)]="daysArrearsSeSelected" name="group16" [value]="item.value"
+                                  (change)="ondaysArrearsSecChange($event.target)"  />
+                              {{item.subAttribute}}
+                          </li>
+                      </ul>
+                    </fieldset>
+                </div>
+
+                <div class="form-group row">
+                  <div class="col-md-6 text-left">
+                    <button type="button" (click)="previous()" style="margin-bottom: 15px;" class="btn btn-danger"><i class="fas fa-arrow-left"></i>Back</button>
+                 </div>
+                  <div class="col-md-6 text-right">
+                    <button type="button" (click)="next()" style="margin-bottom: 15px;" class="btn btn-danger">Next<i class="fas fa-arrow-right"></i></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+            <!-- fourth-part end -->
+
+            <!-- fifth-part -->
+            <div id="fifth-part" class="content" role="tabpanel" aria-labelledby="fifth-part-trigger">
+              <div style="width: 1700px; background-color: white; position: relative; left: 0px;">
+                <div style="margin: 0px 45px;">
+                  <label for="" style="margin-top: 20px;"></label>
+                  <div class="form-row">
+                    <fieldset id="group17" class="form-group col-md-6">
+                    <b>Type of business</b>: 
+                    <br>
+                    <ul class="list-group">
+                      <li class="list-group-item" *ngFor="let it of expressLoanList">
+                          <input type="radio" [(ngModel)]="businessTypeSelected" name="group17" [value]="it.value"
+                              (change)="onBusinessTypeChange($event.target)"  />
+                          {{it.subAttribute}}
+                      </li>
+                  </ul>
+                    </fieldset>
+                      <fieldset id="group18" class="form-group col-md-6">
+                        <b>Experience business (years)</b>:
+                          <br>
+                          <ul class="list-group">
+                            <li class="list-group-item" *ngFor="let item of expBusinessList">
+                                <input type="radio" [(ngModel)]="expBusinessSelected" name="group18" [value]="item.value"
+                                    (change)="onExpBusinessChange(item)"  />
+                                {{item.subAttribute}}
+                            </li>
+                        </ul>
+                      </fieldset>
+                  </div>
+
+                  <div class="form-row">
+                    <fieldset id="group19" class="form-group col-md-6">
+                     <b>Marital status</b>:
+                    <br>
+                    <ul class="list-group">
+                        <li class="list-group-item" *ngFor="let item of maritalStatusList">
+                            <input type="radio" [(ngModel)]="maritalStatusSelected" name="group19" [value]="item.value"
+                                (change)="onMaritalStatusChange(item)"  />
+                            {{item.subAttribute}}
+                        </li>
+                    </ul>
+                    </fieldset>
+                    <fieldset id="group20" class="form-group col-md-6">
+                      <b>Value of assets</b>:
+                      <br>
+                        <ul class="list-group">
+                          <li class="list-group-item" *ngFor="let item of valueAssetsList">
+                              <input type="radio" [(ngModel)]="valueAssetsSelected" name="group20" [value]="item.value"
+                                  (change)="onValueAssetsChange($event.target)"  />
+                              {{item.subAttribute}}
+                          </li>
+                      </ul>
+                    </fieldset>
+                </div>
+
+                <div class="form-group row">
+                  <div class="col-md-6 text-left">
+                    <button type="button" (click)="previous()" style="margin-bottom: 15px;" class="btn btn-danger"><i class="fas fa-arrow-left"></i>Back</button>
+                 </div>
+                  <div class="col-md-6 text-right">
+                    <button type="submit" style="margin-bottom: 15px;" class="btn btn-danger"><i class="fas fa-database"></i>Submit</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+            <!-- fifth-part end -->
+            </form>
+            
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+<subattrModal #subattrModal></subattrModal>
+
+  </div>

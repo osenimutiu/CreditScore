@@ -1,0 +1,67 @@
+﻿<div bsModal #createOrEditModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="createOrEditModal" aria-hidden="true" [config]="{backdrop: 'static'}">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <form *ngIf="active" #logisticRegressionInputForm="ngForm" novalidate (ngSubmit)="save()" autocomplete="off">
+                <div class="modal-header">
+                    <h4 class="modal-title">
+                        <span *ngIf="logisticRegressionInput.id">{{l("EditLogisticRegressionInput")}}</span>
+                        <span *ngIf="!logisticRegressionInput.id">{{l("CreateNewLogisticRegressionInput")}}</span>
+                    </h4>
+                    <button type="button" class="close" (click)="close()" aria-label="Close" [disabled]="saving">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                 
+
+
+								<div class="form-group">
+									<label for="LogisticRegressionInput_Location">{{l("Location")}}</label>
+									<input type="number" #LogisticRegressionInput_Location="ngModel" id="LogisticRegressionInput_Location" class="form-control" [(ngModel)]="logisticRegressionInput.location" name="Location"   />
+									<validation-messages [formCtrl]="LogisticRegressionInput_Location"></validation-messages>
+								</div>
+					
+								<div class="form-group">
+									<label for="LogisticRegressionInput_Rent_bin">{{l("Rent_bin")}}</label>
+									<input type="number" #LogisticRegressionInput_Rent_bin="ngModel" id="LogisticRegressionInput_Rent_bin" class="form-control" [(ngModel)]="logisticRegressionInput.rent_bin" name="Rent_bin"   />
+									<validation-messages [formCtrl]="LogisticRegressionInput_Rent_bin"></validation-messages>
+								</div>
+					
+								<div class="form-group">
+									<label for="LogisticRegressionInput_Rent_to_Income_bin">{{l("Rent_to_Income_bin")}}</label>
+									<input type="number" #LogisticRegressionInput_Rent_to_Income_bin="ngModel" id="LogisticRegressionInput_Rent_to_Income_bin" class="form-control" [(ngModel)]="logisticRegressionInput.rent_to_Income_bin" name="Rent_to_Income_bin"   />
+									<validation-messages [formCtrl]="LogisticRegressionInput_Rent_to_Income_bin"></validation-messages>
+								</div>
+					
+								<div class="form-group">
+									<label for="LogisticRegressionInput_Return_on_Assets_bin">{{l("Return_on_Assets_bin")}}</label>
+									<input type="number" #LogisticRegressionInput_Return_on_Assets_bin="ngModel" id="LogisticRegressionInput_Return_on_Assets_bin" class="form-control" [(ngModel)]="logisticRegressionInput.return_on_Assets_bin" name="Return_on_Assets_bin"   />
+									<validation-messages [formCtrl]="LogisticRegressionInput_Return_on_Assets_bin"></validation-messages>
+								</div>
+					
+								<div class="form-group">
+									<label for="LogisticRegressionInput_Total_assets_bin">{{l("Total_assets_bin")}}</label>
+									<input type="number" #LogisticRegressionInput_Total_assets_bin="ngModel" id="LogisticRegressionInput_Total_assets_bin" class="form-control" [(ngModel)]="logisticRegressionInput.total_assets_bin" name="Total_assets_bin"   />
+									<validation-messages [formCtrl]="LogisticRegressionInput_Total_assets_bin"></validation-messages>
+								</div>
+					
+								<br/><div class="m-checkbox-list">
+									<label for="LogisticRegressionInput_Good_Bad" class="kt-checkbox">
+										<input id="LogisticRegressionInput_Good_Bad" #LogisticRegressionInput_Good_Bad="ngModel" type="checkbox" name="Good_Bad" [(ngModel)]="logisticRegressionInput.good_Bad"> 
+										{{l("Good_Bad")}}
+										<span></span>
+									</label>
+									<validation-messages [formCtrl]="LogisticRegressionInput_Good_Bad"></validation-messages>
+								</div>
+					
+
+                </div>
+                <div class="modal-footer">
+                    <button [disabled]="saving" type="button" class="btn btn-default" (click)="close()">{{l("Cancel")}}</button>
+                    <button type="submit" class="btn btn-primary blue" [disabled]="!logisticRegressionInputForm.form.valid" [buttonBusy]="saving" [busyText]="l('SavingWithThreeDot')"><i class="fa fa-save"></i> <span>{{l("Save")}}</span></button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,91 @@
+<div [@routerTransition]>
+  
+    <div class="content d-flex flex-column flex-column-fluid">
+     <sub-header [title]="'Vintage Analysis' | localize">
+          <div role="actions">
+          <button (click)="reload()" class="btn btn-outline-danger"><i class="fas fa-sync"></i> Refresh</button>
+      </div>
+              </sub-header> 
+      
+      <!-- <div [class]="containerClass"> -->
+      <div [class]="">
+          <div class="card card-custom gutter-b">
+            
+              <div class="card-body">
+                  <form class="form" autocomplete="off">
+                      <div>
+                          <div class="row align-items-center">
+                              <div class="col-xl-12">
+                                 <div class="col-xl-3">
+                                    <div class="form-group m-form__group align-items-center">
+                                        <div class="input-group">
+                                        </div>
+                                        <br>
+                                    </div>
+                                  </div>
+                              </div>
+                          </div>
+                           
+                      </div>
+                  </form>
+                  <br>
+                  <br>
+                  <br>
+                  <table class="table table-borderless">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>#</th>
+                            <th>FullDate</th>
+                            <th>FullYear</th>
+                            <th>FullMonth</th>
+                            <th>FullCount</th>
+                            <th>Q1(%)</th>
+                            <th>Q2(%)</th>
+                            <th>Q3(%)</th>
+                            <th>Q4(%)</th>
+                            <th>Q5(%)</th>
+                            <th>Q6(%)</th>
+                            <th>Q7(%)</th>
+                            <th>Q8(%)</th>
+                            <th>Q9(%)</th>
+                            <th>Q10(%)</th>
+                            <th>Q11(%)</th>
+                            <th>Q12(%)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let cal of vintages | paginate: { itemsPerPage: 10, currentPage: p }; let i = index;">
+                            <td>{{i + 1}}</td>
+                            <td>{{cal.fullDate}}</td>
+                            <td>{{cal.fullYear}}</td>
+                            <td>{{cal.fullMonth}}</td>
+                            <td>{{cal.fullCount}}</td>
+                            <td>{{cal.q1 | number : '.0-2'}}</td>
+                            <td>{{cal.q2 | number : '.0-2'}}</td>
+                            <td>{{cal.q3 | number : '.0-2'}}</td>
+                            <td>{{cal.q4 | number : '.0-2'}}</td>
+                            <td>{{cal.q5 | number : '.0-2'}}</td>
+                            <td>{{cal.q6 | number : '.0-2'}}</td>
+                            <td>{{cal.q7 | number : '.0-2'}}</td>
+                            <td>{{cal.q8 | number : '.0-2'}}</td>
+                            <td>{{cal.q9 | number : '.0-2'}}</td>
+                            <td>{{cal.q10 | number : '.0-2'}}</td>
+                            <td>{{cal.q11 | number : '.0-2'}}</td>
+                            <td>{{cal.q12 | number : '.0-2'}}</td>
+                        </tr>
+                    </tbody>
+                </table> 
+                <div class="row">
+                    <div class="col-md-2">
+                        <!-- <input type="text" class="form-control" value="{{totalamount | number : '.0-0'}}" disabled="true" style="width: 150px;"> -->
+                       </div>
+                    <div class="col-md-10"> 
+                        <pagination-controls (pageChange)="p = $event" class="pull-right"></pagination-controls>
+                    </div>
+                </div>
+               
+              </div>
+          </div>
+      </div>
+    </div>
+  </div>

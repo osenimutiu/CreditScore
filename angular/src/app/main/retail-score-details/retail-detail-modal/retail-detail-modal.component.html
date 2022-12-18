@@ -1,0 +1,290 @@
+<div bsModal #modal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal" aria-hidden="true" [config]="{backdrop: 'static'}">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <form *ngIf="active" #form="ngForm" novalidate (ngSubmit)="save()">
+                <div class="modal-header" style="background-color: #e90c0c;">
+                    <h4 class="modal-title">
+                        <span class=" text-center text-white"><i class="fas fa-wrench"></i>&nbsp;&nbsp;{{l("Edit")}}</span>
+                    </h4>
+                    <button type="button" class="close" (click)="close()" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                       <div class="form-row">
+                        <div class="form-group col-md-12">  
+                            <label><b>{{l("FullName")}}</b></label>
+                            <select name="nameId" class="form-control" [(ngModel)]="retail.nameId" [disabled]="true">
+                                <option *ngFor="let x of custList" value="{{x.id}}">{{x.firstName}} - {{x.lastName}}</option>
+                              </select>
+                              <!-- <input class="form-control" name="nameId" [(ngModel)]="retail.nameId" required> -->
+                        </div>
+                        <!-- <div class="form-group col-md-6">  
+                            <label>{{l("LastName")}}</label>
+                             <input class="form-control" name="param2" [(ngModel)]="param2" required>
+                        </div> -->
+                    </div>
+                    <!-- <div class="form-row">
+                        <div class="form-group col-md-6"> 
+                            <label>{{l("Account Number")}}</label>
+                             <input class="form-control" name="param3" [(ngModel)]="param3" required>
+                        </div>
+                        <div class="form-group col-md-6"> 
+                            <label>{{l("BVN")}}</label>
+                             <input class="form-control" name="param4" [(ngModel)]="param4" required>
+                        </div>
+                        
+                    </div> -->
+                    <div class="form-row">
+                        <div id="group1" class="form-group col-md-6"> 
+                            <label><b>{{l("Gender")}}</b></label>
+                            <br>
+                            <ul class="list-group">
+                                <li class="list-group-item" *ngFor="let item of genderList">
+                                    <input type="radio" [(ngModel)]="genderSelected" name="group1" [value]="item.value"
+                                        (change)="onGenderChange(item)"  />
+                                    {{item.subAttribute}}
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="form-group col-md-6" id="group2"> 
+                            <label><b>{{l("Age")}}</b></label>
+                            <br>
+                        <ul class="list-group">
+                          <li class="list-group-item" *ngFor="let item of ageList">
+                              <input type="radio" [(ngModel)]="ageSelected" name="group2" [value]="item.value"
+                                  (change)="onAgeChange(item)"  />
+                              {{item.subAttribute}}
+                          </li>
+                      </ul>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div id="group3" class="form-group col-md-6"> 
+                            <label><b>{{l("Has been saving for (years)")}}</b></label>
+                            <br>
+                        <ul class="list-group">
+                          <li class="list-group-item" *ngFor="let it of savingList">
+                              <input type="radio" [(ngModel)]="savingSelected" name="group3" [value]="it.value"
+                                  (change)="onSavingChange($event.target)"  />
+                              {{it.subAttribute}}
+                          </li>
+                      </ul>
+                        </div>
+                        <div class="form-group col-md-6" id="group4"> 
+                            <label><b>{{l("Deposits per month")}}</b></label>
+                            <br>
+                            <ul class="list-group">
+                                <li class="list-group-item" *ngFor="let item of depositList">
+                                    <input type="radio" [(ngModel)]="depositSelected" name="group4" [value]="item.value"
+                                        (change)="onDepositChange($event.target)"  />
+                                    {{item.subAttribute}}
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div id="group5" class="form-group col-md-6"> 
+                            <label><b>{{l("Withdrawals per month")}}</b></label>
+                            <br>
+                            <ul class="list-group">
+                              <li class="list-group-item" *ngFor="let it of withdrawalList">
+                                  <input type="radio" [(ngModel)]="withdrawalSelected" name="group5" [value]="it.value"
+                                      (change)="onWithdrawalChange($event.target)"  />
+                                  {{it.subAttribute}}
+                              </li>
+                          </ul>
+                        </div>
+                        <div class="form-group col-md-6" id="group6"> 
+                            <label><b>{{l("Net change - savings balance (past 6 months)")}}</b></label>
+                            <br>
+                              <ul class="list-group">
+                                <li class="list-group-item" *ngFor="let item of netChangeList">
+                                    <input type="radio" [(ngModel)]="netChangeSelected" name="group6" [value]="item.value"
+                                        (change)="onNetChange(item)"  />
+                                    {{item.subAttribute}}
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div id="group7" class="form-group col-md-6"> 
+                            <label><b>{{l("Current savings balance")}}</b></label>
+                            <br>
+                            <ul class="list-group">
+                                <li class="list-group-item" *ngFor="let item of currentSavingList">
+                                    <input type="radio" [(ngModel)]="currentSavingSelected" name="group7" [value]="item.value"
+                                        (change)="onCurrentSavingChange(item)"  />
+                                    {{item.subAttribute}}
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="form-group col-md-6" id="group8"> 
+                            <label><b>{{l("Number of credit-bureau queries")}}</b></label>
+                            <br>
+                            <ul class="list-group">
+                                <li class="list-group-item" *ngFor="let item of numberCreditsList">
+                                    <input type="radio" [(ngModel)]="numberCreditsSelected" name="group8" [value]="item.value"
+                                        (change)="onNumberCreditChange($event.target)"  />
+                                    {{item.subAttribute}}
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div id="group9" class="form-group col-md-6"> 
+                            <label><b>{{l("Max days in arrears")}}</b></label>
+                            <br>
+                            <ul class="list-group">
+                                <li class="list-group-item" *ngFor="let it of maxDaysList">
+                                    <input type="radio" [(ngModel)]="maxDaysSelected" name="group9" [value]="it.value"
+                                        (change)="onMaxDaysChange($event.target)"  />
+                                    {{it.subAttribute}}
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="form-group col-md-6" id="group10"> 
+                            <label><b>{{l("Client for (months)")}}</b></label>
+                            <br>
+                            <ul class="list-group">
+                                <li class="list-group-item" *ngFor="let item of clientList">
+                                    <input type="radio" [(ngModel)]="clientSelected" name="group10" [value]="item.value"
+                                        (change)="onClientMonthChange(item)"  />
+                                    {{item.subAttribute}}
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div id="group11" class="form-group col-md-6"> 
+                            <label><b>{{l("Transactions per month (average)")}}</b></label>
+                            <br>
+                            <ul class="list-group">
+                                <li class="list-group-item" *ngFor="let item of transactionList">
+                                    <input type="radio" [(ngModel)]="transactionSelected" name="group11" [value]="item.value"
+                                        (change)="onTransactionChange(item)"  />
+                                    {{item.subAttribute}}
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="form-group col-md-6" id="group12"> 
+                            <label><b>{{l("Subjective perception")}}</b></label>
+                            <br>
+                            <ul class="list-group">
+                                <li class="list-group-item" *ngFor="let item of subjectiveList">
+                                    <input type="radio" [(ngModel)]="subjectiveSelected" name="group12" [value]="item.value"
+                                        (change)="onSubjectiveChange($event.target)"  />
+                                    {{item.subAttribute}}
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div id="group13" class="form-group col-md-6"> 
+                            <label><b>{{l("Express loans taken")}}</b></label>
+                            <br>
+                            <ul class="list-group">
+                                <li class="list-group-item" *ngFor="let it of expressLoanList">
+                                    <input type="radio" [(ngModel)]="expressLoanSelected" name="group13" [value]="it.value"
+                                        (change)="onExpressChange($event.target)"  />
+                                    {{it.subAttribute}}
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="form-group col-md-6" id="group14"> 
+                            <label><b>{{l("Days in arrears previous Express loan")}}</b></label>
+                            <br>
+                            <ul class="list-group">
+                                <li class="list-group-item" *ngFor="let item of daysArrearsList">
+                                    <input type="radio" [(ngModel)]="daysArrearsSelected" name="group14" [value]="item.value"
+                                        (change)="onDaysArrearsChange(item)"  />
+                                    {{item.subAttribute}}
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div id="group15" class="form-group col-md-6"> 
+                            <label><b>{{l("Days in arrears next-to-last Express loan")}}</b></label>
+                            <br>
+                            <ul class="list-group">
+                                <li class="list-group-item" *ngFor="let item of daysArrearsNeList">
+                                    <input type="radio" [(ngModel)]="daysArrearsNeSelected" name="group15" [value]="item.value"
+                                        (change)="onDaysArrearsNeChange(item)"  />
+                                    {{item.subAttribute}}
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="form-group col-md-6" id="group16"> 
+                            <label><b>{{l("Days in arrears second-to-last Express loan")}}</b></label>
+                            <br>
+                            <ul class="list-group">
+                                <li class="list-group-item" *ngFor="let item of daysArrearsSeList">
+                                    <input type="radio" [(ngModel)]="daysArrearsSeSelected" name="group16" [value]="item.value"
+                                        (change)="ondaysArrearsSecChange($event.target)"  />
+                                    {{item.subAttribute}}
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div id="group17" class="form-group col-md-6"> 
+                            <label><b>{{l("Type of business")}}</b></label>
+                            <br>
+                            <ul class="list-group">
+                                <li class="list-group-item" *ngFor="let it of expressLoanList">
+                                    <input type="radio" [(ngModel)]="businessTypeSelected" name="group17" [value]="it.value"
+                                        (change)="onBusinessTypeChange($event.target)"  />
+                                    {{it.subAttribute}}
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="form-group col-md-6" id="group18"> 
+                            <label><b>{{l("Experience business (years)")}}</b></label>
+                            <br>
+                            <ul class="list-group">
+                                <li class="list-group-item" *ngFor="let item of expBusinessList">
+                                    <input type="radio" [(ngModel)]="expBusinessSelected" name="group18" [value]="item.value"
+                                        (change)="onExpBusinessChange(item)"  />
+                                    {{item.subAttribute}}
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div id="group19" class="form-group col-md-6"> 
+                            <label><b>{{l("Marital status")}}</b></label>
+                            <br>
+                            <ul class="list-group">
+                                <li class="list-group-item" *ngFor="let item of maritalStatusList">
+                                    <input type="radio" [(ngModel)]="maritalStatusSelected" name="group19" [value]="item.value"
+                                        (change)="onMaritalStatusChange(item)"  />
+                                    {{item.subAttribute}}
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="form-group col-md-6" id="group20"> 
+                            <label><b>{{l("Value of assets")}}</b></label>
+                            <br>
+                            <ul class="list-group">
+                                <li class="list-group-item" *ngFor="let item of valueAssetsList">
+                                    <input type="radio" [(ngModel)]="valueAssetsSelected" name="group20" [value]="item.value"
+                                        (change)="onValueAssetsChange($event.target)"  />
+                                    {{item.subAttribute}}
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+               <div class="modal-footer">
+                    <button [disabled]="saving" type="button" class="btn btn-secondary" (click)="close()">{{l("Cancel")}}</button>
+                    <button type="submit" class="btn btn-primary" [disabled]="!form.valid" [buttonBusy]="saving" [busyText]="l('SavingWithThreeDot')"><i class="fal fa-battery-bolt"></i> <span>{{l("Save")}}</span></button>
+                </div>
+            </form>
+        </div>
+       
+    </div>
+</div>
+
+

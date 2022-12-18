@@ -1,0 +1,49 @@
+<div bsModal #modal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="viewRequestModal" aria-hidden="true" [config]="{backdrop: 'static'}">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #e90c0c;">
+                <h4 class="modal-title">
+                    <span class=" text-center text-white">Report</span>
+                </h4>
+                <button type="button" class="close" (click)="close()" aria-label="Close">
+                    <span aria-hidden="false">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-12 mb-6">
+                        <h6>Select Customers:</h6>
+                        <select name="ent" id="ent" style="width: 750px;" class="form-control" [(ngModel)]="id" (change)="getReportForView()">
+                            <option *ngFor="let x of reports" value="{{x.id}}">{{x.customerName}}</option>
+                        </select>
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>ACCOUNT NUMBER : {{ item.accountNumber }}</h6>
+                        
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>CUTOFF : {{ totalCutOff }}</h6>
+                        
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>TOTAL SCORE : {{ item.totalScore}}</h6>
+                        
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>RATING : {{ item.qualitativeRating }}</h6>
+                        
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>DECISION : <span [style.color]="getColorDecision(decide)">{{ decide }}</span></h6>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button [disabled]="saving" type="button" class="btn btn-outline-danger" (click)="close()">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+

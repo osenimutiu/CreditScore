@@ -1,0 +1,49 @@
+<div appBsModal #createInputDataModal="bs-modal" class="modal fade" tabindex="-1" role="dialog"
+    aria-labelledby="myLargeModalLabel" aria-hidden="true" [config]="{backdrop: 'static'}">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <form *ngIf="active" #inputDataForm="ngForm" novalidate (ngSubmit)="saveAttributes()">
+            <div class="modal-header bg-primary">
+                <h5 class="modal-title text-center">{{"Select Attributes" | localize}}</h5>
+                <button type="button" class="close" [attr.aria-label]="l('Close')" (click)="close()">
+                    <i aria-hidden="true" class="ki ki-close"></i>
+                </button>
+            </div>
+            <div class="modal-body" (onRowSelect)="checkUncheckAll()">
+                <div class="row">  
+                  <div class="col-md-3" style="font-size:18px">Extracted <br> Attributes</div>  
+                      <div class="col-md-9">
+                        <label for="Select All / Unselect All" class="form-control">
+                          <input type="checkbox" name="list_name" value="" (change)="bulk($event)">  <span> Select All / Unselect All</span>
+                      
+                        <!-- <input type="checkbox" name="list_name" value="{{x.id}}" (change)="onChangeb(x.attributes,$event)">  <span> Select All / Unselect All</span> -->
+                      </label>
+                        <!-- <label for="Select All / Unselect All" class="form-control">  $event.target.value bulk($event)
+                          <input type="checkbox" value="{{x.id}}" (change)="onChange(x.attributes,$event)">  
+                            {{x.attributes}}<br>   
+                        </label> -->
+                 
+                       <label class="form-control" *ngFor="let x of data">  
+                          <input type="checkbox" value="{{x.id}}" [checked]="checks" (change)="onChange(x.attributes,$event)">  
+                          
+                            {{x.attributes}}<br>  
+                
+                        </label>  
+                        <br>           
+                        <label style="color:#47d195;">{{values}}</label>    
+                        <label style="font-size:12px; color:#47d195;">({{count}}) selected</label>    
+                        <p style="font-size:12px;" class="text-danger">{{errorMsg}}</p><br>       
+                      </div>   
+                    <br>           
+                  </div>
+               
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light-primary font-weight-bold" (click)="close()" [disabled]="saving">{{"Cancel" | localize}}</button>
+                <button type="submit" class="btn btn-primary" [disabled]="!inputDataForm.form.valid" [buttonBusy]="saving" [busyText]="l('SavingWithThreeDot')"><i class="fal fa-battery-bolt"></i> <span>{{l("Save")}}</span></button>
+            </div>
+         </form>
+        </div>
+    </div>
+</div>

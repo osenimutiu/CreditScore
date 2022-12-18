@@ -1,0 +1,177 @@
+<div bsModal #modal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal" aria-hidden="true" [config]="{backdrop: 'static'}">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <form *ngIf="active" #form="ngForm" novalidate (ngSubmit)="save()">
+                <div class="modal-header" style="background-color: #e90c0c;">
+                    <h4 class="modal-title">
+                        <span class=" text-center text-white"><i class="fas fa-wrench"></i>&nbsp;&nbsp;{{l("Cooperate")}}</span>
+                    </h4>
+                    <button type="button" class="close" (click)="close()" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <!-- shhs -->
+                <div class="modal-body">
+                       <div class="form-row">
+                        <div class="form-group col-md-6">  
+                            <label><b>{{l("CompanyName")}}</b></label>
+                             <input class="form-control" name="param1" [(ngModel)]="param1" required>
+                        </div>
+                        <div class="form-group col-md-6">  
+                            <label><b>{{l("RCNumber")}}</b></label>
+                             <input class="form-control" name="param2" [(ngModel)]="param2" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6"> 
+                            <label><b>{{l("Account Number")}}</b></label>
+                             <input class="form-control" min="10" max="10" type="number" name="param3" [(ngModel)]="param3" required maxlength="10">
+                        </div>
+                        
+                    </div>
+                    <div class="form-row">
+                        <div id="group1" class="form-group col-md-6"> 
+                            <label><b>{{l("Cashflow")}}</b></label>
+                            <br>
+                            <ul class="list-group">
+                                <li class="list-group-item" *ngFor="let item of cashflowList">
+                                    <input type="radio" [(ngModel)]="cashflowSelected" name="group1" [value]="item.value"
+                                        (change)="oncashflowChange(item)"  />
+                                    {{item.qualitative}}
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="form-group col-md-6" id="group2"> 
+                            <label><b>{{l("Management Experience")}}</b></label>
+                            <br>
+                        <ul class="list-group">
+                            <li class="list-group-item" *ngFor="let item of ManagementList">
+                                <input type="radio" [(ngModel)]="ManagementSelected" name="group2" [value]="item.value"
+                                    (change)="onManagementChange(item)"  />
+                                {{item.qualitative}}
+                            </li>
+                      </ul>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div id="group3" class="form-group col-md-6"> 
+                            <label><b>{{l("Trend and Ratios")}}</b></label>
+                            <br>
+                        <ul class="list-group">
+                            <li class="list-group-item" *ngFor="let it of TrendList">
+                                <input type="radio" [(ngModel)]="TrendSelected" name="group3" [value]="it.value"
+                                    (change)="onTrendChange($event.target)"  />
+                                {{it.qualitative}}
+                            </li>
+                      </ul>
+                        </div>
+                        <div class="form-group col-md-6" id="group4"> 
+                            <label><b>{{l("Liquidity")}}</b></label>
+                            <br>
+                            <ul class="list-group">
+                                <li class="list-group-item" *ngFor="let item of LiquidityList">
+                                    <input type="radio" [(ngModel)]="LiquiditySelected" name="group4" [value]="item.value"
+                                        (change)="onLiquidityChange($event.target)"  />
+                                    {{item.qualitative}}
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div id="group5" class="form-group col-md-6"> 
+                            <label><b>{{l("Leverage")}}</b></label>
+                            <br>
+                            <ul class="list-group">
+                                <li class="list-group-item" *ngFor="let it of LeverageList">
+                                    <input type="radio" [(ngModel)]="LeverageSelected" name="group5" [value]="it.value"
+                                        (change)="onLeverageChange($event.target)"  />
+                                    {{it.qualitative}}
+                                </li>
+                          </ul>
+                        </div>
+                        <div class="form-group col-md-6" id="group6"> 
+                            <label><b>{{l("Target Market")}}</b></label>
+                            <br>
+                              <ul class="list-group">
+                                <li class="list-group-item" *ngFor="let item of TargetList">
+                                    <input type="radio" [(ngModel)]="TargetSelected" name="group6" [value]="item.value"
+                                        (change)="onTargetChange(item)"  />
+                                    {{item.qualitative}}
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div id="group7" class="form-group col-md-6"> 
+                            <label><b>{{l("legal/Regulatory/Governance-Environment")}}</b></label>
+                            <br>
+                            <ul class="list-group">
+                                <li class="list-group-item" *ngFor="let item of legalList">
+                                    <input type="radio" [(ngModel)]="legalSelected" name="group7" [value]="item.value"
+                                        (change)="onlegalChange(item)"  />
+                                    {{item.qualitative}}
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="form-group col-md-6" id="group8">  
+                            <label><b>{{l("Industrial Cyclicality")}}</b></label>
+                            <br>
+                            <ul class="list-group">
+                                <li class="list-group-item" *ngFor="let item of IndustrialList">
+                                    <input type="radio" [(ngModel)]="IndustrialSelected" name="group8" [value]="item.value"
+                                        (change)="onIndustrialChange($event.target)"  />
+                                    {{item.qualitative}}
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div id="group9" class="form-group col-md-6"> 
+                            <label><b>{{l("Years in Business")}}</b></label>
+                            <br>
+                            <ul class="list-group">
+                                <li class="list-group-item" *ngFor="let it of YearsList">
+                                    <input type="radio" [(ngModel)]="YearsSelected" name="group9" [value]="it.value"
+                                        (change)="onYearsChange($event.target)"  />
+                                    {{it.qualitative}}
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="form-group col-md-6" id="group10"> 
+                            <label><b>{{l("Seasoning/Credit-Relationship")}}</b></label>
+                            <br>
+                            <ul class="list-group">
+                                <li class="list-group-item" *ngFor="let item of SeasoningList">
+                                    <input type="radio" [(ngModel)]="SeasoningSelected" name="group10" [value]="item.value"
+                                        (change)="onSeasoningChange(item)"  />
+                                    {{item.qualitative}}
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div id="group11" class="form-group col-md-6"> 
+                            <label><b>{{l("Character issues")}}</b></label>
+                            <br>
+                            <ul class="list-group">
+                                <li class="list-group-item" *ngFor="let item of CharacterList">
+                                    <input type="radio" [(ngModel)]="CharacterSelected" name="group11" [value]="item.value"
+                                        (change)="onCharacterChange(item)"  />
+                                    {{item.qualitative}}
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                   
+                </div>
+                <p style="color: red; margin-left: 20px;">{{existResponse}}</p>
+                <!-- <p style="color: seagreen; margin-left: 20px;">{{nonExistResponse}}</p> -->
+                <div class="modal-footer">
+                    <button [disabled]="saving" type="button" class="btn btn-secondary" (click)="close()">{{l("Cancel")}}</button>
+                    <button type="submit" class="btn btn-primary" [disabled]="!form.valid" [buttonBusy]="saving" [busyText]="l('SavingWithThreeDot')"><i class="fal fa-battery-bolt"></i> <span>{{l("Save")}}</span></button>
+                </div>
+            </form>
+        </div>
+       
+    </div>
+</div>

@@ -1,0 +1,90 @@
+<div [@routerTransition]>
+
+    <div class="content d-flex flex-column flex-column-fluid">
+        <sub-header [title]="'Data Visualisation' | localize">
+            <div role="actions">
+                <button (click)="reload()" class="btn btn-outline-danger"><i class="fas fa-sync"></i>
+                    {{l("Refresh")}}</button>
+            </div>
+        </sub-header>
+        <div [class]="containerClass">
+            <div class="card card-custom gutter-b">
+                <div class="card-body">
+                    <tabset>
+                        <tab class="p-5" heading="{{'Location' | localize}}">
+                            <div class="row align-items-center">
+                                <select #myInput [(ngModel)]="location" class="form-control"
+                                            (ngModelChange)='onlocationSelected($event)' style="width: 400px;">
+                                            <option value="All">All</option>
+                                            <option *ngFor="let x of listDistinctlocation" value="{{x}}">{{x}}</option>
+                                        </select>
+                                        <br>
+                                        <br>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <span style="color: red; font-size: 20px;">{{modifiedText}}</span>
+                                        <p style="font-size: 20px; font-weight: bold; margin-top: 14px;">{{locationTitleRaw}}</p>
+                                        <br>
+                                        <div class="6" *ngIf="isActive">
+                                            <div class="chart-container"
+                                                style="position: relative; height:30vh; width:35vw">
+                                                <canvas id="goodlocationraw">{{ barchart }}</canvas>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <br>
+                                        <br>
+                                        <br>
+                                        <br>
+                                        <p *ngIf="isActive">
+                                            <b style="color: #000;">Total: {{ getRowsValueForGood_BadlocationRaw(null)
+                                                }}</b> <br>
+                                            <span style="color: green;">Good: {{ getRowsValueForGood_BadlocationRaw(true) }}
+                                            </span><br>
+                                            <span style="color: red;">Bad : {{ getRowsValueForGood_BadlocationRaw(false)
+                                                }}</span>
+                                        </p>
+
+                                    </div>
+                                    <div class="col-md-2"></div>
+                                    <div class="col-md-4">
+                                        <br>
+                                        <br>
+                                        <br>
+                                        <p style="font-size: 20px; font-weight: bold;">{{locationTitle}}</p>
+                                        <div class="6" *ngIf="isActive">
+
+                                            <div class="chart-container"
+                                                style="position: relative; height:30vh; width:35vw">
+                                                <canvas id="goodlocation">{{ barchart }}</canvas>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <br>
+                                        <br>
+                                        <br>
+                                        <br>
+                                        <p *ngIf="isActive">
+                                            <b style="color: #000;">Total: {{ getRowsValueForGood_Badlocation(null)
+                                                }}</b> <br>
+                                            <span style="color: green;">Good: {{ getRowsValueForGood_Badlocation(true) }}
+                                            </span><br>
+                                            <span style="color: red;">Bad : {{ getRowsValueForGood_Badlocation(false)
+                                                }}</span>
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+
+                                </div>
+                            </div>
+                        </tab>
+                       
+                    </tabset>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

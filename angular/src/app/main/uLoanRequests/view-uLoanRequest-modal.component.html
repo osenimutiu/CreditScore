@@ -1,0 +1,203 @@
+﻿<div bsModal #createOrEditModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="createOrEditModal" aria-hidden="true" [config]="{backdrop: 'static'}">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    <span>{{l("Details")}}</span>
+                </h4>
+                <button type="button" class="close" (click)="close()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-6 mb-3">
+                        <h6>{{l("LoanType")}} : {{ item.uLoanRequest.loanType }}</h6>
+                        
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("Requested Amount")}} : {{ item.uLoanRequest.amount | currency}}</h6>
+                        
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("Tenor")}} : {{ item.uLoanRequest.tenor }}</h6>
+                        
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("Status")}} :  {{ "Under Review" }}</h6>
+                       
+                    </div>
+
+
+                </div>
+
+                <hr>
+                <h2 >CREDIT BUREAU</h2>
+                <div class="row">
+                    <div class="col-6 mb-3">
+                        <h6>{{l("Probability Adverse")}} : {{ '10.2%'}}</h6>
+                        
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("Probability Failure")}} : {{ '0.3%'}}</h6>
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("Payment Default")}} : {{ '0'}}</h6>
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("Outstanding Balance With Other FI")}} : {{ 20000000 | currency}}</h6>
+                    </div>
+            
+                </div>
+                <hr>
+                
+                <div class="row">
+                    
+                    <div><h2>FINANCIAL OVERVIEW</h2><br></div>
+
+
+                <table class="styled-table">
+                    <thead>
+                        <tr>
+                            <td colspan="2"><b>Financial Ratios- Leverage/Coverage</b></td>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Equity Ratio:</td>
+                            <td>10.2%</td>
+                        </tr>
+                        <tr>
+                            <td>Assets Coverage ratio:</td>
+                            <td>10.5%</td>
+                        </tr>
+                        <tr>
+                            <td>Debt/EBITDA :</td>
+                            <td>45%</td>
+                        </tr>
+                        <tr>
+                            <td>DSCR:</td>
+                            <td>2.0</td>
+                        </tr>
+                        <tr>
+                            <td>ICR :</td>
+                            <td>5.0</td>
+                        </tr>
+                        <tr>
+                            <td>Leverage Ratio : </td>
+                            <td>20%</td>
+                        </tr>
+                    </tbody>
+                    <thead>
+                        <tr>
+                            <td colspan="2"><b>Financial Ratios- Liquidity/TurnOver</b></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Current Ratio:</td>
+                            <td>80%</td>
+                        </tr>
+                        <tr>
+                            <td>Quick Ratio :</td>
+                            <td> 43%</td>
+                        </tr>
+                        <tr>
+                            <td>Cash Ratio :</td>
+                            <td> 35%</td>
+                        </tr>
+                        <tr>
+                            <td>Cash turnover :</td>
+                            <td>{{ 20000000 | currency}}</td>
+                        </tr>
+                        <tr>
+                            <td>Iventory Turnover : </td>
+                            <td>{{ 20000000 | currency}}</td>
+                        </tr>
+                        <tr>
+                            <td>Cash Coversion Ratio: </td>
+                            <td>10.6</td>
+                        </tr>
+                  
+                    </tbody>
+                    <thead>
+                        <tr>
+                            <td colspan="2"><b>Ratios- Profitability</b> </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>ROA :</td>
+                            <td>{{ 20000000 | currency}}</td>
+                        </tr>
+                        <tr>
+                            <td>Profit Margin :</td>
+                            <td>37%</td>
+                        </tr>
+                        <tr>
+                            <td>Asset Turnover : </td>
+                            <td> {{ 20000000 | currency}}</td>
+                        </tr>
+                        <tr>
+                            <td>ROCE :</td>
+                            <td> {{ 20000000 | currency}}</td>
+                        </tr>
+                        <tr>
+                            <td>EBITDA Ratio : </td>
+                            <td>45%</td>
+                        </tr>
+                        <tr>
+                            <td>Trend :</td>
+                            <td> {{ 20000000 | currency}}</td>
+                        </tr>
+                        <tr>
+                            <td>Equity (YOY):</td>
+                            <td> {{ 20000000 | currency}}</td>
+                        </tr>
+                        <tr>
+                            <td>Revenue (YOY):</td>
+                            <td> {{ 20000000 | currency}}</td>
+                        </tr>
+                        <tr>
+                            <td>Net Profit:</td>
+                            <td> {{ 20000000 | currency}}</td>
+                        </tr>
+                        <tr>
+                            <td>Leverage Ratio :</td>
+                            <td>4.5%</td>
+                        </tr>
+                    </tbody>
+                </table>
+                </div>
+                <div class="row container">
+                    <div class="col">
+                        <table class="styled-table" >
+                            <thead>
+                                <tr>
+                                    <th style="text-align:left"><b>Recommendation</b></th>
+                                    <th style="text-align:left"><b>AI Base Score</b></th>
+                                    <th style="text-align:left"><b>Max Amount</b></th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                               <tr>
+                               <td [style.background-color]="getColor(item.uLoanRequest.status)"><h2 class="text-left">{{item.uLoanRequest.status}}</h2></td>
+                               <td ><h2 class="text-left">{{758}}</h2></td>
+                               <td ><h2 class="text-left">{{ 20000000 | currency}}</h2></td>
+                               </tr>
+                           </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button [disabled]="saving" type="button" class="btn btn-primary blue" (click)="close()">{{l("Close")}}</button>
+            </div>
+        </div>
+    </div>
+
+</div>

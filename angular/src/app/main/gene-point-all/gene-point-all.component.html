@@ -1,0 +1,196 @@
+<style>
+
+    /* Table Styles */
+
+    .table-wrapper{
+     margin: 10px 70px 70px;
+     box-shadow: 0px 35px 50px rgba( 0, 0, 0, 0.2 );
+    }
+
+    .fl-table td, .fl-table th {
+     padding: 8px;
+    }
+
+    .fl-table thead th:nth-child(odd) {
+     color: #ffffff;
+     background: #324960;
+    }
+
+    .fl-table tr:nth-child(even) {
+     background: #F8F8F8;
+    }
+
+    /* Responsive */
+
+    @media (max-width: 767px) {
+     .fl-table {
+         display: block;
+         width: 100%;
+     }
+     .table-wrapper:before{
+         content: "Scroll horizontally >";
+         display: block;
+         text-align: right;
+         font-size: 11px;
+         color: white;
+         padding: 0 0 10px;
+     }
+     .fl-table thead, .fl-table tbody, .fl-table thead th {
+         display: block;
+     }
+     .fl-table thead th:last-child{
+         border-bottom: none;
+     }
+     .fl-table thead {
+         float: left;
+     }
+     .fl-table tbody {
+         width: auto;
+         position: relative;
+         overflow-x: auto;
+     }
+     .fl-table td, .fl-table th {
+         padding: 20px .625em .625em .625em;
+         height: 60px;
+         vertical-align: middle;
+         box-sizing: border-box;
+         overflow-x: hidden;
+         overflow-y: auto;
+         width: 120px;
+         font-size: 13px;
+         text-overflow: ellipsis;
+     }
+     .fl-table thead th {
+         text-align: left;
+         border-bottom: 1px solid #f7f7f9;
+     }
+     .fl-table tbody tr {
+         display: table-cell;
+     }
+     .fl-table tbody tr:nth-child(odd) {
+         background: none;
+     }
+     .fl-table tr:nth-child(even) {
+         background: transparent;
+     }
+     .fl-table tr td:nth-child(odd) {
+         background: #F8F8F8;
+         border-right: 1px solid #E6E4E4;
+     }
+     .fl-table tr td:nth-child(even) {
+         border-right: 1px solid #E6E4E4;
+     }
+     .fl-table tbody td {
+         display: block;
+         text-align: center;
+     }
+    }
+    </style>
+<div [@routerTransition]>
+    <div class="content d-flex flex-column flex-column-fluid">
+     <sub-header [title]="'POINT ALLOCATION' | localize">
+      <div role="actions">
+           <button (click)="generateScore()" class="btn btn-secondary"><i class=""></i> {{l("Generate Score")}}</button>
+           <button (click)="reload()" class="btn btn-primary"><i class=""></i> {{l("Refresh")}}</button>
+      </div>
+      </sub-header>
+      <div [class]="containerClass">
+          <div class="card card-custom gutter-b">
+              <div class="card-body">
+                <tabset>
+                <tab class="p-5" heading="{{'Details' | localize}}">
+                    <div class="row align-items-center">
+
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" style="width: 400px;" name="detailRefNo" [(ngModel)]="detailRefNo" placeholder="Reference Number">
+                        </div>
+                        <div class="col-sm-8">
+                            <button type="button" style="position: relative; top: 15px; right: 90px;" class="btn btn-danger form-group" (click)="SearchForDetail()">
+                             {{"Search" | localize}}
+                              </button>
+                        </div>
+                        <br>
+                        <br>
+                        <table class="table fl-table">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th style="width: 150px; background-color: #e90c0c; color: white;">#</th>
+                                    <th style="width: 150px; background-color: #e90c0c; color: white;">Ref No.</th>
+                                    <th style="width: 150px; background-color: #e90c0c; color: white;">Characteristics</th>
+                                    <th style="width: 150px; background-color: #e90c0c; color: white;">Attributes</th>
+                                    <th style="width: 150px; background-color: #e90c0c; color: white;">Scores</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let x of detailList | paginate: { itemsPerPage: 5, currentPage: p }; let i = index;">
+                                    <td>{{i + 1}}</td>
+                                    <td>{{x.refNo}}</td>
+                                    <td>{{x.characteristic}}</td>
+                                    <td>{{x.attribute}}</td>
+                                    <td>{{x.score | number : '.2-4'}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="row">
+                            <div class="" style="font-size: 15px; font-weight: bold;">
+                            Total: {{detailList.length}}
+                               </div>
+                            <div class="" style="position: relative; left: 1100px;">
+                                <pagination-controls (pageChange)="p = $event" class="pull-right"></pagination-controls>
+                            </div>
+                        </div>
+                    </div>
+                </tab>
+
+                <tab class="p-5" heading="{{'Score' | localize}}">
+                    <div class="row align-items-center">
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" style="width: 400px;" name="scoreRefNo" [(ngModel)]="scoreRefNo" placeholder="Reference Number">
+                        </div>
+                        <div class="col-sm-8">
+                            <button type="button" style="position: relative; top: 15px; right: 90px;" class="btn btn-danger form-group" (click)="SearchForScore()">
+                             {{"Search" | localize}}
+                              </button>
+                        </div>
+                        <br>
+                        <br>
+                        <table class="table fl-table">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th style="width: 150px; background-color: #e90c0c; color: white;">#</th>
+                                    <th style="width: 150px; background-color: #e90c0c; color: white;">Ref No.</th>
+                                    <th style="width: 150px; background-color: #e90c0c; color: white;">Characteristics</th>
+                                    <th style="width: 150px; background-color: #e90c0c; color: white;">Attributes</th>
+                                    <th style="width: 150px; background-color: #e90c0c; color: white;">Scores</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let x of scoreList | paginate: { itemsPerPage: 5, currentPage: sc }; let i = index;">
+                                    <td>{{i + 1}}</td>
+                                    <td>{{x.refNo}}</td>
+                                    <td>{{x.characteristic}}</td>
+                                    <td>{{x.attribute}}</td>
+                                    <td>{{x.score | number : '.2-4'}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="row">
+                            <div class="" style="font-size: 15px; font-weight: bold;">
+                            Total: {{scoreList.length}}
+                               </div>
+                            <div class="" style="position: relative; left: 1100px;">
+                                <pagination-controls (pageChange)="sc = $event" class="pull-right"></pagination-controls>
+                            </div>
+                        </div>
+                    </div>
+                </tab>
+                    <!--  -->
+
+
+                </tabset>
+
+              </div>
+          </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,84 @@
+
+<div [@routerTransition]>
+  
+    <div class="content d-flex flex-column flex-column-fluid">
+     <sub-header [title]="'Scores' | localize">
+          <div role="actions">
+          <!-- <button (click)="cutoffScoreModal.show()" class="btn btn-outline-success"><i class="fas fa-plus-square"></i> Set CutOff</button> -->
+          <button (click)="reload()" class="btn btn-outline-primary"><i class="fas fa-sync"></i> Refresh</button>
+      </div>
+              </sub-header> 
+      
+      <!-- <div [class]="containerClass"> -->
+      <div [class]="">
+          <div class="card card-custom gutter-b">
+            
+              <div class="card-body">
+                  <form class="form" autocomplete="off">
+                      <div>
+                          <div class="row align-items-center">
+                              <div class="col-xl-12">
+                                 <div class="col-xl-3">
+                                    <div class="form-group m-form__group align-items-center">
+                                        <div class="input-group">
+                                        </div>
+                                        <br>
+                                    </div>
+                                  </div>
+                              </div>
+                          </div>
+                           
+                      </div>
+                  </form>
+                  <table class="table fl-table table-borderless">
+                    <thead class="table-dark">
+                        <tr>
+                            <th style="width: 150px; background-color: #e90c0c; color: white;">#</th>
+                            <th style="width: 150px; background-color: #e90c0c; color: white;">FullName</th>
+                            <th style="width: 150px; background-color: #e90c0c; color: white;">BVN </th>
+                            <th style="width: 150px; background-color: #e90c0c; color: white;">Account Number</th>
+                            <th style="width: 150px; background-color: #e90c0c; color: white;">Scores</th>
+                            <th style="width: 150px; background-color: #e90c0c; color: white;">Status</th>
+                            <th style="width: 150px; background-color: #e90c0c; color: white;">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let ret of retailDetail | paginate: { itemsPerPage: 10, currentPage: p }; let i = index;">
+                            <td>{{i + 1}}</td>
+                            <td>{{ret.fullName}}</td>
+                            <td>{{ret.bvn}}</td>
+                            <td>{{ret.accountNo}}</td>
+                            <td>{{ret.score}}</td>
+                            <td>{{ret.status}}</td>
+                            <!-- <td *ngIf="ret.score >= totalCutOff">{{isEligible}}</td> -->
+                            <td>
+                                <!-- <button class="btn btn-primary" (click)="editdemoModal.show(ret.id)" [disabled]="ret.position < 40">
+                                    Edit
+                                </button> -->
+                                <!-- <button class="btn btn-primary" *ngIf="permission.isGranted('Pages.DemoRetail.Tenant.GetRetailScoreItemEdit')" (click)="retailDetlModal.show(ret.id)"><i class="fa fa-edit"></i>
+                                    
+                                </button> -->
+                                <button class="btn btn-success" [disabled]="ret.status != 'Pending'" *ngIf="permission.isGranted('Pages.DemoRetail.Tenant.GetRetailScoreItemEdit')" (click)="approve(ret.id)" title="Approve"><i class="fas fa-thumbs-up"></i></button>
+                                <button class="btn btn-danger" [disabled]="ret.status != 'Pending'" *ngIf="permission.isGranted('Pages.DemoRetail.Tenant.GetRetailScoreItemEdit')" (click)="decline(ret.id)" title="Decline"><i class="fas fa-window-close"></i></button>
+                                <button class="btn btn-secondary" *ngIf="permission.isGranted('Pages.DemoRetail.Tenant.GetRetailScoreItemEdit')" (click)="eligibilityModal.show(ret.id)" title="Eligibility"><i class="fas fa-user-check"></i></button>
+                             </td>
+                        </tr>
+                    </tbody>
+                </table> 
+                <div class="row">
+                    <div class="col-md-2">
+                        <!-- <input type="text" class="form-control" value="{{totalCutOff | number : '.0-0'}}" disabled="true" style="width: 150px;"> -->
+                       </div>
+                    <div class="col-md-10"> 
+                        <pagination-controls (pageChange)="p = $event" class="pull-right"></pagination-controls>
+                    </div>
+                </div>
+               
+              </div>
+          </div>
+      </div>
+    </div>
+    <cutoffScoreModal #cutoffScoreModal (modalSave)="getScoreDetail()"></cutoffScoreModal>
+    <retailDetlModal #retailDetlModal (modalSave)="getScoreDetail()"></retailDetlModal>
+    <eligibilityModal #eligibilityModal (modalSave)="getScoreDetail()"></eligibilityModal>
+  </div>

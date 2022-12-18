@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="Current">
+  <Import Project="..\..\common.props">
+  </Import>
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
+    <AssemblyName>IFRSDemo.Migrator</AssemblyName>
+    <OutputType>Exe</OutputType>
+    <PackageId>IFRSDemo.Migrator</PackageId>
+    <UserSecretsId>MyCompanyName-IFRSDemo-894FDFC1-6482-4A56-926A-3C46C9FE0329</UserSecretsId>
+    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
+    <LangVersion>7.2</LangVersion>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DockerfileContext>..\..</DockerfileContext>
+    <FileUpgradeFlags>40</FileUpgradeFlags>
+    <UpgradeBackupLocation>D:\PageIntegration\aspnet-core\Backup\src\IFRSDemo.Migrator\</UpgradeBackupLocation>
+    <OldToolsVersion>2.0</OldToolsVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Update="appsettings.json;log4net.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.8" />
+    <PackageReference Include="Abp.Castle.Log4Net" Version="5.14.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="3.1.5" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\IFRSDemo.EntityFrameworkCore\IFRSDemo.EntityFrameworkCore.csproj" />
+  </ItemGroup>
+</Project>

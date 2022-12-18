@@ -1,0 +1,32 @@
+﻿<div [@routerTransition]>
+  
+  <div class="content d-flex flex-column flex-column-fluid">
+  
+                 <sub-header [title]="('SectionSetups' | localize) +' '+ ('Details' | localize)" [breadcrumbs]="breadcrumbs">
+                 </sub-header>
+             
+    <div [class]="containerClass">
+        <div class="card card-custom gutter-b">
+            <div class="card-body">
+                <div class="row align-items-center">
+                                     <div class="col-6 mb-3">
+                        <h6>{{l("Section")}} :</h6>
+                        {{ item.sectionSetup.section }}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("Position")}} :</h6>
+                        {{ item.sectionSetup.position }}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("Active")}} :</h6>
+                        <div *ngIf="item.sectionSetup.active" class="text-left"><i class="fa fa-check-circle text-success"
+                                title="True"></i></div>
+                        <div *ngIf="!item.sectionSetup.active" class="text-left"><i class="fa fa-times-circle" title="False"></i></div>
+                    </div>
+                 
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>

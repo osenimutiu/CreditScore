@@ -1,0 +1,73 @@
+<div bsModal #scorecardModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="createOrEditModal" aria-hidden="true" [config]="{backdrop: 'static'}">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    <span>SCORE DETAILS</span>
+                </h4>
+                <button type="button" class="close" (click)="close()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row row-centered">
+
+                <table class="styled-table" >
+                    <thead>
+                        <tr>
+                            <td colspan="4"><h3>OBLIGOR RATING RESULT</h3></td>
+
+                        </tr>
+                    </thead>
+                    <tbody *ngFor="let ret of coopList">
+                        <tr>
+                            <td><h3>TOTAL SCORE</h3></td>
+                            <td><h3>{{returnNo}}%</h3></td>
+                        </tr>
+                        <tr>
+                            <td><h3>OBLIGOR RATING</h3></td>
+                            <td><h3>{{ret.rating}}</h3></td>
+                        </tr>
+                        <tr>
+                            <td><h3>RATING DESCRIPTION</h3></td>
+                            <td><h4>{{ret.ratingDescription}}</h4></td>
+                        </tr>
+                        <tr>
+                            <td><h3>PD</h3></td>
+                            <td><h3>0.4</h3></td>
+                        </tr>
+                        <tr>
+                            <td><h3>STATUS</h3></td>
+                            <td><h3>PENDING APPROVAL</h3></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- hssh -->
+                </div>
+                <!-- <div class="row container">
+                    <div class="col">
+                        <table class="styled-table" >
+                            <thead>
+                                <tr>
+                                    <th style="text-align:left"><h3>STATUS</h3></th>
+                    
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                               <tr>
+                               <td><h3 class="text-left">PENDING APPROVAL</h3></td>
+              
+                               </tr>
+                           </tbody>
+                        </table>
+                    </div>
+                </div> -->
+            </div>
+            <div class="modal-footer">
+                <button [disabled]="saving" type="button" class="btn btn-primary blue" (click)="close()">{{l("Close")}}</button>
+            </div>
+        </div>
+    </div>
+
+</div>

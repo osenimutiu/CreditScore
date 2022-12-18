@@ -1,0 +1,81 @@
+<div [@routerTransition]>
+  
+    <div class="content d-flex flex-column flex-column-fluid">
+     <sub-header [title]="'CHARACTERISTICS ANALYSIS' | localize">
+          <div role="actions">
+           <button (click)="reload()" class="btn btn-outline-primary"><i class="fas fa-sync"></i> {{l("Refresh")}}</button>
+      </div>
+              </sub-header> 
+      
+      <div [class]="containerClass">
+          <div class="card card-custom gutter-b">
+            <div class="card" style="width: 30rem; margin-left: 12em;">
+                <div class="card-header" >
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item" style="font-weight: bold;">Total Index:&nbsp; {{totalamount}}</li>
+                        <li class="list-group-item" style="font-weight: bold;"> Output:&nbsp;
+                            <span style="color: #128a38; font-weight: bold;">{{significantResponse}}</span> 
+                            <span style="color: red; font-weight: bold;">{{inSignificantResponse}}</span></li>
+                      </ul>
+                </div>
+                
+              </div>
+              <!-- <div class="card-body">
+                  <form class="form" autocomplete="off">
+                      <div>
+                          <div class="row align-items-center">
+                              <div class="col-xl-12">
+                                  <div class="form-group m-form__group align-items-center">
+                                      <div class="input-group">
+                                          <input name="transFilter" autoFocus class="form-control m-input" [placeholder]="l('SearchWithThreeDot')" type="text">
+                                          <span class="input-group-btn">
+                                              <button  class="btn btn-danger" type="submit"><i class="flaticon-search-1"></i></button>
+                                          </span>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                                
+                      </div>
+                  </form>
+                  <span class="alert-success">{{significantResponse}}</span> <span class="alert-danger">{{inSignificantResponse}}</span>
+                           <p>{{totalamount}}</p>
+                    <table class="table table-borderless">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>#</th>
+                                <th>Bins</th>
+                                <th>Frequency(Dev)</th>
+                                <th>Frequency(Rec)</th>
+                                <th>% Frequency(Dev)</th>
+                                <th>% Frequency(Rec)</th>
+                                <th>SC Points</th>
+                                <th>Index</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let x of xterList; let i = index;">
+                                <td>{{1 + 1}}</td>
+                                <td>{{x.bins}}</td>
+                                <td>{{x.devFrequency}}</td>
+                                <td>{{x.recFrequency}}</td>
+                                <td>{{x.devFrequencyPerc}}</td>
+                                <td>{{x.recFrequencyPerc}}</td>
+                                <td>{{x.scPoints}}</td>
+                                <td>{{x.index}}</td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+                    <div class="row">
+                        <div class="col-md-11"></div>
+                        <div class="col-md-1">
+                            <input type="text" class="form-control" value="{{getTotal(xterList)}}" disabled="true">
+                          
+                        </div>
+                    </div>     
+              </div> -->
+          </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,44 @@
+﻿<div [@routerTransition]>
+  
+  <div class="content d-flex flex-column flex-column-fluid">
+  <sub-header [title]="('SubHeadingSetups' | localize) +' '+ ('Details' | localize)" [breadcrumbs]="breadcrumbs">
+            </sub-header>
+            
+    
+    <div [class]="containerClass">
+        <div class="card card-custom gutter-b">
+            <div class="card-body">              
+                
+					<div class="form-group m-form__group">
+						<label for="SectionSetupSection">{{l("SectionSetup")}}</label>
+						<select name="subHeadingSetup.sectionSetupId" [(ngModel)]="subHeadingSetup.sectionSetupId" class="form-control" required>
+							<option value="">{{l("SelectASectionSetup")}}</option>
+							<option *ngFor="let item of allSectionSetups" value="{{item.id}}">{{item.displayName}}</option>
+						</select>
+					</div>
+					 
+                
+								<div class="form-group">
+									<label for="SubHeadingSetup_SubHeading">{{l("SubHeading")}}</label>
+									<input type="text" #SubHeadingSetup_SubHeading="ngModel" id="SubHeadingSetup_SubHeading" class="form-control" [(ngModel)]="subHeadingSetup.subHeading" name="SubHeading"    />
+								    <validation-messages [formCtrl]="SubHeadingSetup_SubHeading"></validation-messages>
+								</div>
+					
+            </div>
+              <div class="card-footer">
+				<div class="col-lg-12">
+					<button (click)="save()" class="btn btn-primary blue float-right"
+                        [buttonBusy]="saving" [busyText]="l('SavingWithThreeDot')"><i class="fa fa-save"></i> 
+                        <span>{{l("Save")}}</span>
+                    </button>
+                    <button *ngIf="!this.subHeadingSetup.id" (click)="saveAndNew()" class="btn btn-primary blue float-right"
+                        [buttonBusy]="saving" [busyText]="l('SavingWithThreeDot')"><i class="fa fa-save"></i> 
+                        <span>{{l("SaveAndNew")}}</span>
+                    </button>
+				</div>
+		    </div>
+        </div>
+    </div>
+  </div>
+  
+</div>

@@ -1,0 +1,33 @@
+
+<div bsModal #modal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal" aria-hidden="true" [config]="{backdrop: 'static'}">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <form *ngIf="active" #form="ngForm" novalidate>
+                <div class="modal-header bg-danger">
+                    <h4 class="modal-title">
+                        <span class=" text-center text-white">&nbsp;&nbsp;{{l("Result")}}</span>
+                    </h4>
+                    <button type="button" class="close" (click)="close()" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="card" style="width: 30rem;">
+                        <!-- <div class="card-header">
+                          Score
+                        </div> -->
+                        <ul class="list-group list-group-flush" *ngFor="let rec of recommendations" style="font-size: 15px; font-weight: bold;">
+                          <li class="list-group-item"><b >Amount</b>: {{rec.amount | currency : '₦'}}</li>
+                          <li class="list-group-item"><b>Score</b>: {{totalScore}}</li>
+                          <li class="list-group-item"><b >Recommendation: </b><b [style.color]="getColorDecision(rec.recommendation)"> {{rec.recommendation}}</b></li>
+                        </ul>
+                      </div>
+                </div>
+                <div class="modal-footer">
+                    <button [disabled]="saving" type="button" class="btn btn-secondary" (click)="close()">{{l("Cancel")}}</button>
+                   </div>
+            </form>
+        </div>
+    </div>
+</div>
+

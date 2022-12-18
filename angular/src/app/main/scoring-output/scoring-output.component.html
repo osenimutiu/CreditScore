@@ -1,0 +1,229 @@
+<div appBsModal #scoringOutputModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" [config]="{backdrop: 'static'}">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <h5 class="modal-title text-center">{{"Scores" | localize}}</h5>
+                <button type="button" class="close" [attr.aria-label]="l('Close')" (click)="close()">
+                    <i aria-hidden="true" class="ki ki-close"></i>
+               </button>
+            </div>
+            <div class="modal-body">
+                <div [@routerTransition]>
+                    <button (click)="reload()" class="form-group btn btn-outline-success">{{l("Refresh")}}</button>
+                    <input type="text" #myInput [(ngModel)]="app_Type" (input)="Search()" class="form-control form-group" placeholder="UniqueID to search" />
+                    <table class="styled-table">
+                        <thead>
+                            <tr>
+                                <th>App Type</th>
+                                <th>Score</th>
+                                <th>Risk Level</th>
+                                <th>PD</th>
+                                <th>Good Bad Odd</th>
+                                <th>Interest Rate</th> 
+                                <th>Recommendation</th>
+                                <th>Debt Income Ratio</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let record of scoringOutputs | paginate: { itemsPerPage: 5, currentPage: p }">
+                                <td>{{record.app_Type}}</td>
+                                <td>{{record.score}}</td>
+                                <td>{{record.risk_Level}}</td>
+                                <td>{{record.pd}}</td>
+                                <td>{{record.good_Bad_Odd}}</td>
+                                <td>{{record.interest_Rate}}</td>
+                                <td [style.background-color]="getColor(record.recommendation)">{{record.recommendation}}</td>
+                                <td>{{record.debt_Income_Ratio}}</td>
+                            </tr>
+                         </tbody>
+                        
+                    </table>
+                    <pagination-controls (pageChange)="p = $event" class="pull-right"></pagination-controls>
+                    <h3 class="text-center">{{"Total" | localize}} ({{scoringOutputs.length}})</h3>
+                  </div>
+            </div>
+      
+            
+           
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light-primary font-weight-bold" (click)="close()" [disabled]="saving">{{"Cancel" | localize}}</button>
+            </div>
+           </div>
+    </div>
+</div>
+
+
+
+
+
+
+<!-- <div class="kt-content kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor">
+                
+                
+    <div class="kt-subheader kt-grid__item">
+      <div [class]="containerClass">
+        <div class="kt-subheader__main">
+            <h3 class="kt-subheader__title">
+                <span>{{l("")}}</span>
+            </h3>
+            <span class="kt-subheader__separator kt-subheader__separator--v"></span>
+            <span class="kt-subheader__desc">
+                {{l("")}}
+            </span>
+        </div>
+        <div class="kt-subheader__toolbar">
+            <div class="kt-subheader__wrapper">
+                <button (click)="reload()" class="form-group btn btn-outline-success">{{l("Refresh")}}</button>
+            </div>
+        </div>
+      </div>
+    </div>
+
+
+<div [class]="containerClass + ' kt-grid__item kt-grid__item--fluid'">
+<div class="kt-portlet kt-portlet--mobile">
+<div class="kt-portlet__body">
+    <form class="kt-form" autocomplete="off">
+        <div>
+            <div class="row align-items-center">
+                <div class="col-xl-12">
+                    <div class="form-group m-form__group align-items-center">
+                        <div class="input-group">
+                            <input [(ngModel)]="app_TypeFilter" name="app_TypeFilter" autoFocus class="form-control m-input" placeholder="Enter UniqueID to search" type="text">
+                            <span class="input-group-btn">
+                                <button (click)="getScoringOutput()" class="btn btn-primary" type="submit"><i class="flaticon-search-1"></i></button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+         
+        </div>
+    </form>
+
+    <div class="row align-items-center">
+        <div class="primeng-datatable-container col-12"
+             [busyIf]="primengTableHelper.isLoading">
+            <p-table #dataTable
+                         (onLazyLoad)="getScoringOutput($event)"
+                         [value]="primengTableHelper.records"
+                         rows="{{primengTableHelper.defaultRecordsCountPerPage}}"
+                         [paginator]="false"
+                         [lazy]="true"
+                         [scrollable]="true"
+                         ScrollWidth="100%"
+                         [responsive]="primengTableHelper.isResponsive"
+                         [resizableColumns]="primengTableHelper.resizableColumns">
+                <ng-template pTemplate="header">
+                    <tr>
+                     
+                        <th style="width: 150px" pSortableColumn="app_Type">
+                            {{l('App Type')}}
+                            <p-sortIcon field="app_Type"></p-sortIcon>
+                        </th>
+                        <th style="width: 150px" pSortableColumn="score">
+                            {{l('Score')}}
+                            <p-sortIcon field="score"></p-sortIcon>
+                        </th>
+                        <th style="width: 150px" pSortableColumn="risk_Level">
+                            {{l('Risk Level')}}
+                            <p-sortIcon field="risk_Level"></p-sortIcon>
+                        </th>
+                        <th style="width: 150px" pSortableColumn="pd">
+                            {{l('Pd')}}
+                            <p-sortIcon field="pD"></p-sortIcon>
+                        </th>
+                        <th style="width: 150px" pSortableColumn="good_Bad_Odd">
+                            {{l('Good Bad Odd')}}
+                            <p-sortIcon field="good_Bad_Odd"></p-sortIcon>
+                        </th>
+                        <th style="width: 150px" pSortableColumn="interest_Rate">
+                            {{l('Interest Rate')}}
+                            <p-sortIcon field="interest_Rate"></p-sortIcon>
+                        </th>
+                        <th style="width: 150px" pSortableColumn="recommendation">
+                            {{l('Recommendation')}}
+                            <p-sortIcon field="recommendation"></p-sortIcon>
+                        </th>
+                        <th style="width: 150px" pSortableColumn="debt_Income_Ratio">
+                            {{l('Debt Income Ratio')}}
+                            <p-sortIcon field="debt_Income_Ratio"></p-sortIcon>
+                        </th>
+
+                    </tr>
+                </ng-template>                           
+                <ng-template pTemplate="body" let-record="$implicit">
+                    <tr>
+                        
+                        <td style="width:150px">
+                                    <span class="ui-column-title"> {{l('App Type')}}</span>
+                                    {{record.app_Type}}
+                                </td>
+                        <td style="width:150px">
+                                <span class="ui-column-title"> {{l('Score')}}</span>
+                                {{record.score}}
+                            </td>
+                        <td style="width:150px">
+                                <span class="ui-column-title"> {{l('Risk Level')}}</span>
+                                {{record.risk_Level}}
+                            </td>
+                        <td style="width:150px">
+                                <span class="ui-column-title"> {{l('PD')}}</span>
+                                {{record.pd}}
+                          </td>
+                        <td style="width:150px">
+                                <span class="ui-column-title"> {{l('Good Bad Odd')}}</span>
+                                {{record.good_Bad_Odd}}
+                          </td>
+                        <td style="width:150px">
+                                <span class="ui-column-title"> {{l('Interest Rate')}}</span>
+                                {{record.interest_Rate}}
+                          </td>
+                        <td style="width:150px">
+                                <span class="ui-column-title" [style.background-color]="getColor(record.recommendation)"> {{l('Recommendation')}}</span>
+                                {{record.recommendation}}
+                          </td>
+                        <td style="width:150px">
+                                <span class="ui-column-title"> {{l('Debt Income Ratio')}}</span>
+                                {{record.debt_Income_Ratio}}
+                          </td>
+
+                    </tr>
+                </ng-template>
+            </p-table>
+            <div class="primeng-no-data" *ngIf="primengTableHelper.totalRecordsCount == 0">
+                {{l('NoData')}}
+            </div>
+            <div class="primeng-paging-container">
+                <p-paginator [rows]="primengTableHelper.defaultRecordsCountPerPage"
+                             #paginator
+                             (onPageChange)="getScoringOutput($event)"
+                             [totalRecords]="primengTableHelper.totalRecordsCount"
+                             [rowsPerPageOptions]="primengTableHelper.predefinedRecordsCountPerPage">
+                </p-paginator>
+                <span class="total-records-count">
+                    {{l('TotalRecordsCount', primengTableHelper.totalRecordsCount)}}
+                </span>
+            </div>
+        </div>
+        
+    </div>
+</div>
+</div>
+</div>
+
+</div> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+  

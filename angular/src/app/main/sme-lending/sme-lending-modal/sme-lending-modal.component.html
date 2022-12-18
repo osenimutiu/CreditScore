@@ -1,0 +1,29 @@
+
+<div bsModal #modal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal" aria-hidden="true" [config]="{backdrop: 'static'}">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <form *ngIf="active" #applicationScoringForm="ngForm" novalidate>
+                <div class="modal-header bg-danger">
+                    <h4 class="modal-title">
+                        <span class=" text-center text-white"><i class="far fa-chart-bar text-white"></i>&nbsp;{{l("Add Document")}}</span>
+                    </h4>
+                    <button type="button" class="close" (click)="close()" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                   <div class="form-group">
+                            <input class="form-control" type="file" name="param9" required placeholder="choose file">
+                     </div>
+                     <div class="form-group">
+                        <button type="button" class="btn btn-outline-danger">{{l("Upload")}}</button>
+                     </div>
+                    </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" (click)="close()">{{l("Cancel")}}</button>
+                    
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
